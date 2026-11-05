@@ -4,19 +4,27 @@ SPDX-License-Identifier: MIT
 """
 
 # NOTE: See dho_input.gd for more information.
-
+# This scripts' purpose is for the devhubone test scene. It is not intended to be used in your game.
+# Make of that what you will.
 @tool
 extends Label
+class_name DHOButtonDetector
 
 @export var button_capture: DHOInput.BUTTON = DHOInput.BUTTON.A
+var is_showing_details: bool = false
 
 const ON_TEXT  := "[ON ]"
 const OFF_TEXT := "[OFF]"
 
+func show_details() -> void:
+	self.is_showing_details = not self.is_showing_details
+	self.update_text()
+
 func update_text(is_on: bool = false) -> void:
 	var display_text := "%s" % [(ON_TEXT if is_on else OFF_TEXT)]
 	display_text += " %s" % [DHOInput.BUTTON_NAMES[self.button_capture]]
-	display_text += "  (%s)" % [DHOInput.BUTTON_EVENT_NAMES[self.button_capture]]
+	if self.is_showing_details:
+		display_text += "  (%s)" % [DHOInput.BUTTON_EVENT_NAMES[self.button_capture]]
 	self.set_text(display_text)
 
 func _ready() -> void:

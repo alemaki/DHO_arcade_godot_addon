@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://byifledreqwcf" path="res://scripts/xy_joystick.gd" id="1_0xq6w"]
 [ext_resource type="FontFile" uid="uid://dpyjihv03bxd0" path="res://Fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="1_qn1hh"]
 [ext_resource type="Script" uid="uid://b42bfkgiqte6e" path="res://scripts/press_detector.gd" id="2_70se8"]
+[ext_resource type="Script" uid="uid://b4b6km7il5ch1" path="res://scripts/hold_detector.gd" id="4_41277"]
+[ext_resource type="Script" uid="uid://d4a3ms1wru5dr" path="res://scripts/events/dho_show_details.gd" id="5_uuk3a"]
 
 [sub_resource type="Theme" id="Theme_qn1hh"]
 default_font = ExtResource("1_qn1hh")
@@ -64,49 +66,91 @@ layout_mode = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="Tree/ButtonContainer" unique_id=498697261]
 layout_mode = 2
 
-[node name="A_Detector" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1863245773]
+[node name="ADetector" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1863245773]
 layout_mode = 2
-text = "[OFF] A  (Joypad Button 3 (Top Action, Sony Triangle, Xbox Y, Nintendo X) - All devices)"
+text = "[OFF] A"
 script = ExtResource("2_70se8")
 
-[node name="B_Detector" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1934291228]
+[node name="BDetector" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1934291228]
 layout_mode = 2
-text = "[OFF] B  (Joypad Button 1 (Right Action, Sony Circle, Xbox B, Nintendo A) - All devices)"
+text = "[OFF] B"
 script = ExtResource("2_70se8")
 button_capture = 1
 
-[node name="C_Detector" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1004974948]
+[node name="CDetector" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1004974948]
 layout_mode = 2
-text = "[OFF] C  (Joypad Button 0 (Bottom Action, Sony Cross, Xbox A, Nintendo B) - All devices)"
+text = "[OFF] C"
 script = ExtResource("2_70se8")
 button_capture = 2
 
-[node name="D_Detector" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=331940295]
+[node name="DDetector" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=331940295]
 layout_mode = 2
-text = "[OFF] D  (Joypad Button 2 (Left Action, Sony Square, Xbox X, Nintendo Y) - All devices)"
+text = "[OFF] D"
 script = ExtResource("2_70se8")
 button_capture = 3
 
-[node name="E_Detector" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=404314665]
+[node name="EDetector" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=404314665]
 layout_mode = 2
-text = "[OFF] E  (Joypad Button 9 (Left Shoulder, Sony L1, Xbox LB))"
+text = "[OFF] E"
 script = ExtResource("2_70se8")
 button_capture = 4
 
-[node name="F_Detector" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1666167827]
+[node name="FDetector" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1666167827]
 layout_mode = 2
-text = "[OFF] F  (Joypad Button 10 (Right Shoulder, Sony R1, Xbox RB))"
+text = "[OFF] F"
 script = ExtResource("2_70se8")
 button_capture = 5
 
-[node name="PLAY_Detector" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1456398126]
+[node name="PlayDetector" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1456398126]
 layout_mode = 2
-text = "[OFF] Play (Left)  (Joypad Button 6 (Start, Xbox Menu, Nintendo +))"
+text = "[OFF] Play (Left)"
 script = ExtResource("2_70se8")
 button_capture = 6
 
-[node name="EXIT_Detector" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1705070263]
+[node name="ExitDetector" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1705070263]
 layout_mode = 2
-text = "[OFF] ChangeGame (Right)  (Joypad Button 4 (Back, Sony Select, Xbox Back, Nintendo -))"
+text = "[OFF] ChangeGame (Right)"
 script = ExtResource("2_70se8")
 button_capture = 7
+
+[node name="HSeparator3" type="HSeparator" parent="Tree" unique_id=2111930718]
+layout_mode = 2
+
+[node name="LongPressButtonContainer" type="MarginContainer" parent="Tree" unique_id=23851409]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Tree/LongPressButtonContainer" unique_id=2046574127]
+layout_mode = 2
+
+[node name="BButtonHold" type="Label" parent="Tree/LongPressButtonContainer/VBoxContainer" unique_id=1557428747]
+layout_mode = 2
+text = "Hold B = WIN     (0.0s / 5.0s)"
+script = ExtResource("4_41277")
+button_capture = 1
+name_of_event = "WIN"
+
+[node name="CButtonHold" type="Label" parent="Tree/LongPressButtonContainer/VBoxContainer" unique_id=260531101]
+layout_mode = 2
+text = "Hold C = LOSE    (0.0s / 5.0s)"
+script = ExtResource("4_41277")
+button_capture = 2
+name_of_event = "LOSE"
+
+[node name="DButtonHold" type="Label" parent="Tree/LongPressButtonContainer/VBoxContainer" unique_id=1313128028 node_paths=PackedStringArray("hold_event")]
+layout_mode = 2
+text = "Hold D = DETAILS (0.0s / 5.0s)"
+script = ExtResource("4_41277")
+button_capture = 3
+name_of_event = "DETAILS"
+hold_event = NodePath("DHOShowDetails")
+
+[node name="DHOShowDetails" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/DButtonHold" unique_id=1196848703]
+script = ExtResource("5_uuk3a")
+metadata/_custom_type_script = "uid://d4a3ms1wru5dr"
+
+[node name="EButtonHold" type="Label" parent="Tree/LongPressButtonContainer/VBoxContainer" unique_id=1742257614]
+layout_mode = 2
+text = "Hold E = SOUND   (0.0s / 5.0s)"
+script = ExtResource("4_41277")
+button_capture = 4
+name_of_event = "SOUND"
