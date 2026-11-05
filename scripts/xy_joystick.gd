@@ -6,43 +6,11 @@ SPDX-License-Identifier: MIT
 @tool
 extends Label
 
+# NOTE: Look at dho_input.gd for more information.
 
 func _ready() -> void:
 	pass
 
 func _process(_delta: float) -> void:
-	# The documentation below is for any godot version from 4.x <= 4.8.
-	# They might be compatible for future versions or might not be.
-	#
-	# We are using the default movement names (ui_left, ui_right, etc.) here.
-	#
-	# WARNING: IF you have DELETED the input mapping for the events mentioned above,
-	# this test script WILL NOT WORK!!!!
-	#
-	# New projects in Godot have them ON by default. You can see the godot built-in actions
-	# by going into: Project -> Project Settings -> Input Map -> Show Built-In-Actions.
-	# Feel free to define yours if you want to. The instructions are below.
-	#
-	# The devhubone joystick is captured by the default actions ui_left, ui_right, ui_up, ui_down.
-	# I am sure those are descriptive enough.
-	#
-	# You can capture the joystick events by defining your own action names 
-	# (for example 'process_[direction]') and setting the input capture to: 
-	# 'process_left' : Joypad Axis 0 - (Left stick Left, Joystick 0 Left)
-	# 'process_right': Joypad Axis 0 + (Left stick Right, Joystick 0 Right)
-	# 'process_up'   : Joypad Axis 1 - (Left stick Up, Joystick 0 Up)
-	# 'process_Down' : Joypad Axis 1 + (Left stick Down, Joystick 0 Down)
-	
-	var axis_X: float = Input.get_axis("ui_left", "ui_right")
-	var axis_Y: float = Input.get_axis("ui_up", "ui_down")
-	
-	# WARNING: DO NOT USE Input.get_vector like this:
-	# var input_direction := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	# As of currently (04.11.2026), joypad inputs will result with some error along the axis
-	# that is not pressed when calling the Input.get_vector.
-	# Issue to resolve: https://github.com/godotengine/godot/issues/90515#issuecomment-2616602880
-	#
-	# Feel free to get the direct input with:
-	# var input_left: float = Input.get_action_strength("ui_left")
-	
-	self.set_text("X=%3.2f, Y=%3.2f" % [axis_X, axis_Y])
+	var direction := DHOInput.get_input_vector()
+	self.set_text("X=%3.2f, Y=%3.2f" % [direction.x, direction.y])
