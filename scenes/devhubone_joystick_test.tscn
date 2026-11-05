@@ -2,9 +2,11 @@
 
 [ext_resource type="Script" uid="uid://byifledreqwcf" path="res://scripts/xy_joystick.gd" id="1_0xq6w"]
 [ext_resource type="FontFile" uid="uid://dpyjihv03bxd0" path="res://Fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="1_qn1hh"]
-[ext_resource type="Script" uid="uid://b42bfkgiqte6e" path="res://scripts/press_detector.gd" id="2_70se8"]
-[ext_resource type="Script" uid="uid://b4b6km7il5ch1" path="res://scripts/hold_detector.gd" id="4_41277"]
+[ext_resource type="Script" uid="uid://b42bfkgiqte6e" path="res://scripts/dho_button_toggle_label.gd" id="2_70se8"]
+[ext_resource type="Script" uid="uid://b4b6km7il5ch1" path="res://scripts/dho_hold_label.gd" id="4_41277"]
 [ext_resource type="Script" uid="uid://d4a3ms1wru5dr" path="res://scripts/events/dho_show_details.gd" id="5_uuk3a"]
+[ext_resource type="Script" uid="uid://dvx4onvuv6cxa" path="res://scripts/events/dho_play_sound.gd" id="6_rwodt"]
+[ext_resource type="AudioStream" uid="uid://cxek813k56rw5" path="res://sound/audio-test.mp3" id="7_l5w76"]
 
 [sub_resource type="Theme" id="Theme_qn1hh"]
 default_font = ExtResource("1_qn1hh")
@@ -70,48 +72,56 @@ layout_mode = 2
 layout_mode = 2
 text = "[OFF] A"
 script = ExtResource("2_70se8")
+fixed_text = null
 
 [node name="BDetector" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1934291228]
 layout_mode = 2
 text = "[OFF] B"
 script = ExtResource("2_70se8")
 button_capture = 1
+fixed_text = null
 
 [node name="CDetector" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1004974948]
 layout_mode = 2
 text = "[OFF] C"
 script = ExtResource("2_70se8")
 button_capture = 2
+fixed_text = null
 
 [node name="DDetector" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=331940295]
 layout_mode = 2
 text = "[OFF] D"
 script = ExtResource("2_70se8")
 button_capture = 3
+fixed_text = null
 
 [node name="EDetector" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=404314665]
 layout_mode = 2
 text = "[OFF] E"
 script = ExtResource("2_70se8")
 button_capture = 4
+fixed_text = null
 
 [node name="FDetector" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1666167827]
 layout_mode = 2
 text = "[OFF] F"
 script = ExtResource("2_70se8")
 button_capture = 5
+fixed_text = null
 
 [node name="PlayDetector" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1456398126]
 layout_mode = 2
 text = "[OFF] Play (Left)"
 script = ExtResource("2_70se8")
 button_capture = 6
+fixed_text = null
 
 [node name="ExitDetector" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1705070263]
 layout_mode = 2
 text = "[OFF] ChangeGame (Right)"
 script = ExtResource("2_70se8")
 button_capture = 7
+fixed_text = null
 
 [node name="HSeparator3" type="HSeparator" parent="Tree" unique_id=2111930718]
 layout_mode = 2
@@ -124,21 +134,21 @@ layout_mode = 2
 
 [node name="BButtonHold" type="Label" parent="Tree/LongPressButtonContainer/VBoxContainer" unique_id=1557428747]
 layout_mode = 2
-text = "Hold B = WIN     (0.0s / 5.0s)"
+text = "Hold B = WIN     (0.0s / 3.0s)"
 script = ExtResource("4_41277")
 button_capture = 1
 name_of_event = "WIN"
 
 [node name="CButtonHold" type="Label" parent="Tree/LongPressButtonContainer/VBoxContainer" unique_id=260531101]
 layout_mode = 2
-text = "Hold C = LOSE    (0.0s / 5.0s)"
+text = "Hold C = LOSE    (0.0s / 3.0s)"
 script = ExtResource("4_41277")
 button_capture = 2
 name_of_event = "LOSE"
 
 [node name="DButtonHold" type="Label" parent="Tree/LongPressButtonContainer/VBoxContainer" unique_id=1313128028 node_paths=PackedStringArray("hold_event")]
 layout_mode = 2
-text = "Hold D = DETAILS (0.0s / 5.0s)"
+text = "Hold D = DETAILS (0.0s / 3.0s)"
 script = ExtResource("4_41277")
 button_capture = 3
 name_of_event = "DETAILS"
@@ -148,9 +158,18 @@ hold_event = NodePath("DHOShowDetails")
 script = ExtResource("5_uuk3a")
 metadata/_custom_type_script = "uid://d4a3ms1wru5dr"
 
-[node name="EButtonHold" type="Label" parent="Tree/LongPressButtonContainer/VBoxContainer" unique_id=1742257614]
+[node name="EButtonHold" type="Label" parent="Tree/LongPressButtonContainer/VBoxContainer" unique_id=1742257614 node_paths=PackedStringArray("hold_event")]
 layout_mode = 2
-text = "Hold E = SOUND   (0.0s / 5.0s)"
+text = "Hold E = SOUND   (0.0s / 3.0s)"
 script = ExtResource("4_41277")
 button_capture = 4
 name_of_event = "SOUND"
+hold_event = NodePath("DHOPlaySound")
+
+[node name="DHOPlaySound" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/EButtonHold" unique_id=975648874 node_paths=PackedStringArray("player")]
+script = ExtResource("6_rwodt")
+player = NodePath("AudioStreamPlayer")
+metadata/_custom_type_script = "uid://dvx4onvuv6cxa"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Tree/LongPressButtonContainer/VBoxContainer/EButtonHold/DHOPlaySound" unique_id=1942069304]
+stream = ExtResource("7_l5w76")

@@ -9,10 +9,10 @@ SPDX-License-Identifier: MIT
 extends DHOEvent
 class_name DHOPlaySound
 
-@export var sound = null
+@export var player: AudioStreamPlayer = null
 
 func execute() -> void:
-	if !sound:
-		print("SOUND NOT SET IN DHOChangeScene event.")
+	if !player:
+		print("AudioStreamPlayer NOT SET IN DHOPlaySound event.")
 		return
-	# TODO: play sound
+	player.set_playing(not player.is_playing())

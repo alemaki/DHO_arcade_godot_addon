@@ -10,9 +10,9 @@ extends DHOEvent
 class_name DHOShowDetails
 
 # Yeah this is ugly. Too lazy to do it the right way...
-static func get_all_button_detectors(root: Node) -> Array[DHOButtonDetector]:
-	var button_detectors: Array[DHOButtonDetector] = []
-	if root is DHOButtonDetector:
+static func get_all_button_detectors(root: Node) -> Array[DHOButtonToggleLabel]:
+	var button_detectors: Array[DHOButtonToggleLabel] = []
+	if root is DHOButtonToggleLabel:
 		button_detectors.push_back(root)
 	for child in root.get_children():
 		button_detectors += get_all_button_detectors(child)
@@ -20,6 +20,6 @@ static func get_all_button_detectors(root: Node) -> Array[DHOButtonDetector]:
 
 func execute() -> void:
 	var root := self.get_tree().get_root()
-	var press_buttons: Array[DHOButtonDetector] = get_all_button_detectors(root)
+	var press_buttons: Array[DHOButtonToggleLabel] = get_all_button_detectors(root)
 	for button in press_buttons:
 		button.show_details()
