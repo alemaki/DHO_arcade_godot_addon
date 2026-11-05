@@ -6,7 +6,6 @@ SPDX-License-Identifier: MIT
 # NOTE: See dho_input.gd for more information.
 # This scripts' purpose is for the devhubone test scene. It is not intended to be used in your game.
 # Make of that what you will.
-@tool
 extends DetailedLabel
 
 @export var button_capture: DHOInput.BUTTON = DHOInput.BUTTON.A
@@ -36,13 +35,3 @@ func button_pressed() -> void:
 
 func button_released() -> void:
 	self.update_text(false)
-
-
-func _input(event: InputEvent) -> void:
-	if event is InputEventJoypadButton:
-		if event.is_pressed()\
-			&& event.get_button_index() == DHOInput.BUTTON_EVENT_TRIGGERS[self.button_capture]:
-			self.button_pressed()
-		elif event.is_released()\
-			&& event.get_button_index() == DHOInput.BUTTON_EVENT_TRIGGERS[self.button_capture]:
-			self.button_released()

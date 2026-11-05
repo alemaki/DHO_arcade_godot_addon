@@ -3,7 +3,6 @@ Copyright (c) 2026 Alexander Makedonski
 SPDX-License-Identifier: MIT
 """
 
-@tool
 extends Node
 # You know... As in DevHubOne
 class_name DHOInput
@@ -12,6 +11,9 @@ class_name DHOInput
 """ -------------------------------------------------------------------------------------------- """
 """ SECTION: BUTTONS """
 """ -------------------------------------------------------------------------------------------- """
+
+signal dho_button_pressed(button: DHOInput.BUTTON)
+signal dho_button_released(button: DHOInput.BUTTON)
 
 enum BUTTON {
 	A,
@@ -24,7 +26,7 @@ enum BUTTON {
 	EXIT
 }
 
-const BUTTON_NAMES: Dictionary = {
+const BUTTON_NAMES: Dictionary[BUTTON, String] = {
 	DHOInput.BUTTON.A :		"A",
 	DHOInput.BUTTON.B :		"B",
 	DHOInput.BUTTON.C :		"C",
@@ -36,7 +38,7 @@ const BUTTON_NAMES: Dictionary = {
 }
 
 
-const GODOT_BUTTON_MAPPING: Dictionary = {
+const GODOT_BUTTON_MAPPING: Dictionary[BUTTON, String] = {
 	DHOInput.BUTTON.A :		"ui_select",
 	DHOInput.BUTTON.B :		"", # no default godot mapping.
 	DHOInput.BUTTON.C :		"", # no default godot mapping.
@@ -47,7 +49,7 @@ const GODOT_BUTTON_MAPPING: Dictionary = {
 	DHOInput.BUTTON.EXIT :	"", # no default godot mapping.
 }
 
-const BUTTON_EVENT_TRIGGERS: Dictionary = {
+const BUTTON_EVENT_TRIGGERS: Dictionary[BUTTON, JoyButton] = {
 	DHOInput.BUTTON.A:		JOY_BUTTON_Y, 				# Joypad Button 3 (Top Action, Sony Triangle, Xbox Y, Nintendo X) - All devices
 	DHOInput.BUTTON.B:		JOY_BUTTON_B, 				# Joypad Button 1 (Right Action, Sony Circle, Xbox B, Nintendo A) - All devices
 	DHOInput.BUTTON.C:		JOY_BUTTON_A, 				# Joypad Button 0 (Bottom Action, Sony Cross, Xbox A, Nintendo B) - All devices
@@ -58,7 +60,19 @@ const BUTTON_EVENT_TRIGGERS: Dictionary = {
 	DHOInput.BUTTON.EXIT: 	JOY_BUTTON_BACK 			# Joypad Button 4 (Back, Sony Select, Xbox Back, Nintendo -)
 }
 
-const BUTTON_EVENT_NAMES: Dictionary = {
+# I know I am great at naming. No need to thank me.
+const EVENT_TRIGGER_BUTTONS: Dictionary[JoyButton, BUTTON] = {
+	JOY_BUTTON_Y:				DHOInput.BUTTON.A,
+	JOY_BUTTON_B:				DHOInput.BUTTON.B,
+	JOY_BUTTON_A:				DHOInput.BUTTON.C,
+	JOY_BUTTON_X:				DHOInput.BUTTON.D,
+	JOY_BUTTON_LEFT_SHOULDER:	DHOInput.BUTTON.E,
+	JOY_BUTTON_RIGHT_SHOULDER:	DHOInput.BUTTON.F,
+	JOY_BUTTON_START:			DHOInput.BUTTON.PLAY,
+	JOY_BUTTON_BACK:			DHOInput.BUTTON.EXIT,
+}
+
+const BUTTON_EVENT_NAMES: Dictionary[BUTTON, String] = {
 	DHOInput.BUTTON.A:		"Joypad Button 3 (Top Action, Sony Triangle, Xbox Y, Nintendo X)-All devices",
 	DHOInput.BUTTON.B:		"Joypad Button 1 (Right Action, Sony Circle, Xbox B, Nintendo A)-All devices",
 	DHOInput.BUTTON.C:		"Joypad Button 0 (Bottom Action, Sony Cross, Xbox A, Nintendo B)-All devices",
@@ -68,6 +82,14 @@ const BUTTON_EVENT_NAMES: Dictionary = {
 	DHOInput.BUTTON.PLAY: 	"Joypad Button 6 (Start, Xbox Menu, Nintendo +)",
 	DHOInput.BUTTON.EXIT: 	"Joypad Button 4 (Back, Sony Select, Xbox Back, Nintendo -)",
 }
+
+class ButtonContext extends RefCounted:
+	var is_pressed: bool = false
+	var press_started: float = 0.
+
+# Will be generated at _ready
+var button_contexts: Dictionary[BUTTON, ButtonContext] = {}
+
 
 """ -------------------------------------------------------------------------------------------- """
 """ SECTION: JOYPAD """
@@ -106,3 +128,62 @@ static func get_input_vector() -> Vector2:
 	# var input_left: float = Input.get_action_strength("ui_left")
 	
 	return Vector2(axis_X, axis_Y)
+
+static func get_n_input_vector() -> Vector2:
+	return get_input_vector().normalized()
+
+""" -------------------------------------------------------------------------------------------- """
+""" SECTION: NODE FUNCTIONS """
+""" -------------------------------------------------------------------------------------------- """
+
+func _init():
+	for button in BUTTON.values():
+		self.button_contexts[button] = ButtonContext.new()
+
+func _process(_delta: float):
+	pass
+
+func _input(event: InputEvent) -> void:
+	if event is not InputEventJoypadButton:
+		return
+	if event.is_pressed() && EVENT_TRIGGER_BUTTONS.has(event.get_button_index()):
+		self.button_pressed(EVENT_TRIGGER_BUTTONS[event.get_button_index()])
+	elif event.is_released() && EVENT_TRIGGER_BUTTONS.has(event.get_button_index()):
+		self.button_released(EVENT_TRIGGER_BUTTONS[event.get_button_index()])
+	
+
+
+""" -------------------------------------------------------------------------------------------- """
+""" SECTION: INPUT HANDLING """
+""" -------------------------------------------------------------------------------------------- """
+
+func is_button_pressed(button: BUTTON) -> bool:
+	return button_contexts[button].is_pressed
+
+# Returns 0 if button is not held
+func get_button_hold_duration_msec(button: BUTTON) -> float:
+	if not button_contexts[button].is_pressed:
+		return 0.
+	return Time.get_ticks_msec() - button_contexts[button].press_started
+
+func get_button_hold_duration_sec(button: BUTTON) -> float:
+	if not button_contexts[button].is_pressed:
+		return 0.
+	return (Time.get_ticks_msec() - button_contexts[button].press_started) / 1000.
+
+func get_button_last_held_time_msec(button: BUTTON) -> float:
+	return (Time.get_ticks_msec() - button_contexts[button].press_started)
+	
+func get_button_last_held_time_sec(button: BUTTON) -> float:
+	return (Time.get_ticks_msec() - button_contexts[button].press_started) / 1000.
+
+func button_pressed(button: BUTTON) -> void:
+	# Signal for this button should fire only once when it's pressed.
+	self.dho_button_pressed.emit(button)
+	button_contexts[button].press_started = Time.get_ticks_msec()
+	button_contexts[button].is_pressed = true
+
+func button_released(button: BUTTON) -> void:
+	# Signal for this button should fire only once when it's released.
+	self.dho_button_released.emit(button)
+	button_contexts[button].is_pressed = false
