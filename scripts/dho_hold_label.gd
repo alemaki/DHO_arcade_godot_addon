@@ -10,7 +10,7 @@ SPDX-License-Identifier: MIT
 extends Label
 
 # Measured in seconds
-@export var max_hold_duration: float =  3 # TODO: Change to 3 seconds later
+@export var max_hold_duration: float =  3
 @export var button_capture: DHOInput.BUTTON = DHOInput.BUTTON.A
 @export var name_of_event: String = "START"
 @export var hold_event: DHOEvent = null

@@ -2,7 +2,8 @@
 
 [ext_resource type="Script" uid="uid://byifledreqwcf" path="res://scripts/xy_joystick.gd" id="1_0xq6w"]
 [ext_resource type="FontFile" uid="uid://dpyjihv03bxd0" path="res://Fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="1_qn1hh"]
-[ext_resource type="Script" uid="uid://b42bfkgiqte6e" path="res://scripts/dho_button_toggle_label.gd" id="2_70se8"]
+[ext_resource type="Script" uid="uid://b42bfkgiqte6e" path="res://scripts/dho_button_label_control.gd" id="2_70se8"]
+[ext_resource type="Script" uid="uid://cxxx6xl2huta8" path="res://scripts/detailed_label.gd" id="4_4g43j"]
 [ext_resource type="Script" uid="uid://b4b6km7il5ch1" path="res://scripts/dho_hold_label.gd" id="4_41277"]
 [ext_resource type="Script" uid="uid://d4a3ms1wru5dr" path="res://scripts/events/dho_show_details.gd" id="5_uuk3a"]
 [ext_resource type="Script" uid="uid://dvx4onvuv6cxa" path="res://scripts/events/dho_play_sound.gd" id="6_rwodt"]
@@ -68,60 +69,63 @@ layout_mode = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="Tree/ButtonContainer" unique_id=498697261]
 layout_mode = 2
 
-[node name="ADetector" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1863245773]
+[node name="ADetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1863245773]
 layout_mode = 2
 text = "[OFF] A"
 script = ExtResource("2_70se8")
-fixed_text = null
 
-[node name="BDetector" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1934291228]
+[node name="BDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1934291228]
 layout_mode = 2
 text = "[OFF] B"
 script = ExtResource("2_70se8")
 button_capture = 1
-fixed_text = null
 
-[node name="CDetector" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1004974948]
+[node name="CDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1004974948]
 layout_mode = 2
 text = "[OFF] C"
 script = ExtResource("2_70se8")
 button_capture = 2
-fixed_text = null
 
-[node name="DDetector" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=331940295]
+[node name="DDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=331940295]
 layout_mode = 2
 text = "[OFF] D"
 script = ExtResource("2_70se8")
 button_capture = 3
-fixed_text = null
 
-[node name="EDetector" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=404314665]
+[node name="EDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=404314665]
 layout_mode = 2
 text = "[OFF] E"
 script = ExtResource("2_70se8")
 button_capture = 4
-fixed_text = null
 
-[node name="FDetector" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1666167827]
+[node name="FDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1666167827]
 layout_mode = 2
 text = "[OFF] F"
 script = ExtResource("2_70se8")
 button_capture = 5
-fixed_text = null
 
-[node name="PlayDetector" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1456398126]
+[node name="PlayDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1456398126]
 layout_mode = 2
 text = "[OFF] Play (Left)"
 script = ExtResource("2_70se8")
 button_capture = 6
-fixed_text = null
 
-[node name="ExitDetector" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1705070263]
+[node name="ExitDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1705070263]
 layout_mode = 2
 text = "[OFF] ChangeGame (Right)"
 script = ExtResource("2_70se8")
 button_capture = 7
-fixed_text = null
+
+[node name="DetailedContainer" type="MarginContainer" parent="Tree" unique_id=1125020950]
+layout_mode = 2
+
+[node name="DetailedLabel" type="Label" parent="Tree/DetailedContainer" unique_id=163306869]
+layout_mode = 2
+script = ExtResource("4_4g43j")
+fixed_text = "Details:"
+no_details_text = " OFF"
+details_text = " ON"
+metadata/_custom_type_script = "uid://cxxx6xl2huta8"
 
 [node name="HSeparator3" type="HSeparator" parent="Tree" unique_id=2111930718]
 layout_mode = 2
