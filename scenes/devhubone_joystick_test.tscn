@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://beq43jnkebwdo"]
+
+[ext_resource type="Script" uid="uid://byifledreqwcf" path="res://scripts/xy_joystick.gd" id="1_0xq6w"]
+[ext_resource type="Script" uid="uid://b42bfkgiqte6e" path="res://scripts/detector.gd" id="2_70se8"]
+
+[node name="DevhuboneJoystickTest" type="Control" unique_id=1179187291]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=498697261]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="XY_Joystick_detector" type="Label" parent="VBoxContainer" unique_id=563201456]
+layout_mode = 2
+text = "X: 0.000000, Y: 0.000000"
+script = ExtResource("1_0xq6w")
+
+[node name="A_Detector" type="Label" parent="VBoxContainer" unique_id=1863245773]
+layout_mode = 2
+text = "[OFF] A                 (\"Joypad Button 3 (Top Action, Sony Triangle, Xbox Y, Nintendo X) - All devices\" | InputEventJoypadButton.JOY_BUTTON_Y)"
+script = ExtResource("2_70se8")
+
+[node name="B_Detector" type="Label" parent="VBoxContainer" unique_id=1934291228]
+layout_mode = 2
+text = "[OFF] B                 (\"Joypad Button 1 (Right Action, Sony Circle, Xbox B, Nintendo A) - All devices\" | InputEventJoypadButton.JOY_BUTTON_B)"
+script = ExtResource("2_70se8")
+button_capture = 1
+
+[node name="C_Detector" type="Label" parent="VBoxContainer" unique_id=1004974948]
+layout_mode = 2
+text = "[OFF] C                 (\"Joypad Button 0 (Bottom Action, Sony Cross, Xbox A, Nintendo B) - All devices\" | InputEventJoypadButton.JOY_BUTTON_A)"
+script = ExtResource("2_70se8")
+button_capture = 2
+
+[node name="D_Detector" type="Label" parent="VBoxContainer" unique_id=331940295]
+layout_mode = 2
+text = "[OFF] D                 (\"Joypad Button 2 (Left Action, Sony Square, Xbox X, Nintendo Y) - All devices\" | InputEventJoypadButton.JOY_BUTTON_X)"
+script = ExtResource("2_70se8")
+button_capture = 3
+
+[node name="E_Detector" type="Label" parent="VBoxContainer" unique_id=404314665]
+layout_mode = 2
+text = "[OFF] E                 (\"Joypad Button 9 (Left Shoulder, Sony L1, Xbox LB)\" | InputEventJoypadButton.JOY_BUTTON_LEFT_SHOULDER)"
+script = ExtResource("2_70se8")
+button_capture = 4
+
+[node name="F_Detector" type="Label" parent="VBoxContainer" unique_id=1666167827]
+layout_mode = 2
+text = "[OFF] F                 (\"Joypad Button 10 (Right Shoulder, Sony R1, Xbox RB)\" | InputEventJoypadButton.JOY_BUTTON_RIGHT_SHOULDER)"
+script = ExtResource("2_70se8")
+button_capture = 5
+
+[node name="PERSON_Detector" type="Label" parent="VBoxContainer" unique_id=1456398126]
+layout_mode = 2
+text = "[OFF] Play (Left)       (\"Joypad Button 6 (Start, Xbox Menu, Nintendo +)\" | InputEventJoypadButton.JOY_BUTTON_START)"
+script = ExtResource("2_70se8")
+button_capture = 6
+
+[node name="EXIT_Detector" type="Label" parent="VBoxContainer" unique_id=1705070263]
+layout_mode = 2
+text = "[OFF] ChangeGame (Right)   (\"Joypad Button 4 (Back, Sony Select, Xbox Back, Nintendo -)\" | InputEventJoypadButton.JOY_BUTTON_BACK)"
+script = ExtResource("2_70se8")
+button_capture = 7
