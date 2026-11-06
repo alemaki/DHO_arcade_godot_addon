@@ -9,30 +9,24 @@ SPDX-License-Identifier: MIT
 
 extends Label
 
-# Measured in seconds
-@export var max_hold_duration: float =  3
-@export var button_capture: DHOInput.BUTTON = DHOInput.BUTTON.A
 @export var name_of_event: String = "START"
-@export var hold_event: DHOEvent = null
 @export var input_node: DHOInput = null
+@export var hold_trigger_node: DHOHoldTrigger = null
 
 func update_text() -> void:
 	var display_text := "Hold %s = %-7s (%.1fs / %.1fs)" % [
-		DHOInput.BUTTON_NAMES[self.button_capture],
+		DHOInput.BUTTON_NAMES[self.hold_trigger_node.button_capture],
 		self.name_of_event,
-		min(input_node.get_button_hold_duration_sec(self.button_capture), self.max_hold_duration),
-		self.max_hold_duration
+		min(input_node.get_button_hold_duration_sec(self.hold_trigger_node.button_capture),
+			self.hold_trigger_node.max_hold_duration),
+		self.hold_trigger_node.max_hold_duration
 		]
 	self.set_text(display_text)
 
 func _ready() -> void:
+	assert(hold_trigger_node != null)
 	assert(input_node != null)
 	self.update_text()
 
 func _process(_delta: float) -> void:
 	self.update_text()
-	if self.input_node.get_button_hold_duration_sec(self.button_capture) >= self.max_hold_duration:
-		if !hold_event:
-			print(self.get_name() + ": No hold event configured")
-		else:
-			hold_event.execute()

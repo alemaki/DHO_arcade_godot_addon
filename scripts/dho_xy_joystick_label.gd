@@ -9,9 +9,11 @@ SPDX-License-Identifier: MIT
 
 extends Label
 
+@export var dho_input: DHOInput = null
+
 func _ready() -> void:
-	pass
+	assert(dho_input != null)
 
 func _process(_delta: float) -> void:
-	var direction := DHOInput.get_input_vector()
+	var direction := dho_input.get_input_vector()
 	self.set_text("X=%3.2f, Y=%3.2f" % [direction.x, direction.y])

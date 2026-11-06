@@ -1,12 +1,15 @@
 [gd_scene format=3 uid="uid://beq43jnkebwdo"]
 
-[ext_resource type="Script" uid="uid://byifledreqwcf" path="res://scripts/xy_joystick.gd" id="1_0xq6w"]
 [ext_resource type="FontFile" uid="uid://dpyjihv03bxd0" path="res://Fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="1_qn1hh"]
 [ext_resource type="Script" uid="uid://b42bfkgiqte6e" path="res://scripts/dho_button_label_control.gd" id="2_70se8"]
-[ext_resource type="Script" uid="uid://cxxx6xl2huta8" path="res://scripts/detailed_label.gd" id="4_4g43j"]
+[ext_resource type="Script" uid="uid://cwsg5lygoewbf" path="res://scripts/dho_xy_joystick_label.gd" id="2_xi5co"]
+[ext_resource type="Script" uid="uid://dux0gucsr622e" path="res://scripts/dho_currently_pressed_button_label.gd" id="3_xi5co"]
+[ext_resource type="Script" uid="uid://cxxx6xl2huta8" path="res://scripts/dho_detailed_label.gd" id="4_4g43j"]
 [ext_resource type="Script" uid="uid://b4b6km7il5ch1" path="res://scripts/dho_hold_label.gd" id="4_41277"]
+[ext_resource type="Script" uid="uid://diehq1u621bbw" path="res://scripts/dho_last_pressed_label.gd" id="4_vgd2g"]
 [ext_resource type="Script" uid="uid://d4a3ms1wru5dr" path="res://scripts/events/dho_show_details.gd" id="5_uuk3a"]
 [ext_resource type="Script" uid="uid://dvx4onvuv6cxa" path="res://scripts/events/dho_play_sound.gd" id="6_rwodt"]
+[ext_resource type="Script" uid="uid://qkevjtyxu8q1" path="res://scripts/dho_hold_detector.gd" id="7_6dpnn"]
 [ext_resource type="AudioStream" uid="uid://cxek813k56rw5" path="res://sound/audio-test.mp3" id="7_l5w76"]
 [ext_resource type="Script" uid="uid://ccdj83skhqvcr" path="res://scripts/dho_input.gd" id="9_64xq8"]
 
@@ -55,7 +58,7 @@ text = "Movement:"
 [node name="XY_Joystick_detector" type="Label" parent="Tree/MovementContainer/VBoxContainer" unique_id=563201456]
 layout_mode = 2
 text = "X=0.00, Y=0.00"
-script = ExtResource("1_0xq6w")
+script = ExtResource("2_xi5co")
 
 [node name="Movement label2" type="Label" parent="Tree/MovementContainer/VBoxContainer" unique_id=1861503890]
 layout_mode = 2
@@ -63,6 +66,15 @@ text = "Hat: - - - -"
 
 [node name="HSeparator2" type="HSeparator" parent="Tree" unique_id=272448615]
 layout_mode = 2
+
+[node name="CurrentlyPressedButtonsContainer" type="MarginContainer" parent="Tree" unique_id=1598638795]
+layout_mode = 2
+
+[node name="CurrentlyPressedButtonLabel" type="Label" parent="Tree/CurrentlyPressedButtonsContainer" unique_id=592775535]
+layout_mode = 2
+text = "Details: OFF"
+script = ExtResource("3_xi5co")
+metadata/_custom_type_script = "uid://cxxx6xl2huta8"
 
 [node name="ButtonContainer" type="MarginContainer" parent="Tree" unique_id=1828789745]
 layout_mode = 2
@@ -117,6 +129,16 @@ text = "[OFF] ChangeGame (Right)"
 script = ExtResource("2_70se8")
 button_capture = 7
 
+[node name="LastPressedButtonContainer" type="MarginContainer" parent="Tree" unique_id=104521971]
+layout_mode = 2
+
+[node name="LastPressedButtonLabel" type="Label" parent="Tree/LastPressedButtonContainer" unique_id=1549349039 node_paths=PackedStringArray("input_node")]
+layout_mode = 2
+text = "Details: OFF"
+script = ExtResource("4_vgd2g")
+input_node = NodePath("../../../DHOInput")
+metadata/_custom_type_script = "uid://cxxx6xl2huta8"
+
 [node name="DetailedContainer" type="MarginContainer" parent="Tree" unique_id=1125020950]
 layout_mode = 2
 
@@ -138,50 +160,84 @@ layout_mode = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="Tree/LongPressButtonContainer" unique_id=2046574127]
 layout_mode = 2
 
-[node name="BButtonHold" type="Label" parent="Tree/LongPressButtonContainer/VBoxContainer" unique_id=1557428747 node_paths=PackedStringArray("input_node")]
+[node name="BButtonHold" type="Label" parent="Tree/LongPressButtonContainer/VBoxContainer" unique_id=1557428747 node_paths=PackedStringArray("input_node", "hold_trigger_node")]
 layout_mode = 2
 text = "Hold B = WIN     (0.0s / 3.0s)"
 script = ExtResource("4_41277")
-button_capture = 1
 name_of_event = "WIN"
 input_node = NodePath("../../../../DHOInput")
+hold_trigger_node = NodePath("DHOShowDetailsHoldTrigger")
 
-[node name="CButtonHold" type="Label" parent="Tree/LongPressButtonContainer/VBoxContainer" unique_id=260531101 node_paths=PackedStringArray("input_node")]
-layout_mode = 2
-text = "Hold C = LOSE    (0.0s / 3.0s)"
-script = ExtResource("4_41277")
-button_capture = 2
-name_of_event = "LOSE"
-input_node = NodePath("../../../../DHOInput")
+[node name="DHOShowDetailsHoldTrigger" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/BButtonHold" unique_id=121355694 node_paths=PackedStringArray("input_node", "trigger_event")]
+script = ExtResource("7_6dpnn")
+input_node = NodePath("../../../../../DHOInput")
+button_capture = 1
+trigger_event = NodePath("DHOShowDetails")
+metadata/_custom_type_script = "uid://qkevjtyxu8q1"
 
-[node name="DButtonHold" type="Label" parent="Tree/LongPressButtonContainer/VBoxContainer" unique_id=1313128028 node_paths=PackedStringArray("hold_event", "input_node")]
-layout_mode = 2
-text = "Hold D = DETAILS (0.0s / 3.0s)"
-script = ExtResource("4_41277")
-button_capture = 3
-name_of_event = "DETAILS"
-hold_event = NodePath("DHOShowDetails")
-input_node = NodePath("../../../../DHOInput")
-
-[node name="DHOShowDetails" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/DButtonHold" unique_id=1196848703]
+[node name="DHOShowDetails" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/BButtonHold/DHOShowDetailsHoldTrigger" unique_id=2081776171]
 script = ExtResource("5_uuk3a")
 metadata/_custom_type_script = "uid://d4a3ms1wru5dr"
 
-[node name="EButtonHold" type="Label" parent="Tree/LongPressButtonContainer/VBoxContainer" unique_id=1742257614 node_paths=PackedStringArray("hold_event", "input_node")]
+[node name="CButtonHold" type="Label" parent="Tree/LongPressButtonContainer/VBoxContainer" unique_id=260531101 node_paths=PackedStringArray("input_node", "hold_trigger_node")]
+layout_mode = 2
+text = "Hold C = LOSE    (0.0s / 3.0s)"
+script = ExtResource("4_41277")
+name_of_event = "LOSE"
+input_node = NodePath("../../../../DHOInput")
+hold_trigger_node = NodePath("DHOShowDetailsHoldTrigger")
+
+[node name="DHOShowDetailsHoldTrigger" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/CButtonHold" unique_id=1536857706 node_paths=PackedStringArray("input_node", "trigger_event")]
+script = ExtResource("7_6dpnn")
+input_node = NodePath("../../../../../DHOInput")
+button_capture = 2
+trigger_event = NodePath("DHOShowDetails")
+metadata/_custom_type_script = "uid://qkevjtyxu8q1"
+
+[node name="DHOShowDetails" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/CButtonHold/DHOShowDetailsHoldTrigger" unique_id=1714974389]
+script = ExtResource("5_uuk3a")
+metadata/_custom_type_script = "uid://d4a3ms1wru5dr"
+
+[node name="DButtonHold" type="Label" parent="Tree/LongPressButtonContainer/VBoxContainer" unique_id=1313128028 node_paths=PackedStringArray("input_node", "hold_trigger_node")]
+layout_mode = 2
+text = "Hold D = DETAILS (0.0s / 3.0s)"
+script = ExtResource("4_41277")
+name_of_event = "DETAILS"
+input_node = NodePath("../../../../DHOInput")
+hold_trigger_node = NodePath("DHOShowDetailsHoldTrigger")
+
+[node name="DHOShowDetailsHoldTrigger" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/DButtonHold" unique_id=1736415264 node_paths=PackedStringArray("input_node", "trigger_event")]
+script = ExtResource("7_6dpnn")
+input_node = NodePath("../../../../../DHOInput")
+button_capture = 3
+trigger_event = NodePath("DHOShowDetails")
+metadata/_custom_type_script = "uid://qkevjtyxu8q1"
+
+[node name="DHOShowDetails" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/DButtonHold/DHOShowDetailsHoldTrigger" unique_id=1196848703]
+script = ExtResource("5_uuk3a")
+metadata/_custom_type_script = "uid://d4a3ms1wru5dr"
+
+[node name="EButtonHold" type="Label" parent="Tree/LongPressButtonContainer/VBoxContainer" unique_id=1742257614 node_paths=PackedStringArray("input_node", "hold_trigger_node")]
 layout_mode = 2
 text = "Hold E = SOUND   (0.0s / 3.0s)"
 script = ExtResource("4_41277")
-button_capture = 4
 name_of_event = "SOUND"
-hold_event = NodePath("DHOPlaySound")
 input_node = NodePath("../../../../DHOInput")
+hold_trigger_node = NodePath("DHOPlaySoundHoldTrigger")
 
-[node name="DHOPlaySound" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/EButtonHold" unique_id=975648874 node_paths=PackedStringArray("player")]
+[node name="DHOPlaySoundHoldTrigger" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/EButtonHold" unique_id=434003374 node_paths=PackedStringArray("input_node", "trigger_event")]
+script = ExtResource("7_6dpnn")
+input_node = NodePath("../../../../../DHOInput")
+button_capture = 4
+trigger_event = NodePath("DHOPlaySound")
+metadata/_custom_type_script = "uid://qkevjtyxu8q1"
+
+[node name="DHOPlaySound" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/EButtonHold/DHOPlaySoundHoldTrigger" unique_id=975648874 node_paths=PackedStringArray("player")]
 script = ExtResource("6_rwodt")
 player = NodePath("AudioStreamPlayer")
 metadata/_custom_type_script = "uid://dvx4onvuv6cxa"
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Tree/LongPressButtonContainer/VBoxContainer/EButtonHold/DHOPlaySound" unique_id=1942069304]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Tree/LongPressButtonContainer/VBoxContainer/EButtonHold/DHOPlaySoundHoldTrigger/DHOPlaySound" unique_id=1942069304]
 stream = ExtResource("7_l5w76")
 
 [node name="DHOInput" type="Node" parent="." unique_id=1660465069]
