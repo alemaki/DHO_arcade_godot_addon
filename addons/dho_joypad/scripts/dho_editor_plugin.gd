@@ -1,15 +1,16 @@
 @tool
 extends EditorPlugin
 
+const AUTOLOAD_NAME: String = "DhoJoypad"
+const AUTOLOAD_PATH: String = "res://addons/dho_joypad/dho_joypad.gd"
+
 
 func _enable_plugin() -> void:
-	# Add autoloads here.
-	pass
+	self.add_autoload_singleton(AUTOLOAD_NAME, AUTOLOAD_PATH)
 
 
 func _disable_plugin() -> void:
-	# Remove autoloads here.
-	pass
+	self.remove_autoload_singleton(AUTOLOAD_NAME)
 
 
 func _enter_tree() -> void:
