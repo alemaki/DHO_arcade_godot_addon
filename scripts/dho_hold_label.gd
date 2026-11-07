@@ -1,7 +1,5 @@
-"""
-Copyright (c) 2026 Alexander Makedonski
-SPDX-License-Identifier: MIT
-"""
+## Copyright (c) 2026 Alexander Makedonski
+## SPDX-License-Identifier: MIT
 
 # NOTE: See dho_input.gd for more information.
 # This scripts' purpose is for the devhubone test scene. It is not intended to be used in your game.
@@ -10,12 +8,12 @@ SPDX-License-Identifier: MIT
 extends Label
 
 @export var name_of_event: String = "START"
-@export var input_node: DHOInput = null
+@export var input_node: DHOJoypad = null
 @export var hold_trigger_node: DHOHoldTrigger = null
 
 func update_text() -> void:
 	var display_text := "Hold %s = %-7s (%.1fs / %.1fs)" % [
-		DHOInput.BUTTON_NAMES[self.hold_trigger_node.button_capture],
+		DHOJoypad.BUTTON_NAMES[self.hold_trigger_node.button_capture],
 		self.name_of_event,
 		min(input_node.get_button_hold_duration_sec(self.hold_trigger_node.button_capture),
 			self.hold_trigger_node.max_hold_duration),

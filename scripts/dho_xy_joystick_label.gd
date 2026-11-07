@@ -1,7 +1,5 @@
-"""
-Copyright (c) 2026 Alexander Makedonski
-SPDX-License-Identifier: MIT
-"""
+## Copyright (c) 2026 Alexander Makedonski
+## SPDX-License-Identifier: MIT
 
 # NOTE: Look at dho_input.gd for more information.
 # This scripts' purpose is for the devhubone test scene. It is not intended to be used in your game.
@@ -9,7 +7,7 @@ SPDX-License-Identifier: MIT
 
 extends Label
 
-@export var dho_input: DHOInput = null
+@export var dho_input: DHOJoypad = null
 
 func _ready() -> void:
 	assert(dho_input != null)

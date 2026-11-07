@@ -1,7 +1,5 @@
-"""
-Copyright (c) 2026 Alexander Makedonski
-SPDX-License-Identifier: MIT
-"""
+## Copyright (c) 2026 Alexander Makedonski
+## SPDX-License-Identifier: MIT
 
 # NOTE: Look at dho_input.gd for more information.
 # This scripts' purpose is for the devhubone test scene. It is not intended to be used in your game.
@@ -12,8 +10,8 @@ class_name DHOHoldTrigger
 
 # Measured in seconds
 @export var max_hold_duration = 3
-@export var input_node: DHOInput = null 
-@export var button_capture: DHOInput.BUTTON = DHOInput.BUTTON.A
+@export var input_node: DHOJoypad = null 
+@export var button_capture: DHOJoypad.BUTTON = DHOJoypad.BUTTON.A
 @export var trigger_event: DHOEvent = null
 
 # Shouldn't fire multiple times.
