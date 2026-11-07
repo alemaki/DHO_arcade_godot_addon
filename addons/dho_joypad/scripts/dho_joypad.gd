@@ -42,6 +42,7 @@ const BUTTON_INFORMATION: Dictionary[BUTTON, DHOButtonInformation] = {
 	DHOJoypad.BUTTON.EXIT: preload("res://addons/dho_joypad/resources/buttons/dho_button_exit.tres"),
 }
 
+# TODO: generate programatically
 const EVENT_TRIGGER_BUTTONS: Dictionary[JoyButton, BUTTON] = {
 	JOY_BUTTON_Y:				DHOJoypad.BUTTON.A,
 	JOY_BUTTON_B:				DHOJoypad.BUTTON.B,
@@ -175,23 +176,3 @@ func _button_released(button: BUTTON) -> void:
 	# Signal for this button should fire only once when it's released.
 	self.dho_button_released.emit(button)
 	button_contexts[button].is_pressed = false
-
-
-func _enable_plugin() -> void:
-	# Add autoloads here.
-	pass
-
-
-func _disable_plugin() -> void:
-	# Remove autoloads here.
-	pass
-
-
-func _enter_tree() -> void:
-	# Initialization of the plugin goes here.
-	pass
-
-
-func _exit_tree() -> void:
-	# Clean-up of the plugin goes here.
-	pass

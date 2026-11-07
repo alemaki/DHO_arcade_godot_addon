@@ -6,6 +6,7 @@
 script = ExtResource("1_y6yix")
 button = 3
 button_name = "D"
-event_trigger = 2
+input_action = "ui_d"
+joy_button = 2
 event_name = "Joypad Button 2 (Left Action, Sony Square, Xbox X, Nintendo Y)-All devices"
 metadata/_custom_type_script = "uid://doge6v11mn3ks"

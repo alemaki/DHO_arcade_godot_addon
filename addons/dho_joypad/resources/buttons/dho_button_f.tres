@@ -6,6 +6,7 @@
 script = ExtResource("1_w1bow")
 button = 5
 button_name = "F"
-event_trigger = 10
+input_action = "ui_f"
+joy_button = 10
 event_name = "Joypad Button 10 (Right Shoulder, Sony R1, Xbox RB)"
 metadata/_custom_type_script = "uid://doge6v11mn3ks"
