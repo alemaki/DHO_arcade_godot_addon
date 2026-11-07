@@ -1,5 +1,5 @@
-## Copyright (c) 2026 Alexander Makedonski
-## SPDX-License-Identifier: MIT
+# Copyright (c) 2026 Alexander Makedonski
+# SPDX-License-Identifier: MIT
 
 @tool
 extends Node
@@ -31,41 +31,17 @@ enum BUTTON {
 	EXIT
 }
 
-const BUTTON_NAMES: Dictionary[BUTTON, String] = {
-	DHOJoypad.BUTTON.A :		"A",
-	DHOJoypad.BUTTON.B :		"B",
-	DHOJoypad.BUTTON.C :		"C",
-	DHOJoypad.BUTTON.D :		"D",
-	DHOJoypad.BUTTON.E :		"E",
-	DHOJoypad.BUTTON.F :		"F",
-	DHOJoypad.BUTTON.PLAY :	"Play (Left)",
-	DHOJoypad.BUTTON.EXIT :	"ChangeGame (Right)",
+const BUTTON_INFORMATION: Dictionary[BUTTON, DHOButtonInformation] = {
+	DHOJoypad.BUTTON.A: preload("res://addons/dho_joypad/resources/buttons/dho_button_a.tres"),
+	DHOJoypad.BUTTON.B: preload("res://addons/dho_joypad/resources/buttons/dho_button_b.tres"),
+	DHOJoypad.BUTTON.C: preload("res://addons/dho_joypad/resources/buttons/dho_button_c.tres"),
+	DHOJoypad.BUTTON.D: preload("res://addons/dho_joypad/resources/buttons/dho_button_d.tres"),
+	DHOJoypad.BUTTON.E: preload("res://addons/dho_joypad/resources/buttons/dho_button_e.tres"),
+	DHOJoypad.BUTTON.F: preload("res://addons/dho_joypad/resources/buttons/dho_button_f.tres"),
+	DHOJoypad.BUTTON.PLAY: preload("res://addons/dho_joypad/resources/buttons/dho_button_play.tres"),
+	DHOJoypad.BUTTON.EXIT: preload("res://addons/dho_joypad/resources/buttons/dho_button_exit.tres"),
 }
 
-
-const GODOT_BUTTON_MAPPING: Dictionary[BUTTON, String] = {
-	DHOJoypad.BUTTON.A :		"ui_select",
-	DHOJoypad.BUTTON.B :		"", # no default godot mapping.
-	DHOJoypad.BUTTON.C :		"", # no default godot mapping.
-	DHOJoypad.BUTTON.D :		"ui_colorpicker_delete_preset",
-	DHOJoypad.BUTTON.E :		"", # no default godot mapping.
-	DHOJoypad.BUTTON.F :		"", # no default godot mapping.
-	DHOJoypad.BUTTON.PLAY :	"", # no default godot mapping.
-	DHOJoypad.BUTTON.EXIT :	"", # no default godot mapping.
-}
-
-const BUTTON_EVENT_TRIGGERS: Dictionary[BUTTON, JoyButton] = {
-	DHOJoypad.BUTTON.A:		JOY_BUTTON_Y, 				# Joypad Button 3 (Top Action, Sony Triangle, Xbox Y, Nintendo X) - All devices
-	DHOJoypad.BUTTON.B:		JOY_BUTTON_B, 				# Joypad Button 1 (Right Action, Sony Circle, Xbox B, Nintendo A) - All devices
-	DHOJoypad.BUTTON.C:		JOY_BUTTON_A, 				# Joypad Button 0 (Bottom Action, Sony Cross, Xbox A, Nintendo B) - All devices
-	DHOJoypad.BUTTON.D:		JOY_BUTTON_X, 				# Joypad Button 2 (Left Action, Sony Square, Xbox X, Nintendo Y) - All devices
-	DHOJoypad.BUTTON.E:		JOY_BUTTON_LEFT_SHOULDER, 	# Joypad Button 9 (Left Shoulder, Sony L1, Xbox LB)
-	DHOJoypad.BUTTON.F:		JOY_BUTTON_RIGHT_SHOULDER, 	# Joypad Button 10 (Right Shoulder, Sony R1, Xbox RB)
-	DHOJoypad.BUTTON.PLAY: 	JOY_BUTTON_START, 			# Joypad Button 6 (Start, Xbox Menu, Nintendo +)
-	DHOJoypad.BUTTON.EXIT: 	JOY_BUTTON_BACK 			# Joypad Button 4 (Back, Sony Select, Xbox Back, Nintendo -)
-}
-
-# I know, I am great at naming. No need to thank me.
 const EVENT_TRIGGER_BUTTONS: Dictionary[JoyButton, BUTTON] = {
 	JOY_BUTTON_Y:				DHOJoypad.BUTTON.A,
 	JOY_BUTTON_B:				DHOJoypad.BUTTON.B,
@@ -75,17 +51,6 @@ const EVENT_TRIGGER_BUTTONS: Dictionary[JoyButton, BUTTON] = {
 	JOY_BUTTON_RIGHT_SHOULDER:	DHOJoypad.BUTTON.F,
 	JOY_BUTTON_START:			DHOJoypad.BUTTON.PLAY,
 	JOY_BUTTON_BACK:			DHOJoypad.BUTTON.EXIT,
-}
-
-const BUTTON_EVENT_NAMES: Dictionary[BUTTON, String] = {
-	DHOJoypad.BUTTON.A:		"Joypad Button 3 (Top Action, Sony Triangle, Xbox Y, Nintendo X)-All devices",
-	DHOJoypad.BUTTON.B:		"Joypad Button 1 (Right Action, Sony Circle, Xbox B, Nintendo A)-All devices",
-	DHOJoypad.BUTTON.C:		"Joypad Button 0 (Bottom Action, Sony Cross, Xbox A, Nintendo B)-All devices",
-	DHOJoypad.BUTTON.D:		"Joypad Button 2 (Left Action, Sony Square, Xbox X, Nintendo Y)-All devices",
-	DHOJoypad.BUTTON.E:		"Joypad Button 9 (Left Shoulder, Sony L1, Xbox LB)",
-	DHOJoypad.BUTTON.F:		"Joypad Button 10 (Right Shoulder, Sony R1, Xbox RB)",
-	DHOJoypad.BUTTON.PLAY: 	"Joypad Button 6 (Start, Xbox Menu, Nintendo +)",
-	DHOJoypad.BUTTON.EXIT: 	"Joypad Button 4 (Back, Sony Select, Xbox Back, Nintendo -)",
 }
 
 class ButtonContext extends RefCounted:

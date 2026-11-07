@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="DHOButtonInformation" format=3 uid="uid://da1dxk3ddv1lh"]
+
+[ext_resource type="Script" uid="uid://doge6v11mn3ks" path="res://addons/dho_joypad/scripts/resource_scripts/dho_button.gd" id="1_tr2gw"]
+
+[resource]
+script = ExtResource("1_tr2gw")
+button = 7
+button_name = "ChangeGame (Right)"
+event_trigger = 6
+event_name = "Joypad Button 4 (Back, Sony Select, Xbox Back, Nintendo -)"
+metadata/_custom_type_script = "uid://doge6v11mn3ks"

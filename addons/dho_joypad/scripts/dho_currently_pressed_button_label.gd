@@ -1,5 +1,5 @@
-## Copyright (c) 2026 Alexander Makedonski
-## SPDX-License-Identifier: MIT
+# Copyright (c) 2026 Alexander Makedonski
+# SPDX-License-Identifier: MIT
 
 # NOTE: Look at dho_input.gd for more information.
 # This scripts' purpose is for the devhubone test scene. It is not intended to be used in your game.
@@ -18,8 +18,8 @@ func _process(_delta: float) -> void:
 	for button in DHOJoypad.BUTTON.values():
 		if DhoJoypad.is_button_pressed(button):
 			if first:
-				result_text += DHOJoypad.BUTTON_NAMES[button]
+				result_text += DHOJoypad.BUTTON_INFORMATION[button].button_name
 				first = false
 			else:
-				result_text += ", " + DHOJoypad.BUTTON_NAMES[button]
+				result_text += ", " + DHOJoypad.BUTTON_INFORMATION[button].button_name
 	self.set_text(result_text)

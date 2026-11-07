@@ -1,5 +1,5 @@
-## Copyright (c) 2026 Alexander Makedonski
-## SPDX-License-Identifier: MIT
+# Copyright (c) 2026 Alexander Makedonski
+# SPDX-License-Identifier: MIT
 
 # NOTE: See dho_input.gd for more information.
 # This scripts' purpose is for the devhubone test scene. It is not intended to be used in your game.
@@ -18,9 +18,9 @@ func show_details() -> void:
 
 func update_text(is_on: bool = false) -> void:
 	var display_text := "%s" % [(ON_TEXT if is_on else OFF_TEXT)]
-	display_text += " %s" % [DHOJoypad.BUTTON_NAMES[self.button_capture]]
+	display_text += " %s" % [DHOJoypad.BUTTON_INFORMATION[self.button_capture].button_name]
 	if self.is_showing_details:
-		display_text += "  (%s)" % [DHOJoypad.BUTTON_EVENT_NAMES[self.button_capture]]
+		display_text += "  (%s)" % [DHOJoypad.BUTTON_INFORMATION[self.button_capture].button_name]
 	self.set_text(display_text)
 
 func _ready() -> void:

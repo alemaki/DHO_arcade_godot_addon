@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="DHOButtonInformation" format=3 uid="uid://b81yhupvyr6y7"]
+
+[ext_resource type="Script" uid="uid://doge6v11mn3ks" path="res://addons/dho_joypad/scripts/resource_scripts/dho_button.gd" id="1_1chws"]
+
+[resource]
+script = ExtResource("1_1chws")
+button_name = "A"
+input_map = "ui_select"
+event_trigger = 3
+event_name = "Joypad Button 3 (Top Action, Sony Triangle, Xbox Y, Nintendo X)-All devices"
+metadata/_custom_type_script = "uid://doge6v11mn3ks"

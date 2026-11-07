@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="DHOButtonInformation" format=3 uid="uid://bvm1s55e4ivsb"]
+
+[ext_resource type="Script" uid="uid://doge6v11mn3ks" path="res://addons/dho_joypad/scripts/resource_scripts/dho_button.gd" id="1_y6yix"]
+
+[resource]
+script = ExtResource("1_y6yix")
+button = 3
+button_name = "D"
+event_trigger = 2
+event_name = "Joypad Button 2 (Left Action, Sony Square, Xbox X, Nintendo Y)-All devices"
+metadata/_custom_type_script = "uid://doge6v11mn3ks"
