@@ -16,12 +16,12 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	var first: bool = true
-	var text: String = self.display_text
+	var result_text: String = self.display_text
 	for button in DHOJoypad.BUTTON.values():
 		if input_node.is_button_pressed(button):
 			if first:
-				text += DHOJoypad.BUTTON_NAMES[button]
+				result_text += DHOJoypad.BUTTON_NAMES[button]
 				first = false
 			else:
-				text += ", " + DHOJoypad.BUTTON_NAMES[button]
-	self.set_text(text)
+				result_text += ", " + DHOJoypad.BUTTON_NAMES[button]
+	self.set_text(result_text)
