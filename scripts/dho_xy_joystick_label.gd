@@ -7,11 +7,9 @@
 
 extends Label
 
-@export var dho_input: DHOJoypad = null
-
 func _ready() -> void:
-	assert(dho_input != null)
+	pass
 
 func _process(_delta: float) -> void:
-	var direction := dho_input.get_input_vector()
+	var direction := DhoJoypad.get_input_vector()
 	self.set_text("X=%3.2f, Y=%3.2f" % [direction.x, direction.y])

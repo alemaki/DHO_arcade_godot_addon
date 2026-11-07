@@ -11,7 +11,6 @@
 [ext_resource type="Script" uid="uid://dvx4onvuv6cxa" path="res://scripts/events/dho_play_sound.gd" id="6_rwodt"]
 [ext_resource type="Script" uid="uid://qkevjtyxu8q1" path="res://scripts/dho_hold_detector.gd" id="7_6dpnn"]
 [ext_resource type="AudioStream" uid="uid://cxek813k56rw5" path="res://sound/audio-test.mp3" id="7_l5w76"]
-[ext_resource type="Script" uid="uid://cer06u33jq5d7" path="res://addons/DHO_joypad/DHO_joypad.gd" id="12_xi5co"]
 
 [sub_resource type="Theme" id="Theme_qn1hh"]
 default_font = ExtResource("1_qn1hh")
@@ -55,11 +54,10 @@ layout_mode = 2
 layout_mode = 2
 text = "Movement:"
 
-[node name="XY_Joystick_detector" type="Label" parent="Tree/MovementContainer/VBoxContainer" unique_id=563201456 node_paths=PackedStringArray("dho_input")]
+[node name="XY_Joystick_detector" type="Label" parent="Tree/MovementContainer/VBoxContainer" unique_id=563201456]
 layout_mode = 2
 text = "X=0.00, Y=0.00"
 script = ExtResource("2_xi5co")
-dho_input = NodePath("")
 
 [node name="Movement label2" type="Label" parent="Tree/MovementContainer/VBoxContainer" unique_id=1861503890]
 layout_mode = 2
@@ -71,11 +69,10 @@ layout_mode = 2
 [node name="CurrentlyPressedButtonsContainer" type="MarginContainer" parent="Tree" unique_id=1598638795]
 layout_mode = 2
 
-[node name="CurrentlyPressedButtonLabel" type="Label" parent="Tree/CurrentlyPressedButtonsContainer" unique_id=592775535 node_paths=PackedStringArray("input_node")]
+[node name="CurrentlyPressedButtonLabel" type="Label" parent="Tree/CurrentlyPressedButtonsContainer" unique_id=592775535]
 layout_mode = 2
 text = "Details: OFF"
 script = ExtResource("3_xi5co")
-input_node = NodePath("")
 metadata/_custom_type_script = "uid://cxxx6xl2huta8"
 
 [node name="ButtonContainer" type="MarginContainer" parent="Tree" unique_id=1828789745]
@@ -84,69 +81,60 @@ layout_mode = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="Tree/ButtonContainer" unique_id=498697261]
 layout_mode = 2
 
-[node name="ADetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1863245773 node_paths=PackedStringArray("input_node")]
+[node name="ADetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1863245773]
 layout_mode = 2
 text = "[OFF] A"
 script = ExtResource("2_70se8")
-input_node = NodePath("")
 
-[node name="BDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1934291228 node_paths=PackedStringArray("input_node")]
+[node name="BDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1934291228]
 layout_mode = 2
 text = "[OFF] B"
 script = ExtResource("2_70se8")
 button_capture = 1
-input_node = NodePath("")
 
-[node name="CDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1004974948 node_paths=PackedStringArray("input_node")]
+[node name="CDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1004974948]
 layout_mode = 2
 text = "[OFF] C"
 script = ExtResource("2_70se8")
 button_capture = 2
-input_node = NodePath("")
 
-[node name="DDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=331940295 node_paths=PackedStringArray("input_node")]
+[node name="DDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=331940295]
 layout_mode = 2
 text = "[OFF] D"
 script = ExtResource("2_70se8")
 button_capture = 3
-input_node = NodePath("")
 
-[node name="EDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=404314665 node_paths=PackedStringArray("input_node")]
+[node name="EDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=404314665]
 layout_mode = 2
 text = "[OFF] E"
 script = ExtResource("2_70se8")
 button_capture = 4
-input_node = NodePath("")
 
-[node name="FDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1666167827 node_paths=PackedStringArray("input_node")]
+[node name="FDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1666167827]
 layout_mode = 2
 text = "[OFF] F"
 script = ExtResource("2_70se8")
 button_capture = 5
-input_node = NodePath("")
 
-[node name="PlayDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1456398126 node_paths=PackedStringArray("input_node")]
+[node name="PlayDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1456398126]
 layout_mode = 2
 text = "[OFF] Play (Left)"
 script = ExtResource("2_70se8")
 button_capture = 6
-input_node = NodePath("")
 
-[node name="ExitDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1705070263 node_paths=PackedStringArray("input_node")]
+[node name="ExitDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1705070263]
 layout_mode = 2
 text = "[OFF] ChangeGame (Right)"
 script = ExtResource("2_70se8")
 button_capture = 7
-input_node = NodePath("")
 
 [node name="LastPressedButtonContainer" type="MarginContainer" parent="Tree" unique_id=104521971]
 layout_mode = 2
 
-[node name="LastPressedButtonLabel" type="Label" parent="Tree/LastPressedButtonContainer" unique_id=1549349039 node_paths=PackedStringArray("input_node")]
+[node name="LastPressedButtonLabel" type="Label" parent="Tree/LastPressedButtonContainer" unique_id=1549349039]
 layout_mode = 2
 text = "Details: OFF"
 script = ExtResource("4_vgd2g")
-input_node = NodePath("")
 metadata/_custom_type_script = "uid://cxxx6xl2huta8"
 
 [node name="DetailedContainer" type="MarginContainer" parent="Tree" unique_id=1125020950]
@@ -170,17 +158,15 @@ layout_mode = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="Tree/LongPressButtonContainer" unique_id=2046574127]
 layout_mode = 2
 
-[node name="BButtonHold" type="Label" parent="Tree/LongPressButtonContainer/VBoxContainer" unique_id=1557428747 node_paths=PackedStringArray("input_node", "hold_trigger_node")]
+[node name="BButtonHold" type="Label" parent="Tree/LongPressButtonContainer/VBoxContainer" unique_id=1557428747 node_paths=PackedStringArray("hold_trigger_node")]
 layout_mode = 2
 text = "Hold B = WIN     (0.0s / 3.0s)"
 script = ExtResource("4_41277")
 name_of_event = "WIN"
-input_node = NodePath("")
 hold_trigger_node = NodePath("DHOShowDetailsHoldTrigger")
 
-[node name="DHOShowDetailsHoldTrigger" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/BButtonHold" unique_id=121355694 node_paths=PackedStringArray("input_node", "trigger_event")]
+[node name="DHOShowDetailsHoldTrigger" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/BButtonHold" unique_id=121355694 node_paths=PackedStringArray("trigger_event")]
 script = ExtResource("7_6dpnn")
-input_node = NodePath("")
 button_capture = 1
 trigger_event = NodePath("DHOShowDetails")
 metadata/_custom_type_script = "uid://qkevjtyxu8q1"
@@ -189,17 +175,15 @@ metadata/_custom_type_script = "uid://qkevjtyxu8q1"
 script = ExtResource("5_uuk3a")
 metadata/_custom_type_script = "uid://d4a3ms1wru5dr"
 
-[node name="CButtonHold" type="Label" parent="Tree/LongPressButtonContainer/VBoxContainer" unique_id=260531101 node_paths=PackedStringArray("input_node", "hold_trigger_node")]
+[node name="CButtonHold" type="Label" parent="Tree/LongPressButtonContainer/VBoxContainer" unique_id=260531101 node_paths=PackedStringArray("hold_trigger_node")]
 layout_mode = 2
 text = "Hold C = LOSE    (0.0s / 3.0s)"
 script = ExtResource("4_41277")
 name_of_event = "LOSE"
-input_node = NodePath("")
 hold_trigger_node = NodePath("DHOShowDetailsHoldTrigger")
 
-[node name="DHOShowDetailsHoldTrigger" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/CButtonHold" unique_id=1536857706 node_paths=PackedStringArray("input_node", "trigger_event")]
+[node name="DHOShowDetailsHoldTrigger" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/CButtonHold" unique_id=1536857706 node_paths=PackedStringArray("trigger_event")]
 script = ExtResource("7_6dpnn")
-input_node = NodePath("")
 button_capture = 2
 trigger_event = NodePath("DHOShowDetails")
 metadata/_custom_type_script = "uid://qkevjtyxu8q1"
@@ -208,17 +192,15 @@ metadata/_custom_type_script = "uid://qkevjtyxu8q1"
 script = ExtResource("5_uuk3a")
 metadata/_custom_type_script = "uid://d4a3ms1wru5dr"
 
-[node name="DButtonHold" type="Label" parent="Tree/LongPressButtonContainer/VBoxContainer" unique_id=1313128028 node_paths=PackedStringArray("input_node", "hold_trigger_node")]
+[node name="DButtonHold" type="Label" parent="Tree/LongPressButtonContainer/VBoxContainer" unique_id=1313128028 node_paths=PackedStringArray("hold_trigger_node")]
 layout_mode = 2
 text = "Hold D = DETAILS (0.0s / 3.0s)"
 script = ExtResource("4_41277")
 name_of_event = "DETAILS"
-input_node = NodePath("")
 hold_trigger_node = NodePath("DHOShowDetailsHoldTrigger")
 
-[node name="DHOShowDetailsHoldTrigger" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/DButtonHold" unique_id=1736415264 node_paths=PackedStringArray("input_node", "trigger_event")]
+[node name="DHOShowDetailsHoldTrigger" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/DButtonHold" unique_id=1736415264 node_paths=PackedStringArray("trigger_event")]
 script = ExtResource("7_6dpnn")
-input_node = NodePath("")
 button_capture = 3
 trigger_event = NodePath("DHOShowDetails")
 metadata/_custom_type_script = "uid://qkevjtyxu8q1"
@@ -227,17 +209,15 @@ metadata/_custom_type_script = "uid://qkevjtyxu8q1"
 script = ExtResource("5_uuk3a")
 metadata/_custom_type_script = "uid://d4a3ms1wru5dr"
 
-[node name="EButtonHold" type="Label" parent="Tree/LongPressButtonContainer/VBoxContainer" unique_id=1742257614 node_paths=PackedStringArray("input_node", "hold_trigger_node")]
+[node name="EButtonHold" type="Label" parent="Tree/LongPressButtonContainer/VBoxContainer" unique_id=1742257614 node_paths=PackedStringArray("hold_trigger_node")]
 layout_mode = 2
 text = "Hold E = SOUND   (0.0s / 3.0s)"
 script = ExtResource("4_41277")
 name_of_event = "SOUND"
-input_node = NodePath("")
 hold_trigger_node = NodePath("DHOPlaySoundHoldTrigger")
 
-[node name="DHOPlaySoundHoldTrigger" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/EButtonHold" unique_id=434003374 node_paths=PackedStringArray("input_node", "trigger_event")]
+[node name="DHOPlaySoundHoldTrigger" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/EButtonHold" unique_id=434003374 node_paths=PackedStringArray("trigger_event")]
 script = ExtResource("7_6dpnn")
-input_node = NodePath("")
 button_capture = 4
 trigger_event = NodePath("DHOPlaySound")
 metadata/_custom_type_script = "uid://qkevjtyxu8q1"
@@ -249,15 +229,3 @@ metadata/_custom_type_script = "uid://dvx4onvuv6cxa"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Tree/LongPressButtonContainer/VBoxContainer/EButtonHold/DHOPlaySoundHoldTrigger/DHOPlaySound" unique_id=1942069304]
 stream = ExtResource("7_l5w76")
-
-[node name="DHOInput" type="EditorPlugin" parent="." unique_id=2036291065]
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-physics_interpolation_mode = 0
-auto_translate_mode = 0
-editor_description = ""
-script = ExtResource("12_xi5co")
-metadata/_custom_type_script = "uid://cer06u33jq5d7"

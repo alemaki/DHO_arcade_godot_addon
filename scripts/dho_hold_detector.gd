@@ -10,7 +10,6 @@ class_name DHOHoldTrigger
 
 # Measured in seconds
 @export var max_hold_duration = 3
-@export var input_node: DHOJoypad = null 
 @export var button_capture: DHOJoypad.BUTTON = DHOJoypad.BUTTON.A
 @export var trigger_event: DHOEvent = null
 
@@ -18,14 +17,14 @@ class_name DHOHoldTrigger
 var fired = false
 
 func _ready() -> void:
-	assert(self.input_node != null)
+	pass
 
 func _process(_delta: float) -> void:
 	if not self.fired\
-		and self.input_node.get_button_hold_duration_sec(self.button_capture) >= self.max_hold_duration:
+		and DhoJoypad.get_button_hold_duration_sec(self.button_capture) >= self.max_hold_duration:
 		self.fired = true
 		if trigger_event != null:
 			trigger_event.execute()
 	elif self.fired\
-		and self.input_node.get_button_hold_duration_sec(self.button_capture) < self.max_hold_duration:
+		and DhoJoypad.get_button_hold_duration_sec(self.button_capture) < self.max_hold_duration:
 		self.fired = false
