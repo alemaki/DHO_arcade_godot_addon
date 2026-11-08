@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://cd68803horyb"]
+
+[ext_resource type="Script" uid="uid://brhs05632fb47" path="res://addons/dho_joypad/scripts/dho_scores_holder.gd" id="1_a380m"]
+[ext_resource type="FontFile" uid="uid://dpyjihv03bxd0" path="res://Fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="1_qrkwd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2px8l"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Theme" id="Theme_55u2m"]
+default_font = ExtResource("1_qrkwd")
+default_font_size = 20
+MarginContainer/constants/margin_bottom = 30
+MarginContainer/constants/margin_top = 50
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_2px8l")
+VBoxContainer/constants/separation = 10
+
+[node name="DhoScoreboard" type="Control" unique_id=898585675]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1025.0
+offset_bottom = -506.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_55u2m")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=173133550]
+layout_mode = 1
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="CenterContainer2" type="CenterContainer" parent="PanelContainer" unique_id=710052514]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/CenterContainer2" unique_id=133692778]
+layout_mode = 2
+
+[node name="GameTitle" type="Label" parent="PanelContainer/CenterContainer2/MarginContainer" unique_id=826729486]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "GAME TITLE"
+
+[node name="CenterContainer3" type="CenterContainer" parent="PanelContainer" unique_id=448791601]
+layout_mode = 2
+
+[node name="ScoresHolder" type="VBoxContainer" parent="PanelContainer/CenterContainer3" unique_id=1439440885]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("1_a380m")
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer" unique_id=1701680253]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/CenterContainer" unique_id=1392965035]
+layout_mode = 2
+
+[node name="PressAToStartLabel" type="Label" parent="PanelContainer/CenterContainer/MarginContainer" unique_id=46721149]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 25
+text = "Press A to start"
