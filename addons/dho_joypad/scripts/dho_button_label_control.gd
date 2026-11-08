@@ -20,7 +20,7 @@ func update_text(is_on: bool = false) -> void:
 	var display_text := "%s" % [(ON_TEXT if is_on else OFF_TEXT)]
 	display_text += " %s" % [DHOJoypad.BUTTON_INFORMATION[self.button_capture].button_name]
 	if self.is_showing_details:
-		display_text += "  (%s)" % [DHOJoypad.BUTTON_INFORMATION[self.button_capture].button_name]
+		display_text += "  (%s)" % [DHOJoypad.BUTTON_INFORMATION[self.button_capture].event_name]
 	self.set_text(display_text)
 
 func _ready() -> void:

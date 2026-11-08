@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://d4b25sr8lvu76"]
+
+[ext_resource type="Script" uid="uid://bgk6rjlxieyhg" path="res://addons/dho_joypad/scripts/dho_exit_trigger.gd" id="1_aiuf5"]
+[ext_resource type="FontFile" uid="uid://dpyjihv03bxd0" path="res://Fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="2_qkwjj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1nfdl"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="Theme" id="Theme_m5iau"]
+Label/font_sizes/font_size = 12
+Label/fonts/font = ExtResource("2_qkwjj")
+MarginContainer/constants/margin_bottom = 10
+MarginContainer/constants/margin_left = 10
+MarginContainer/constants/margin_right = 10
+MarginContainer/constants/margin_top = 10
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_1nfdl")
+
+[node name="DHOExitTrigger" type="Node" unique_id=59560413]
+script = ExtResource("1_aiuf5")
+metadata/_custom_type_script = "uid://bgk6rjlxieyhg"
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1940373516]
+z_index = 1000
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -250.0
+offset_top = 30.0
+offset_right = -30.0
+offset_bottom = 120.0
+grow_horizontal = 0
+theme = SubResource("Theme_m5iau")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1691529849]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/MarginContainer" unique_id=908612490]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+text = "Press \"exit\" again to quit"
+autowrap_mode = 3
