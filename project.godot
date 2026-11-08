@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 DhoJoypad="*uid://cer06u33jq5d7"
+QuitScene="*uid://d4b25sr8lvu76"
 
 [display]
 
