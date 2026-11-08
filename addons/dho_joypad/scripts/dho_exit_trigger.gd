@@ -1,3 +1,6 @@
+# Copyright (c) 2026 Alexander Makedonski
+# SPDX-License-Identifier: MIT
+
 extends Node
 class_name DHOExitTrigger
 

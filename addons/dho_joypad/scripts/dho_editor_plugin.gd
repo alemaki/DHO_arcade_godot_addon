@@ -1,3 +1,6 @@
+# Copyright (c) 2026 Alexander Makedonski
+# SPDX-License-Identifier: MIT
+
 @tool
 extends EditorPlugin
 
@@ -6,7 +9,7 @@ const DHO_AUTOLOAD_PATH: String = "res://addons/dho_joypad/scripts/dho_joypad.gd
 const QUIT_AUTOLOAD_NAME: String = "QuitScene"
 const QUIT_AUTOLOAD_PATH: String = "res://addons/dho_joypad/scenes/dho_exit_trigger.tscn"
 
-#TODO: create support for 2 players.
+# -1 means all devices. Other joypad devices are registered from 0 to 8.
 func create_joypad_button_event(button: JoyButton, device: int = -1) -> InputEventJoypadButton:
 	var event := InputEventJoypadButton.new()
 	event.device = device
@@ -22,20 +25,23 @@ func has_joypad_event(events: Array, ev: InputEventJoypadButton) -> bool:
 	return false
 
 func register_input_actions() -> void:
-	for button: DHOJoypad.BUTTON in DHOJoypad.BUTTON_INFORMATION:
-		var info: DHOButtonInformation = DHOJoypad.BUTTON_INFORMATION[button]
-		if info.input_action.is_empty():
-			push_warning("No mapping for DHOButton: " + info.button_name)
-			continue
-		var setting_path: String = "input/" + info.input_action
-		var action: Variant = ProjectSettings.get_setting(setting_path)
-		if action == null:
-			action = { "deadzone": 0, "events": [] }
-		var event := create_joypad_button_event(info.joy_button)
-		if not has_joypad_event(action.events, event):
-			action.events.append(event)
-		ProjectSettings.set_setting(setting_path, action)
-	ProjectSettings.save()
+	for device in range(2):
+		for button: DHOJoypad.BUTTON in DHOJoypad.BUTTON_INFORMATION:
+			var info: DHOButtonInformation = DHOJoypad.BUTTON_INFORMATION[button]
+			if info.input_action.is_empty():
+				push_warning("No mapping for DHOButton: " + info.button_name)
+				continue
+			var setting_path: String = "input/" + info.input_action
+			var action: Variant = ProjectSettings.get_setting(setting_path)
+			if action == null:
+				action = { "deadzone": 0, "events": [] }
+			var event := create_joypad_button_event(info.joy_button)
+			if device == 1:
+				setting_path += "_device_1" # I will map the second device to different mapping
+			if not has_joypad_event(action.events, event):
+				action.events.append(event)
+			ProjectSettings.set_setting(setting_path, action)
+		ProjectSettings.save()
 
 func _enable_plugin() -> void:
 	self.add_autoload_singleton(DHO_AUTOLOAD_NAME, DHO_AUTOLOAD_PATH)

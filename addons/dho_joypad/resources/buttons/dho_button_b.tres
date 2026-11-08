@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="DHOButtonInformation" format=3 uid="uid://6i1px75pcqrw"]
 
-[ext_resource type="Script" uid="uid://doge6v11mn3ks" path="res://addons/dho_joypad/scripts/resource_scripts/dho_button.gd" id="1_q5my6"]
+[ext_resource type="Script" uid="uid://doge6v11mn3ks" path="res://addons/dho_joypad/scripts/resources/dho_button.gd" id="1_q5my6"]
 
 [resource]
 script = ExtResource("1_q5my6")

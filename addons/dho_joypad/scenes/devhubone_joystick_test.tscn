@@ -2,12 +2,12 @@
 
 [ext_resource type="FontFile" uid="uid://dpyjihv03bxd0" path="res://Fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="1_sscts"]
 [ext_resource type="Texture2D" uid="uid://bn6vnchewuuf2" path="res://icon.svg" id="2_ebn8i"]
-[ext_resource type="Script" uid="uid://cwsg5lygoewbf" path="res://addons/dho_joypad/scripts/dho_xy_joystick_label.gd" id="3_hlem0"]
-[ext_resource type="Script" uid="uid://dux0gucsr622e" path="res://addons/dho_joypad/scripts/dho_currently_pressed_button_label.gd" id="4_w5nki"]
-[ext_resource type="Script" uid="uid://b42bfkgiqte6e" path="res://addons/dho_joypad/scripts/dho_button_label_control.gd" id="5_rdkmu"]
-[ext_resource type="Script" uid="uid://diehq1u621bbw" path="res://addons/dho_joypad/scripts/dho_last_pressed_label.gd" id="6_oddn2"]
-[ext_resource type="Script" uid="uid://cxxx6xl2huta8" path="res://addons/dho_joypad/scripts/dho_detailed_label.gd" id="7_dbkul"]
-[ext_resource type="Script" uid="uid://b4b6km7il5ch1" path="res://addons/dho_joypad/scripts/dho_hold_label.gd" id="8_xux77"]
+[ext_resource type="Script" uid="uid://cwsg5lygoewbf" path="res://addons/dho_joypad/scripts/labels/dho_xy_joystick_label.gd" id="3_sscts"]
+[ext_resource type="Script" uid="uid://dux0gucsr622e" path="res://addons/dho_joypad/scripts/labels/dho_currently_pressed_button_label.gd" id="4_ebn8i"]
+[ext_resource type="Script" uid="uid://b42bfkgiqte6e" path="res://addons/dho_joypad/scripts/labels/dho_button_label_control.gd" id="5_hlem0"]
+[ext_resource type="Script" uid="uid://diehq1u621bbw" path="res://addons/dho_joypad/scripts/labels/dho_last_pressed_label.gd" id="6_w5nki"]
+[ext_resource type="Script" uid="uid://cxxx6xl2huta8" path="res://addons/dho_joypad/scripts/labels/dho_detailed_label.gd" id="7_rdkmu"]
+[ext_resource type="Script" uid="uid://b4b6km7il5ch1" path="res://addons/dho_joypad/scripts/labels/dho_hold_label.gd" id="8_oddn2"]
 [ext_resource type="Script" uid="uid://qkevjtyxu8q1" path="res://addons/dho_joypad/scripts/dho_hold_detector.gd" id="9_5vi5g"]
 [ext_resource type="Script" uid="uid://d4a3ms1wru5dr" path="res://addons/dho_joypad/scripts/events/dho_show_details.gd" id="10_n3jd5"]
 [ext_resource type="Script" uid="uid://dvx4onvuv6cxa" path="res://addons/dho_joypad/scripts/events/dho_play_sound.gd" id="11_1mend"]
@@ -65,7 +65,7 @@ text = "Movement:"
 [node name="XY_Joystick_detector" type="Label" parent="Tree/MovementContainer/VBoxContainer" unique_id=563201456]
 layout_mode = 2
 text = "X=0.00, Y=0.00"
-script = ExtResource("3_hlem0")
+script = ExtResource("3_sscts")
 
 [node name="Movement label2" type="Label" parent="Tree/MovementContainer/VBoxContainer" unique_id=1861503890]
 layout_mode = 2
@@ -80,7 +80,7 @@ layout_mode = 2
 [node name="CurrentlyPressedButtonLabel" type="Label" parent="Tree/CurrentlyPressedButtonsContainer" unique_id=592775535]
 layout_mode = 2
 text = "Details: OFF"
-script = ExtResource("4_w5nki")
+script = ExtResource("4_ebn8i")
 
 [node name="ButtonContainer" type="MarginContainer" parent="Tree" unique_id=1828789745]
 layout_mode = 2
@@ -91,48 +91,48 @@ layout_mode = 2
 [node name="ADetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1863245773]
 layout_mode = 2
 text = "[OFF] A"
-script = ExtResource("5_rdkmu")
+script = ExtResource("5_hlem0")
 
 [node name="BDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1934291228]
 layout_mode = 2
 text = "[OFF] B"
-script = ExtResource("5_rdkmu")
+script = ExtResource("5_hlem0")
 button_capture = 1
 
 [node name="CDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1004974948]
 layout_mode = 2
 text = "[OFF] C"
-script = ExtResource("5_rdkmu")
+script = ExtResource("5_hlem0")
 button_capture = 2
 
 [node name="DDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=331940295]
 layout_mode = 2
 text = "[OFF] D"
-script = ExtResource("5_rdkmu")
+script = ExtResource("5_hlem0")
 button_capture = 3
 
 [node name="EDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=404314665]
 layout_mode = 2
 text = "[OFF] E"
-script = ExtResource("5_rdkmu")
+script = ExtResource("5_hlem0")
 button_capture = 4
 
 [node name="FDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1666167827]
 layout_mode = 2
 text = "[OFF] F"
-script = ExtResource("5_rdkmu")
+script = ExtResource("5_hlem0")
 button_capture = 5
 
 [node name="PlayDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1456398126]
 layout_mode = 2
 text = "[OFF] Play (Left)"
-script = ExtResource("5_rdkmu")
+script = ExtResource("5_hlem0")
 button_capture = 6
 
 [node name="ExitDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1705070263]
 layout_mode = 2
 text = "[OFF] ChangeGame (Right)"
-script = ExtResource("5_rdkmu")
+script = ExtResource("5_hlem0")
 button_capture = 7
 
 [node name="LastPressedButtonContainer" type="MarginContainer" parent="Tree" unique_id=104521971]
@@ -141,7 +141,7 @@ layout_mode = 2
 [node name="LastPressedButtonLabel" type="Label" parent="Tree/LastPressedButtonContainer" unique_id=1549349039]
 layout_mode = 2
 text = "Details: OFF"
-script = ExtResource("6_oddn2")
+script = ExtResource("6_w5nki")
 
 [node name="DetailedContainer" type="MarginContainer" parent="Tree" unique_id=1125020950]
 layout_mode = 2
@@ -149,7 +149,7 @@ layout_mode = 2
 [node name="DetailedLabel" type="Label" parent="Tree/DetailedContainer" unique_id=163306869]
 layout_mode = 2
 text = "Details: OFF"
-script = ExtResource("7_dbkul")
+script = ExtResource("7_rdkmu")
 fixed_text = "Details:"
 no_details_text = " OFF"
 details_text = " ON"
@@ -166,7 +166,7 @@ layout_mode = 2
 [node name="BButtonHoldLabel" type="Label" parent="Tree/LongPressButtonContainer/VBoxContainer" unique_id=1557428747 node_paths=PackedStringArray("hold_trigger_node")]
 layout_mode = 2
 text = "Hold B = WIN     (0.0s / 3.0s)"
-script = ExtResource("8_xux77")
+script = ExtResource("8_oddn2")
 name_of_event = "WIN"
 hold_trigger_node = NodePath("DHOShowDetailsHoldTrigger")
 
@@ -181,7 +181,7 @@ script = ExtResource("10_n3jd5")
 [node name="CButtonHoldLabel" type="Label" parent="Tree/LongPressButtonContainer/VBoxContainer" unique_id=260531101 node_paths=PackedStringArray("hold_trigger_node")]
 layout_mode = 2
 text = "Hold C = LOSE    (0.0s / 3.0s)"
-script = ExtResource("8_xux77")
+script = ExtResource("8_oddn2")
 name_of_event = "LOSE"
 hold_trigger_node = NodePath("DHOShowDetailsHoldTrigger")
 
@@ -196,22 +196,23 @@ script = ExtResource("10_n3jd5")
 [node name="DButtonHoldLabel" type="Label" parent="Tree/LongPressButtonContainer/VBoxContainer" unique_id=1313128028 node_paths=PackedStringArray("hold_trigger_node")]
 layout_mode = 2
 text = "Hold D = DETAILS (0.0s / 3.0s)"
-script = ExtResource("8_xux77")
+script = ExtResource("8_oddn2")
 name_of_event = "DETAILS"
 hold_trigger_node = NodePath("DHOShowDetailsHoldTrigger")
 
-[node name="DHOShowDetailsHoldTrigger" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/DButtonHoldLabel" unique_id=1736415264]
+[node name="DHOShowDetailsHoldTrigger" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/DButtonHoldLabel" unique_id=1736415264 node_paths=PackedStringArray("trigger_event")]
 script = ExtResource("9_5vi5g")
 button_capture = 3
+trigger_event = NodePath("DHOShowDetails")
 
-[node name="DHOShowDetails" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/DButtonHoldLabel/DHOShowDetailsHoldTrigger" unique_id=1741215498]
-script = ExtResource("11_1mend")
-metadata/_custom_type_script = "uid://dvx4onvuv6cxa"
+[node name="DHOShowDetails" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/DButtonHoldLabel/DHOShowDetailsHoldTrigger" unique_id=772209331]
+script = ExtResource("10_n3jd5")
+metadata/_custom_type_script = "uid://d4a3ms1wru5dr"
 
 [node name="EButtonHoldLabel" type="Label" parent="Tree/LongPressButtonContainer/VBoxContainer" unique_id=1742257614 node_paths=PackedStringArray("hold_trigger_node")]
 layout_mode = 2
 text = "Hold E = SOUND   (0.0s / 3.0s)"
-script = ExtResource("8_xux77")
+script = ExtResource("8_oddn2")
 name_of_event = "SOUND"
 hold_trigger_node = NodePath("DHOPlaySoundHoldTrigger")
 
@@ -219,17 +220,19 @@ hold_trigger_node = NodePath("DHOPlaySoundHoldTrigger")
 script = ExtResource("9_5vi5g")
 button_capture = 4
 
-[node name="DHOPlaySound" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/EButtonHoldLabel/DHOPlaySoundHoldTrigger" unique_id=1647040260]
+[node name="DHOPlaySound" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/EButtonHoldLabel/DHOPlaySoundHoldTrigger" unique_id=1647040260 node_paths=PackedStringArray("player")]
 script = ExtResource("11_1mend")
+player = NodePath("AudioStreamPlayer")
 metadata/_custom_type_script = "uid://dvx4onvuv6cxa"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Tree/LongPressButtonContainer/VBoxContainer/EButtonHoldLabel/DHOPlaySoundHoldTrigger/DHOPlaySound" unique_id=1942069304]
 stream = ExtResource("12_vklnt")
 
 [node name="AButtonHoldLabel" type="Label" parent="Tree/LongPressButtonContainer/VBoxContainer" unique_id=323323367 node_paths=PackedStringArray("hold_trigger_node")]
+modulate = Color(1, 1, 1, 0.078431375)
 layout_mode = 2
 text = "Hold E = SOUND   (0.0s / 3.0s)"
-script = ExtResource("8_xux77")
+script = ExtResource("8_oddn2")
 name_of_event = "GODOT"
 hold_trigger_node = NodePath("DHOModulateHoldTrigger")
 

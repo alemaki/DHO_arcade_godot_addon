@@ -17,8 +17,8 @@ class_name DHOJoypad
 
 # NOTE: Documentation for this section ends here.
 
-signal dho_button_pressed(button: DHOJoypad.BUTTON)
-signal dho_button_released(button: DHOJoypad.BUTTON)
+signal dho_button_pressed(button: DHOJoypad.BUTTON, device: int)
+signal dho_button_released(button: DHOJoypad.BUTTON, device: int)
 
 enum BUTTON {
 	A,
@@ -105,12 +105,11 @@ var left_joystick_X_axis: float = 0.
 var left_joystick_Y_axis: float = 0.
 # NOTE: The function below does not return normalised input.
 # I am using only raw input here so the devhubone_test_scene will work regardless of input mappings.
-# TODO: Check device infomation and only capture devhubone Input?
-func get_input_vector() -> Vector2:
+func get_input_vector(device: int) -> Vector2:
 	return Vector2(self.left_joystick_X_axis, self.left_joystick_Y_axis)
 
-func get_normalized_input_vector() -> Vector2:
-	return get_input_vector().normalized()
+func get_normalized_input_vector(device: int) -> Vector2:
+	return get_input_vector(device).normalized()
 
 """ -------------------------------------------------------------------------------------------- """
 """ SECTION: NODE FUNCTIONS """
@@ -136,9 +135,9 @@ func _process(_delta: float):
 func _input(event: InputEvent) -> void:
 	if event is InputEventJoypadButton:
 		if event.is_pressed() && EVENT_TRIGGER_BUTTONS.has(event.get_button_index()):
-			self._button_pressed(EVENT_TRIGGER_BUTTONS[event.get_button_index()])
+			self._button_pressed(EVENT_TRIGGER_BUTTONS[event.get_button_index()], event.device)
 		elif event.is_released() && EVENT_TRIGGER_BUTTONS.has(event.get_button_index()):
-			self._button_released(EVENT_TRIGGER_BUTTONS[event.get_button_index()])
+			self._button_released(EVENT_TRIGGER_BUTTONS[event.get_button_index()], event.device)
 	
 	if event is InputEventJoypadMotion:
 		if event.axis == 0:
@@ -166,13 +165,13 @@ func get_button_last_held_time_msec(button: BUTTON) -> float:
 func get_button_last_held_time_sec(button: BUTTON) -> float:
 	return (Time.get_ticks_msec() - button_contexts[button].press_started) / 1000.
 
-func _button_pressed(button: BUTTON) -> void:
+func _button_pressed(button: BUTTON, device: int) -> void:
 	# Signal for this button should fire only once when it's pressed.
 	self.dho_button_pressed.emit(button)
 	button_contexts[button].press_started = Time.get_ticks_msec()
 	button_contexts[button].is_pressed = true
 
-func _button_released(button: BUTTON) -> void:
+func _button_released(button: BUTTON, device: int) -> void:
 	# Signal for this button should fire only once when it's released.
 	self.dho_button_released.emit(button)
 	button_contexts[button].is_pressed = false

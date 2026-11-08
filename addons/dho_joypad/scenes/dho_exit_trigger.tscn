@@ -26,6 +26,7 @@ PanelContainer/styles/panel = SubResource("StyleBoxFlat_1nfdl")
 
 [node name="DHOExitTrigger" type="Node" unique_id=59560413]
 script = ExtResource("1_aiuf5")
+second_press_trigger_time_window = 1.5
 metadata/_custom_type_script = "uid://bgk6rjlxieyhg"
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1940373516]
