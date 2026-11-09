@@ -1,13 +1,19 @@
 # Copyright (c) 2026 Alexander Makedonski
 # SPDX-License-Identifier: MIT
 
+
+## The scene that contains this script (dho_exit_trigger.tscn) will be autoloaded by the plugin.
+## It's an UI Node that stays hidden until the exit button is pressed. If the exit button is pressed
+## twice, this scene will trigger an exit of the game.
+## It is required for DevHubOne's arcade!
 extends Node
 class_name DHOExitTrigger
 
 # Measured in seconds
 @export var second_press_trigger_time_window: float = 1.
 var pressed_once: bool = false
-# Children will be removed so they will not be processed in the scene and only added on exit button.
+# Children will be removed so they will not be processed in the scene and only added back on 
+# exit button pressed.
 var hidden_children: Array[Node] = []
 
 func hide_children() -> void:

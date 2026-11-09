@@ -4,6 +4,8 @@
 @tool
 extends EditorPlugin
 
+# Currently fixed but too lazy to think of a better way to map the joystick
+const SECOND_DEVICE_NAME_SUFFIX: String = "_device_1"
 const DHO_AUTOLOAD_NAME: String = "DhoJoypad"
 const DHO_AUTOLOAD_PATH: String = "res://addons/dho_joypad/scripts/dho_joypad.gd"
 const QUIT_AUTOLOAD_NAME: String = "QuitScene"
@@ -37,7 +39,7 @@ func register_input_actions() -> void:
 				action = { "deadzone": 0, "events": [] }
 			var event := create_joypad_button_event(info.joy_button)
 			if device == 1:
-				setting_path += "_device_1" # I will map the second device to different mapping
+				setting_path += SECOND_DEVICE_NAME_SUFFIX
 			if not has_joypad_event(action.events, event):
 				action.events.append(event)
 			ProjectSettings.set_setting(setting_path, action)
