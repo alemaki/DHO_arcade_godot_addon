@@ -15,9 +15,37 @@ class_name DHOJoypad
 # WARNING: This node is autoloaded by the plugin. Disabling the autoload of this node (or disabling
 # the plugin) will BREAK the test scenes and asset scenes provided by this plugin for your game.
 # You can see the autoloads in Project settings -> Globals.
+#
+# NOTE: The important sections are: BUTTONS and JOYSTICK
 
+""" -------------------------------------------------------------------------------------------- """
+""" SECTION: DEVICE CONTEXTS """
+""" -------------------------------------------------------------------------------------------- """
 # TODO: Think of a better way to handle multiple devices.
+# NOTE: Documentation for this section ends here.
+
+## Increase value as you like. NOTE: If you are using other joypads in addition to the devhubone's you
+## might need to increase this value on demand.
 const MAX_DEVICES_HANDLED: int = 2
+
+## Context for the joypad measurements.
+class _DHOJoypadContext extends Object:
+	var device: int = 0
+	## Will be generated at _init
+	var button_contexts: Dictionary[BUTTON, ButtonContext] = {}
+	var left_joystick_X_axis: float = 0.
+	var left_joystick_Y_axis: float = 0.
+	
+	func _init() -> void:
+		for button in BUTTON.values():
+			self.button_contexts[button] = ButtonContext.new()
+
+var _device_contexts: Dictionary[int, _DHOJoypadContext] = {}
+
+func is_device_valid(device: int) -> bool:
+	if device >= self.MAX_DEVICES_HANDLED:
+		return false
+	return true
 
 """ -------------------------------------------------------------------------------------------- """
 """ SECTION: INPUT ACTIONS (INPUT MAP) """
@@ -37,6 +65,8 @@ const MAX_DEVICES_HANDLED: int = 2
 #
 # If you wish to create a game that works both with keyboard and the DHO's joypad you can map your
 # keyboard variants to those actions.
+#
+# NOTE: Documentation for this section ends here.
 
 """ -------------------------------------------------------------------------------------------- """
 """ SECTION: BUTTONS """
@@ -118,44 +148,57 @@ class ButtonContext extends RefCounted:
 	## Engine time in which the press started in ms
 	var press_started: float = 0.
 
-## Will be generated at _init
-var button_contexts: Dictionary[BUTTON, ButtonContext] = {}
+## Param device = -1 for any device.
+func is_button_pressed(button: BUTTON, device: int = -1) -> bool:
+	assert(self.is_device_valid(device))
+	if device < 0:
+		for device_context in self._device_contexts.values():
+			if  device_context.button_contexts[button].is_pressed:
+				return true
+	else:
+		return self._device_contexts[device].button_contexts[button].is_pressed
+	return false
 
-func is_button_pressed(button: BUTTON) -> bool:
-	return button_contexts[button].is_pressed
-
-## Returns 0 if button is not held
-func get_button_hold_duration_msec(button: BUTTON) -> float:
-	if not button_contexts[button].is_pressed:
+## Returns 0 if button is not held. Defaults to device 0 if param device = -1.
+func get_button_hold_duration_msec(button: BUTTON, device: int = -1) -> float:
+	assert(self.is_device_valid(device))
+	if device < 0:
+		device = 0
+	if not self._device_contexts[device].button_contexts[button].is_pressed:
 		return 0.
-	return Time.get_ticks_msec() - button_contexts[button].press_started
+	return Time.get_ticks_msec()\
+		 - self._device_contexts[device].button_contexts[button].press_started
 
-## Returns 0 if button is not held
-func get_button_hold_duration_sec(button: BUTTON) -> float:
-	if not button_contexts[button].is_pressed:
-		return 0.
-	return (Time.get_ticks_msec() - button_contexts[button].press_started) / 1000.
+## Returns 0 if button is not held. Defaults to device 0 if param device = -1.
+func get_button_hold_duration_sec(button: BUTTON, device: int = -1) -> float:
+	return self.get_button_hold_duration_msec(button, device) / 1000.
 
-## Returns last held time for the button (includes current time if currently held)
-func get_button_last_held_time_msec(button: BUTTON) -> float:
-	return (Time.get_ticks_msec() - button_contexts[button].press_started)
+## Returns last held time for the button (includes current time if currently held).
+## Defaults to device 0 if param device = -1.
+func get_button_last_held_time_msec(button: BUTTON, device: int = -1) -> float:
+	assert(self.is_device_valid(device))
+	if device < 0:
+		device = 0
+	return Time.get_ticks_msec()\
+		 - self._device_contexts[device].button_contexts[button].press_started
 
-## Returns last held time for the button (includes current time if currently held)
-func get_button_last_held_time_sec(button: BUTTON) -> float:
-	return (Time.get_ticks_msec() - button_contexts[button].press_started) / 1000.
+## Returns last held time for the button (includes current time if currently held).
+## Defaults to device 0 if param device = -1.
+func get_button_last_held_time_sec(button: BUTTON, device: int = -1) -> float:
+	return self.get_button_last_held_time_msec(button, device) / 1000.
 
 ## Handle for event.
 func _button_pressed(button: BUTTON, device: int) -> void:
 	# Signal for this button should fire only once when it's pressed.
-	self.dho_button_pressed.emit(button)
-	button_contexts[button].press_started = Time.get_ticks_msec()
-	button_contexts[button].is_pressed = true
+	self.dho_button_pressed.emit(button, device)
+	self._device_contexts[device].button_contexts[button].press_started = Time.get_ticks_msec()
+	self._device_contexts[device].button_contexts[button].is_pressed = true
 
 ## Handle for event.
 func _button_released(button: BUTTON, device: int) -> void:
 	# Signal for this button should fire only once when it's released.
-	self.dho_button_released.emit(button)
-	button_contexts[button].is_pressed = false
+	self.dho_button_released.emit(button, device)
+	self._device_contexts[device].button_contexts[button].is_pressed = false
 
 """ -------------------------------------------------------------------------------------------- """
 """ SECTION: JOYSTICK """
@@ -198,26 +241,44 @@ func _button_released(button: BUTTON, device: int) -> void:
 #
 # NOTE: Documentation for this section ends here.
 
-var left_joystick_X_axis: float = 0.
-var left_joystick_Y_axis: float = 0.
+## Emits normalized input
+signal dho_joystick_changed(vector: Vector2, device: int)
 
+# This function defaults to device 0 in device = -1, because not sure how I am supposed to handle
+# multiple device inputs for axes.
 ## NOTE: The function below does not return normalised input.
 ## I am using only raw input here so the devhubone_test_scene will work regardless of input mappings.
+## If device = -1 it will default to 0.
 func get_input_vector(device: int) -> Vector2:
-	return Vector2(self.left_joystick_X_axis, self.left_joystick_Y_axis)
+	assert(self.is_device_valid(device))
+	if device == -1:
+		device = 0
+	return Vector2(
+		self._device_context[device].left_joystick_X_axis, 
+		self._device_context[device].left_joystick_Y_axis
+	)
 
-func get_normalized_input_vector(device: int) -> Vector2:
+## If device = -1 it will default to 0.
+func get_normalized_input_vector(device: int = -1) -> Vector2:
 	return get_input_vector(device).normalized()
+
+func _axis_X_changed(axis_value: float, device: int) -> void:
+	self._device_context[device].left_joystick_X_axis = axis_value
+	self.dho_joystick_changed.emit(self.get_normalized_input_vector(device), device)
+
+func _axis_Y_changed(axis_value: float, device: int) -> void:
+	self._device_context[device].left_joystick_X_axis = axis_value
+	self.dho_joystick_changed.emit(self.get_normalized_input_vector(device), device)
 
 """ -------------------------------------------------------------------------------------------- """
 """ SECTION: NODE FUNCTIONS """
 """ -------------------------------------------------------------------------------------------- """
 
-func _init():
-	for device in MAX_DEVICES_HANDLED:
-		for button in BUTTON.values():
-			self.button_contexts[button] = ButtonContext.new()
-			self.button_contexts[button].device = device
+func _init() -> void:
+	for device in self.MAX_DEVICES_HANDLED:
+		var device_context := _DHOJoypadContext.new()
+		device_context.device = device
+		self._device_contexts[device] = device_context
 
 func _process(_delta: float):
 	pass
@@ -228,14 +289,14 @@ func _ready():
 """ -------------------------------------------------------------------------------------------- """
 """ SECTION: INPUT HANDLING """
 """ -------------------------------------------------------------------------------------------- """
-# NOTE: The devhubone joystick can also be captured by using the general joypad input events.
+# The devhubone joystick can also be captured by using the general joypad input events.
 # Take a look at _input() to see how the input events can be handled.
-#
-# You can use this node in your scenes to capture input only for joypad.
 #
 # NOTE: Documentation for this section ends here.
 
 func _input(event: InputEvent) -> void:
+	if not self.is_device_valid(event.device):
+		return
 	if event is InputEventJoypadButton:
 		if event.is_pressed() && EVENT_TRIGGER_BUTTONS.has(event.get_button_index()):
 			self._button_pressed(EVENT_TRIGGER_BUTTONS[event.get_button_index()], event.device)
@@ -244,6 +305,6 @@ func _input(event: InputEvent) -> void:
 	
 	if event is InputEventJoypadMotion:
 		if event.axis == 0:
-			self.left_joystick_X_axis = event.axis_value
+			self._axis_X_changed(event.axis_value, event.device)
 		elif event.axis == 1:
-			self.left_joystick_Y_axis = event.axis_value
+			self._axis_Y_changed(event.axis_value, event.device)
