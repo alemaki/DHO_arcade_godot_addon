@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://l3ygr8ycxa3c"]
+
+[ext_resource type="Script" uid="uid://bg7or48n4ho24" path="res://addons/dho_joypad/scripts/dho_name_setter.gd" id="1_7xf3h"]
+
+[node name="DhoSaveScore" type="Control" unique_id=901363687]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=807651720]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer" unique_id=200091839]
+layout_mode = 2
+script = ExtResource("1_7xf3h")

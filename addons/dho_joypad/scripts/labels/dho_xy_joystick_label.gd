@@ -11,5 +11,5 @@ func _ready() -> void:
 	pass
 
 func _process(_delta: float) -> void:
-	var direction: Vector2 = DhoJoypad.get_input_vector(0) # 0 is the default device, I think...
+	var direction: Vector2 = DhoJoypad.get_input_vector()
 	self.set_text("X=%3.2f, Y=%3.2f" % [direction.x, direction.y])

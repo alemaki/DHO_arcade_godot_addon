@@ -1,4 +1,5 @@
 extends VBoxContainer
+class_name DHOScoreboard
 
 const BEST_SCORE_COUNT = 10
 const scores_location: String = "user://score_data.tres"

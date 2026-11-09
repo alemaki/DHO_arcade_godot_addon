@@ -33,8 +33,8 @@ theme = SubResource("Theme_qn1hh")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1773667894]
 modulate = Color(0.012617188, 0.012617188, 0.012617188, 1)
-position = Vector2(579, 340)
-scale = Vector2(10.734375, 6.703125)
+position = Vector2(579, 330)
+scale = Vector2(10.25, 6.21875)
 texture = ExtResource("2_0yemh")
 
 [node name="Tree" type="VBoxContainer" parent="." unique_id=2141563477]
@@ -79,7 +79,7 @@ layout_mode = 2
 
 [node name="CurrentlyPressedButtonLabel" type="Label" parent="Tree/CurrentlyPressedButtonsContainer" unique_id=592775535]
 layout_mode = 2
-text = "Details: OFF"
+text = "Currently pressed buttons:"
 script = ExtResource("4_xqdvk")
 
 [node name="ButtonContainer" type="MarginContainer" parent="Tree" unique_id=1828789745]
@@ -140,7 +140,7 @@ layout_mode = 2
 
 [node name="LastPressedButtonLabel" type="Label" parent="Tree/LastPressedButtonContainer" unique_id=1549349039]
 layout_mode = 2
-text = "Details: OFF"
+text = "Last pressed button:"
 script = ExtResource("6_a1lkj")
 
 [node name="DetailedContainer" type="MarginContainer" parent="Tree" unique_id=1125020950]
@@ -231,7 +231,7 @@ stream = ExtResource("12_1qb3v")
 [node name="AButtonHoldLabel" type="Label" parent="Tree/LongPressButtonContainer/VBoxContainer" unique_id=323323367 node_paths=PackedStringArray("hold_trigger_node")]
 modulate = Color(1, 1, 1, 0.078431375)
 layout_mode = 2
-text = "Hold E = SOUND   (0.0s / 3.0s)"
+text = "Hold A = GODOT   (0.0s / 3.0s)"
 script = ExtResource("8_nv28x")
 name_of_event = "GODOT"
 hold_trigger_node = NodePath("DHOModulateHoldTrigger")

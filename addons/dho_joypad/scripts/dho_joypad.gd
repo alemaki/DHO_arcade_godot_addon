@@ -13,7 +13,7 @@ class_name DHOJoypad
 # implementation you want to create with the joypad.
 #
 # WARNING: This node is autoloaded by the plugin. Disabling the autoload of this node (or disabling
-# the plugin) will BREAK the test scenes and asset scenes provided by this plugin for your game.
+# the plugin) will BREAK the joypad test scene provided by this plugin.
 # You can see the autoloads in Project settings -> Globals.
 #
 # NOTE: The important sections are: BUTTONS and JOYSTICK
@@ -59,9 +59,9 @@ func is_device_valid(device: int) -> bool:
 #
 # WARNING: Deleting those actions will require you to reload the plugin to have them again.
 # Otherwise you can create your own input actions and map them yourself. You are not required to
-# use the ones provided in the plugin. Every scene provided by the plugin will use the functions
-# below, which work regardless of actions, to capture raw input. They however require this node to
-# be autoloaded.
+# use the ones provided in the plugin. The test scene for the joypad works with the raw input from
+# this node and won't break if the defaults ahve been removed. However the asset scenes provided in
+# this plugin work with input actions, so yo will have to edit them and include your own actions.
 #
 # If you wish to create a game that works both with keyboard and the DHO's joypad you can map your
 # keyboard variants to those actions.

@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://cd68803horyb"]
 
-[ext_resource type="Script" uid="uid://brhs05632fb47" path="res://addons/dho_joypad/scripts/dho_scores_holder.gd" id="1_a380m"]
+[ext_resource type="Script" uid="uid://brhs05632fb47" path="res://addons/dho_joypad/scripts/dho_scoreboard.gd" id="1_a380m"]
 [ext_resource type="FontFile" uid="uid://dpyjihv03bxd0" path="res://Fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="1_qrkwd"]
+[ext_resource type="Script" uid="uid://4aubjdyqkpw1" path="res://addons/dho_joypad/scripts/labels/dho_blinking_label.gd" id="3_vcjci"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2px8l"]
 bg_color = Color(0, 0, 0, 1)
@@ -45,10 +46,11 @@ text = "GAME TITLE"
 [node name="CenterContainer3" type="CenterContainer" parent="PanelContainer" unique_id=448791601]
 layout_mode = 2
 
-[node name="ScoresHolder" type="VBoxContainer" parent="PanelContainer/CenterContainer3" unique_id=1439440885]
+[node name="ScoresHolder" type="VBoxContainer" parent="PanelContainer/CenterContainer3" unique_id=750084622]
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("1_a380m")
+metadata/_custom_type_script = "uid://brhs05632fb47"
 
 [node name="CenterContainer" type="CenterContainer" parent="PanelContainer" unique_id=1701680253]
 layout_mode = 2
@@ -57,8 +59,10 @@ size_flags_vertical = 8
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer/CenterContainer" unique_id=1392965035]
 layout_mode = 2
 
-[node name="PressAToStartLabel" type="Label" parent="PanelContainer/CenterContainer/MarginContainer" unique_id=46721149]
+[node name="PressAToStartLabel" type="Label" parent="PanelContainer/CenterContainer/MarginContainer" unique_id=2114385245]
 layout_mode = 2
 size_flags_vertical = 8
 theme_override_font_sizes/font_size = 25
 text = "Press A to start"
+script = ExtResource("3_vcjci")
+metadata/_custom_type_script = "uid://4aubjdyqkpw1"
