@@ -50,12 +50,20 @@ func is_device_valid(device: int) -> bool:
 """ -------------------------------------------------------------------------------------------- """
 """ SECTION: INPUT ACTIONS (INPUT MAP) """
 """ -------------------------------------------------------------------------------------------- """
-# NOTE: If you are going to use a second device - any mention of any input actions below will be a
-# descripton for the first device that connects. The plugin itself creates those actions for you to
-# use. Each input action will have it's mirror for a second device with the same name with appended
-# "_device_1" (devices are 0-counted) string at the end. For example: "ui_accept" is the input
-# action for device 0 (the main device) and device 1 (the second device) will have an action 
-# "ui_accept_device_1" mapped to it, "ui_left" for device 0 and "ui_left_device_1" for device 1, etc.
+# NOTE: Any mention of any input actions below will be a descripton for all devices actions. 
+# The plugin itself creates those actions for you to use.
+# Each input action will have it's mirror for a single device with the same name with appended
+# "_device_[num]" (devices are 0-counted) string at the end. For example: "ui_accept" will be the
+# the action that all devices activate when pressing the A button. "ui_accept_device_0" is the input
+# action for device 0 (the first deivce) and device 1 (the second device) will have an action 
+# "ui_accept_device_1" mapped to it, "ui_left" for all devices "ui_left_device_0" for device 0 and 
+# "ui_left_device_1" for device 1, etc.
+#
+# When the plugin is loaded, restart the editor and look at the defined actions in:
+# Prject Settings -> Input Map. Search for "ui_accept" and you will see multiple actions defined
+# for all devices and for each device one by one. If you want to create a game with single player,
+# by all means use the general actions. However, If you wish to create a game that uses multiple
+# DevHubOne's joypads you might have to use the more targeted actions.
 #
 # WARNING: Deleting those actions will require you to reload the plugin to have them again.
 # Otherwise you can create your own input actions and map them yourself. You are not required to
@@ -74,7 +82,7 @@ func is_device_valid(device: int) -> bool:
 # The buttons are as straight forward as it goes. The plugin will create input mappings for you to 
 # capture in your game:
 # "ui_accept"	: the A button
-# "ui_cancel"	: the B button		# TODO: create interaction between "ui_cancel" and control nodes?
+# "ui_back"		: the B button		# TODO: create interaction between "ui_back" and control nodes? # "ui_cancel" is mapped to esc. not proper for this purpose
 # "ui_c"		: the C button
 # "ui_d"		: the D button
 # "ui_e"		: the E button

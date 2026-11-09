@@ -233,7 +233,7 @@ modulate = Color(1, 1, 1, 0.078431375)
 layout_mode = 2
 text = "Hold A = GODOT   (0.0s / 3.0s)"
 script = ExtResource("8_nv28x")
-name_of_event = "GODOT"
+name_of_event = "?????"
 hold_trigger_node = NodePath("DHOModulateHoldTrigger")
 
 [node name="DHOModulateHoldTrigger" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/AButtonHoldLabel" unique_id=845339037 node_paths=PackedStringArray("trigger_event")]

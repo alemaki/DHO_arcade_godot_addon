@@ -1,7 +1,7 @@
 # Copyright (c) 2026 Alexander Makedonski
 # SPDX-License-Identifier: MIT
 
-extends Resource
+extends Resource			
 class_name PlayerScoreData
 
 # Currently the size of the name is fixed to 3 symbols (digits and letters)
@@ -39,5 +39,5 @@ static func is_name_valid(name_str: String) -> bool:
 		return false
 	return is_name_digits_and_letters(name_str) and is_name_allowed(name_str)
 
-static func _smaller_score(score_data1: PlayerScoreData, score_data2: PlayerScoreData) -> bool:
-	return score_data1.score < score_data2.score
+static func _bigger_score(score_data1: PlayerScoreData, score_data2: PlayerScoreData) -> bool:
+	return score_data1.score > score_data2.score

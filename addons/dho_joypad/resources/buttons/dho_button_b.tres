@@ -6,7 +6,7 @@
 script = ExtResource("1_q5my6")
 button = 1
 button_name = "B"
-input_action = "ui_cancel"
+input_action = "ui_back"
 joy_button = 1
 event_name = "Joypad Button 1 (Right Action, Sony Circle, Xbox B, Nintendo A)-All devices"
 metadata/_custom_type_script = "uid://doge6v11mn3ks"

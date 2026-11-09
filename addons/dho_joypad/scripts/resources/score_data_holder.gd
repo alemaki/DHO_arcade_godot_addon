@@ -6,7 +6,7 @@ const MAX_SCORE_HOLD = 100 # Idk what devhubone wants but will hold 100 just in 
 
 # TODO: what to do with equal scores?
 func sort_scores() -> void:
-	scores.sort_custom(PlayerScoreData._smaller_score)
+	scores.sort_custom(PlayerScoreData._bigger_score)
 
 # TODO: remove_score()?? Check score validity? or not responsible.
 ## Adds score and sorts it in. If overflowing deletes worst score.

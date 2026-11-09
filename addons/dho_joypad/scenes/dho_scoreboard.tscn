@@ -1,19 +1,8 @@
 [gd_scene format=3 uid="uid://cd68803horyb"]
 
 [ext_resource type="Script" uid="uid://brhs05632fb47" path="res://addons/dho_joypad/scripts/dho_scoreboard.gd" id="1_a380m"]
-[ext_resource type="FontFile" uid="uid://dpyjihv03bxd0" path="res://Fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="1_qrkwd"]
+[ext_resource type="Theme" uid="uid://dubjvex4rp6ix" path="res://addons/dho_joypad/themes/default_theme.tres" id="1_vcjci"]
 [ext_resource type="Script" uid="uid://4aubjdyqkpw1" path="res://addons/dho_joypad/scripts/labels/dho_blinking_label.gd" id="3_vcjci"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2px8l"]
-bg_color = Color(0, 0, 0, 1)
-
-[sub_resource type="Theme" id="Theme_55u2m"]
-default_font = ExtResource("1_qrkwd")
-default_font_size = 20
-MarginContainer/constants/margin_bottom = 30
-MarginContainer/constants/margin_top = 50
-PanelContainer/styles/panel = SubResource("StyleBoxFlat_2px8l")
-VBoxContainer/constants/separation = 10
 
 [node name="DhoScoreboard" type="Control" unique_id=898585675]
 layout_mode = 3
@@ -24,7 +13,7 @@ offset_right = -1025.0
 offset_bottom = -506.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_55u2m")
+theme = ExtResource("1_vcjci")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=173133550]
 layout_mode = 1

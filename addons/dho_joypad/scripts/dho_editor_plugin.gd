@@ -5,7 +5,7 @@
 extends EditorPlugin
 
 # Currently fixed but too lazy to think of a better way to map the joystick
-const SECOND_DEVICE_NAME_SUFFIX: String = "_device_1"
+const DEVICE_NAME_SUFFIX: String = "_device_"
 const DHO_AUTOLOAD_NAME: String = "DhoJoypad"
 const DHO_AUTOLOAD_PATH: String = "res://addons/dho_joypad/scripts/dho_joypad.gd"
 const QUIT_AUTOLOAD_NAME: String = "QuitScene"
@@ -26,25 +26,32 @@ func has_joypad_event(events: Array, ev: InputEventJoypadButton) -> bool:
 				return true
 	return false
 
+func get_action_setting_path(info: DHOButtonInformation, device: int) -> String:
+	assert(not info.input_action.is_empty())
+	var setting_path = "input/"+ info.input_action
+	if device >= 0:
+		setting_path += DEVICE_NAME_SUFFIX + str(device)
+	return setting_path
+
+func get_action_setting(setting_path: String) -> Variant:
+	var action: Variant = ProjectSettings.get_setting(setting_path)
+	if action == null:
+		action = { "deadzone": 0, "events": [] }
+	return action
+
 func register_input_actions() -> void:
-	for device in range(2):
+	for device in range(-1, DHOJoypad.MAX_DEVICES_HANDLED):
 		for button: DHOJoypad.BUTTON in DHOJoypad.BUTTON_INFORMATION:
 			var info: DHOButtonInformation = DHOJoypad.BUTTON_INFORMATION[button]
-			if info.input_action.is_empty():
-				push_warning("No mapping for DHOButton: " + info.button_name)
-				continue
-			var setting_path: String = "input/" + info.input_action
-			var action: Variant = ProjectSettings.get_setting(setting_path)
-			if action == null:
-				action = { "deadzone": 0, "events": [] }
+			var setting_path := self.get_action_setting_path(info, device)
+			var action := get_action_setting(setting_path)
 			var event := create_joypad_button_event(info.joy_button, device)
-			if device == 1:
-				setting_path += SECOND_DEVICE_NAME_SUFFIX
 			if not has_joypad_event(action.events, event):
 				action.events.append(event)
 			ProjectSettings.set_setting(setting_path, action)
 	ProjectSettings.save() 
 	#TODO: REGISTER LEFT, RIGHT, UP and DOWN ACTIONS IMPORTANTEEEE
+	#TODO: ui_accept does not register joypad button 3 for all devices figure out why.
 
 func _enable_plugin() -> void:
 	self.add_autoload_singleton(DHO_AUTOLOAD_NAME, DHO_AUTOLOAD_PATH)

@@ -18,9 +18,9 @@ func _ready() -> void:
 	self._show_label()
 
 func _show_label() -> void:
-	self.set_visible(true)
+	self.get_tree().create_tween().tween_property(self, "modulate:a", 1, 0.15)
 	self.get_tree().create_timer(show_duration).timeout.connect(self._hide_label)
 
 func _hide_label() -> void:
-	self.set_visible(false)
+	self.get_tree().create_tween().tween_property(self, "modulate:a", 0, 0.15)
 	self.get_tree().create_timer(hide_duration).timeout.connect(self._show_label)

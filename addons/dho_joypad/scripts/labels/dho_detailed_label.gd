@@ -6,7 +6,7 @@
 # Make of that what you will.
 
 extends Label
-class_name DetailedLabel
+class_name DHODetailedLabel
 
 @export var fixed_text: String = ""
 @export var no_details_text: String = ""

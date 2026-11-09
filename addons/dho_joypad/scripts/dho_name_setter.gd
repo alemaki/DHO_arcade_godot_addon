@@ -14,7 +14,8 @@ var letter_labels: Array[Label] = []
 @export var right_action = "ui_right"
 @export var up_action = "ui_up"
 @export var down_action = "ui_down"
-@export var save_action = "ui_accept"
+@export var save_action = "ui_a"
+@export var back_action = "ui_back"
 
 func _ready() -> void:
 	character_indexes.resize(LETTER_COUNT)
