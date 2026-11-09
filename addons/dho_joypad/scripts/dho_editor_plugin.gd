@@ -37,13 +37,14 @@ func register_input_actions() -> void:
 			var action: Variant = ProjectSettings.get_setting(setting_path)
 			if action == null:
 				action = { "deadzone": 0, "events": [] }
-			var event := create_joypad_button_event(info.joy_button)
+			var event := create_joypad_button_event(info.joy_button, device)
 			if device == 1:
 				setting_path += SECOND_DEVICE_NAME_SUFFIX
 			if not has_joypad_event(action.events, event):
 				action.events.append(event)
 			ProjectSettings.set_setting(setting_path, action)
-		ProjectSettings.save()
+	ProjectSettings.save() 
+	#TODO: REGISTER LEFT, RIGHT, UP and DOWN ACTIONS IMPORTANTEEEE
 
 func _enable_plugin() -> void:
 	self.add_autoload_singleton(DHO_AUTOLOAD_NAME, DHO_AUTOLOAD_PATH)

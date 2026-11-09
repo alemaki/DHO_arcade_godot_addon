@@ -29,7 +29,7 @@ func _ready() -> void:
 	DhoJoypad.dho_button_pressed.connect(self._on_button_pressed)
 
 
-func _on_button_pressed(button: DHOJoypad.BUTTON) -> void:
+func _on_button_pressed(button: DHOJoypad.BUTTON, _device: int) -> void:
 	if button == DHOJoypad.BUTTON.EXIT:
 		if not pressed_once:
 			self.pressed_once = true

@@ -1,7 +1,10 @@
+# Copyright (c) 2026 Alexander Makedonski
+# SPDX-License-Identifier: MIT
+
 extends HBoxContainer
 
-# TODO: there's gotta be a better solution for this.
 const LETTER_COUNT = PlayerScoreData.NAME_SIZE
+# TODO: there's gotta be a better solution for this.
 const CHARACTER_CYCLE: String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 var current_letter = 0
 var character_indexes: Array[int] = []
@@ -11,7 +14,7 @@ var letter_labels: Array[Label] = []
 @export var right_action = "ui_right"
 @export var up_action = "ui_up"
 @export var down_action = "ui_down"
-@export var save_action = "ui_select"
+@export var save_action = "ui_accept"
 
 func _ready() -> void:
 	character_indexes.resize(LETTER_COUNT)
@@ -30,10 +33,10 @@ func update_labels() -> void:
 	letter_labels[current_letter].modulate = Color.GREEN
 
 func get_result_name() -> String:
-	var name: String = ""
+	var result_name: String = ""
 	for i in LETTER_COUNT:
-		name += CHARACTER_CYCLE[character_indexes[i]]
-	return name
+		result_name += CHARACTER_CYCLE[character_indexes[i]]
+	return result_name
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed(left_action):

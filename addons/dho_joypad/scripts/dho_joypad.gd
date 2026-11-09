@@ -29,7 +29,7 @@ class_name DHOJoypad
 const MAX_DEVICES_HANDLED: int = 2
 
 ## Context for the joypad measurements.
-class _DHOJoypadContext extends Object:
+class _DHOJoypadContext extends RefCounted:
 	var device: int = 0
 	## Will be generated at _init
 	var button_contexts: Dictionary[BUTTON, ButtonContext] = {}
@@ -53,9 +53,9 @@ func is_device_valid(device: int) -> bool:
 # NOTE: If you are going to use a second device - any mention of any input actions below will be a
 # descripton for the first device that connects. The plugin itself creates those actions for you to
 # use. Each input action will have it's mirror for a second device with the same name with appended
-# "_device_1" (devices are 0-counted) string at the end. For example: "ui_select" is the input
+# "_device_1" (devices are 0-counted) string at the end. For example: "ui_accept" is the input
 # action for device 0 (the main device) and device 1 (the second device) will have an action 
-# "ui_select_device_1" mapped to it, "ui_left" for device 0 and "ui_left_device_1" for device 1, etc.
+# "ui_accept_device_1" mapped to it, "ui_left" for device 0 and "ui_left_device_1" for device 1, etc.
 #
 # WARNING: Deleting those actions will require you to reload the plugin to have them again.
 # Otherwise you can create your own input actions and map them yourself. You are not required to
@@ -73,13 +73,13 @@ func is_device_valid(device: int) -> bool:
 """ -------------------------------------------------------------------------------------------- """
 # The buttons are as straight forward as it goes. The plugin will create input mappings for you to 
 # capture in your game:
-# "ui_select"	: the A button
-# "ui_back"		: the B button		# TODO: create interaction between "ui_back" and control nodes?
+# "ui_accept"	: the A button
+# "ui_cancel"	: the B button		# TODO: create interaction between "ui_cancel" and control nodes?
 # "ui_c"		: the C button
 # "ui_d"		: the D button
 # "ui_e"		: the E button
 # "ui_f"		: the F button
-# "ui_start"	: the Play (Left) button
+# "ui_play"		: the Play (Left) button
 # "ui_menu"		: the Exit (Right) button
 #
 # You can also create your own actions with mappngs for DHO's buttons like this:
@@ -147,6 +147,8 @@ class ButtonContext extends RefCounted:
 	var is_pressed: bool = false
 	## Engine time in which the press started in ms
 	var press_started: float = 0.
+	## in ms
+	var last_held_duration: float = 0.
 
 ## Param device = -1 for any device.
 func is_button_pressed(button: BUTTON, device: int = -1) -> bool:
@@ -173,16 +175,15 @@ func get_button_hold_duration_msec(button: BUTTON, device: int = -1) -> float:
 func get_button_hold_duration_sec(button: BUTTON, device: int = -1) -> float:
 	return self.get_button_hold_duration_msec(button, device) / 1000.
 
-## Returns last held time for the button (includes current time if currently held).
+## Returns last held time for the button. (current not included)
 ## Defaults to device 0 if param device = -1.
 func get_button_last_held_time_msec(button: BUTTON, device: int = -1) -> float:
 	assert(self.is_device_valid(device))
 	if device < 0:
 		device = 0
-	return Time.get_ticks_msec()\
-		 - self._device_contexts[device].button_contexts[button].press_started
+	return self._device_contexts[device].button_contexts[button].last_held_duration
 
-## Returns last held time for the button (includes current time if currently held).
+## Returns last held time for the button. (current not included)
 ## Defaults to device 0 if param device = -1.
 func get_button_last_held_time_sec(button: BUTTON, device: int = -1) -> float:
 	return self.get_button_last_held_time_msec(button, device) / 1000.
@@ -190,15 +191,18 @@ func get_button_last_held_time_sec(button: BUTTON, device: int = -1) -> float:
 ## Handle for event.
 func _button_pressed(button: BUTTON, device: int) -> void:
 	# Signal for this button should fire only once when it's pressed.
+	var button_context: ButtonContext = self._device_contexts[device].button_contexts[button]
+	button_context.press_started = Time.get_ticks_msec()
+	button_context.is_pressed = true
 	self.dho_button_pressed.emit(button, device)
-	self._device_contexts[device].button_contexts[button].press_started = Time.get_ticks_msec()
-	self._device_contexts[device].button_contexts[button].is_pressed = true
 
 ## Handle for event.
 func _button_released(button: BUTTON, device: int) -> void:
 	# Signal for this button should fire only once when it's released.
+	var button_context: ButtonContext = self._device_contexts[device].button_contexts[button]
+	button_context.is_pressed = false
+	button_context.last_held_duration = Time.get_ticks_msec() - button_context.press_started
 	self.dho_button_released.emit(button, device)
-	self._device_contexts[device].button_contexts[button].is_pressed = false
 
 """ -------------------------------------------------------------------------------------------- """
 """ SECTION: JOYSTICK """
@@ -249,25 +253,25 @@ signal dho_joystick_changed(vector: Vector2, device: int)
 ## NOTE: The function below does not return normalised input.
 ## I am using only raw input here so the devhubone_test_scene will work regardless of input mappings.
 ## If device = -1 it will default to 0.
-func get_input_vector(device: int) -> Vector2:
+func get_input_vector(device: int = -1) -> Vector2:
 	assert(self.is_device_valid(device))
 	if device == -1:
 		device = 0
 	return Vector2(
-		self._device_context[device].left_joystick_X_axis, 
-		self._device_context[device].left_joystick_Y_axis
+		self._device_contexts[device].left_joystick_X_axis, 
+		self._device_contexts[device].left_joystick_Y_axis
 	)
 
 ## If device = -1 it will default to 0.
 func get_normalized_input_vector(device: int = -1) -> Vector2:
 	return get_input_vector(device).normalized()
 
-func _axis_X_changed(axis_value: float, device: int) -> void:
-	self._device_context[device].left_joystick_X_axis = axis_value
+func _axis_X_changed(axis_value: float, device) -> void:
+	self._device_contexts[device].left_joystick_X_axis = axis_value
 	self.dho_joystick_changed.emit(self.get_normalized_input_vector(device), device)
 
-func _axis_Y_changed(axis_value: float, device: int) -> void:
-	self._device_context[device].left_joystick_X_axis = axis_value
+func _axis_Y_changed(axis_value: float, device) -> void:
+	self._device_contexts[device].left_joystick_Y_axis = axis_value
 	self.dho_joystick_changed.emit(self.get_normalized_input_vector(device), device)
 
 """ -------------------------------------------------------------------------------------------- """

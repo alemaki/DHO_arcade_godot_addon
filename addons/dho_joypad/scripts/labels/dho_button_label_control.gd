@@ -29,10 +29,10 @@ func _ready() -> void:
 	DhoJoypad.dho_button_released.connect(self._on_button_released)
 
 # I can also check in process but that is better i think
-func _on_button_pressed(button: DHOJoypad.BUTTON) -> void:
+func _on_button_pressed(button: DHOJoypad.BUTTON, _device: int) -> void:
 	if button == self.button_capture:
 		self.update_text(true)
 
-func _on_button_released(button: DHOJoypad.BUTTON) -> void:
+func _on_button_released(button: DHOJoypad.BUTTON, _device: int) -> void:
 	if button == self.button_capture:
 		self.update_text(false)

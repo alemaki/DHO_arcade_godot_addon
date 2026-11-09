@@ -21,13 +21,14 @@ func is_data_valid() -> bool:
 static func is_name_digits_and_letters(name_str: String) -> bool:
 	var regex = RegEx.create_from_string("[0-9a-zA-Z]+")
 	var result = regex.search(name_str)
-	return result.get_string() == name_str
+	return result != null and result.get_string() == name_str
 
 static func is_name_allowed(name_str: String) -> bool:
 	var f = FileAccess.open(BAD_WORDS_FILE_PATH, FileAccess.READ)
+	assert(f != null)
 	while not f.eof_reached():
 		var word = f.get_line()
-		if name_str == word:
+		if name_str.to_lower() == word.to_lower():
 			return false
 	f.close()
 	return true

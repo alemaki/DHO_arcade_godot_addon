@@ -13,5 +13,5 @@ func _ready() -> void:
 	self.set_text(self.display_text)
 	DhoJoypad.dho_button_pressed.connect(self._on_button_pressed)
 
-func _on_button_pressed(button: DHOJoypad.BUTTON):
+func _on_button_pressed(button: DHOJoypad.BUTTON, _device: int):
 	self.set_text("%s: %s" % [self.display_text, DHOJoypad.BUTTON_INFORMATION[button].button_name])
