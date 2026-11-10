@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="DHOSceneContext" format=3 uid="uid://da2fmscu3ojq3"]
+
+[ext_resource type="Script" uid="uid://bh6ll7o7c4b01" path="res://addons/dho_joypad/scripts/resources/player_score_data.gd" id="1_5qnvu"]
+[ext_resource type="Script" uid="uid://dlv3fgnl36c2o" path="res://addons/dho_joypad/scripts/resources/dho_scene_context.gd" id="2_nlm6l"]
+
+[sub_resource type="Resource" id="Resource_ypp5h"]
+script = ExtResource("1_5qnvu")
+metadata/_custom_type_script = "uid://bh6ll7o7c4b01"
+
+[resource]
+script = ExtResource("2_nlm6l")
+player_info = SubResource("Resource_ypp5h")
+metadata/_custom_type_script = "uid://dlv3fgnl36c2o"
