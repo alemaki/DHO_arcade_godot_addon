@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="DHOJoystickAxisInformation" format=3 uid="uid://niwrerfxaio7"]
+
+[ext_resource type="Script" uid="uid://cu4srpuvy2g7q" path="res://addons/dho_joypad/scripts/resources/dho_joystick_axis.gd" id="1_p0m5d"]
+
+[resource]
+script = ExtResource("1_p0m5d")
+axis_name = "left"
+input_action = "ui_left"
+axis_value = -1
+event_name = "Joypad Axis 0 - (Left stick Left, Joystick 0 Left)"
+metadata/_custom_type_script = "uid://cu4srpuvy2g7q"
