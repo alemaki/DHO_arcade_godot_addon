@@ -36,8 +36,9 @@ func get_action_setting_path(info: DHOButtonInformation, device: int) -> String:
 func get_action_setting(setting_path: String) -> Variant:
 	var action: Variant = ProjectSettings.get_setting(setting_path)
 	if action == null:
-		action = { "deadzone": 0, "events": [] }
-	return action
+		return { "deadzone": 0, "events": [] }
+	# Mutating it in place makes makes ProjectSettings.save() skips it. So copy and then set.
+	return (action as Dictionary).duplicate(true)
 
 func register_input_actions() -> void:
 	for device in range(-1, DHOJoypad.MAX_DEVICES_HANDLED):
@@ -51,7 +52,6 @@ func register_input_actions() -> void:
 			ProjectSettings.set_setting(setting_path, action)
 	ProjectSettings.save() 
 	#TODO: REGISTER LEFT, RIGHT, UP and DOWN ACTIONS IMPORTANTEEEE
-	#TODO: ui_accept does not register joypad button 3 for all devices figure out why.
 
 func _enable_plugin() -> void:
 	self.add_autoload_singleton(DHO_AUTOLOAD_NAME, DHO_AUTOLOAD_PATH)
