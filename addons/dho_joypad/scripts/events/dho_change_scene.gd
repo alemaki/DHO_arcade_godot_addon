@@ -6,12 +6,13 @@
 # Make of that what you will.
 
 extends DHOEvent
-class_name DHOChangeScene
+class_name DHOWinLoseEvent
 
-@export var scene: PackedScene = null
+@export var win_lose_scene: String = "res://addons/dho_joypad/scenes/dho_win_lose.tscn"
+@export var dho_scene: DHOScene = self.get_tree().current_scene
+@export var is_win: bool = false
 
 func execute() -> void:
-	if !scene:
-		print("SCENE NOT SET IN DHOChangeScene event.")
-		return
-	# TODO: load scene
+	assert(self.dho_scene != null)
+	dho_scene.dho_context.is_win = self.is_win
+	DHOSceneManager.change_scene(self, win_lose_scene, dho_scene.dho_context)

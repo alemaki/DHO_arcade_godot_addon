@@ -2,9 +2,11 @@
 
 [ext_resource type="Script" uid="uid://brhs05632fb47" path="res://addons/dho_joypad/scripts/dho_scoreboard.gd" id="1_a380m"]
 [ext_resource type="Theme" uid="uid://dubjvex4rp6ix" path="res://addons/dho_joypad/themes/default_theme.tres" id="1_vcjci"]
+[ext_resource type="Script" uid="uid://dvm1g7vyj6p8d" path="res://addons/dho_joypad/scripts/dho_scene.gd" id="2_2um2q"]
+[ext_resource type="Resource" uid="uid://da2fmscu3ojq3" path="res://addons/dho_joypad/resources/default_dho_scene_context.tres" id="3_gct2y"]
 [ext_resource type="Script" uid="uid://4aubjdyqkpw1" path="res://addons/dho_joypad/scripts/labels/dho_blinking_label.gd" id="3_vcjci"]
 
-[node name="DhoScoreboard" type="Control" unique_id=898585675]
+[node name="DhoScoreboard" type="Control" unique_id=701423668]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,6 +16,9 @@ offset_bottom = -506.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_vcjci")
+script = ExtResource("2_2um2q")
+dho_context = ExtResource("3_gct2y")
+metadata/_custom_type_script = "uid://dvm1g7vyj6p8d"
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=173133550]
 layout_mode = 1

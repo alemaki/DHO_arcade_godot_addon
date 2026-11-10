@@ -21,7 +21,6 @@ class_name DHOJoypad
 """ -------------------------------------------------------------------------------------------- """
 """ SECTION: DEVICE CONTEXTS """
 """ -------------------------------------------------------------------------------------------- """
-# TODO: Think of a better way to handle multiple devices.
 # NOTE: Documentation for this section ends here.
 
 ## Increase value as you like. NOTE: If you are using other joypads in addition to the devhubone's you
@@ -79,8 +78,8 @@ func is_device_valid(device: int) -> bool:
 """ -------------------------------------------------------------------------------------------- """
 """ SECTION: BUTTONS """
 """ -------------------------------------------------------------------------------------------- """
-# The buttons are as straight forward as it goes. The plugin will create input mappings for you to 
-# capture in your game:
+# The buttons are as straight forward as it goes. The plugin will create input action maps for you 
+# to capture in your game:
 # "ui_accept"	: the A button
 # "ui_back"		: the B button		# TODO: create interaction between "ui_back" and control nodes? # "ui_cancel" is mapped to esc. not proper for this purpose
 # "ui_c"		: the C button
@@ -103,13 +102,13 @@ func is_device_valid(device: int) -> bool:
 # NOTE: I recommend using the defaults since they are better integrated in the engine and even
 # have interactions with the UI.
 #
-# Optionaly you can capture input from this node like this:
+# Optionaly you can capture input from this node like:
 # DhoJoypad.dho_button_pressed.connect(<your function>)
 # DhoJoypad.dho_button_released.connect(<your function>)
-# There is also a small API which can also by accessed like this:
+# There is also a small API which can also by accessed like :
 # DhoJoypad.is_button_pressed(<button>, <device number>)
 # DhoJoypad.get_button_hold_time(<button>, <device number>)
-# See the implementations below. They only work for joypads, keep in mind.
+# See the implementations below. Keep in mind, they only work for joypads.
 #
 # NOTE: Documentation for this section ends here.
 
@@ -233,7 +232,7 @@ func _button_released(button: BUTTON, device: int) -> void:
 # NOTE: I recommend using the defaults since they are better integrated in the engine and even
 # have interactions with the UI.
 # 
-# To get input information just capture the mappings:
+# To get input information just capture the action mappings:
 # var axis_X: float = Input.get_axis("ui_left, ui_right")
 # var axis_Y: float = Input.get_axis("ui_up, ui_down")
 #
@@ -256,10 +255,18 @@ func _button_released(button: BUTTON, device: int) -> void:
 ## Emits normalized input
 signal dho_joystick_changed(vector: Vector2, device: int)
 
+# This currently is only used in plugin registration for actions
+const AXIS_INFORMATION: Array[DHOJoystickAxisInformation] = [
+	preload("res://addons/dho_joypad/resources/axes/X_left.tres"),
+	preload("res://addons/dho_joypad/resources/axes/X_right.tres"),
+	preload("res://addons/dho_joypad/resources/axes/Y_up.tres"),
+	preload("res://addons/dho_joypad/resources/axes/Y_down.tres"),
+]
+
 # This function defaults to device 0 in device = -1, because not sure how I am supposed to handle
 # multiple device inputs for axes.
 ## NOTE: The function below does not return normalised input.
-## I am using only raw input here so the devhubone_test_scene will work regardless of input mappings.
+## I am using only raw input here so the devhubone_test_scene will work regardless of input actions.
 ## If device = -1 it will default to 0.
 func get_input_vector(device: int = -1) -> Vector2:
 	assert(self.is_device_valid(device))
@@ -274,11 +281,11 @@ func get_input_vector(device: int = -1) -> Vector2:
 func get_normalized_input_vector(device: int = -1) -> Vector2:
 	return get_input_vector(device).normalized()
 
-func _axis_X_changed(axis_value: float, device) -> void:
+func _axis_X_changed(axis_value: float, device: int) -> void:
 	self._device_contexts[device].left_joystick_X_axis = axis_value
 	self.dho_joystick_changed.emit(self.get_normalized_input_vector(device), device)
 
-func _axis_Y_changed(axis_value: float, device) -> void:
+func _axis_Y_changed(axis_value: float, device: int) -> void:
 	self._device_contexts[device].left_joystick_Y_axis = axis_value
 	self.dho_joystick_changed.emit(self.get_normalized_input_vector(device), device)
 
