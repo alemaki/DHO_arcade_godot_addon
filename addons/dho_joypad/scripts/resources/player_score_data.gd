@@ -9,8 +9,19 @@ const NAME_SIZE: int = 3
 # Currently fixed to six digits
 const MAX_SCORE: int = 999999
 const BAD_WORDS_FILE_PATH: String = "res://addons/dho_joypad/resources/bad_words.txt"
-@export var score: int = 0
-@export var name: String = ""
+
+@export var score: int = 0:
+	set(value):
+		score = clampi(value, 0, MAX_SCORE)
+	get():
+		return score
+@export var name: String = "AAA":
+	set(value):
+		if not self.is_name_valid(value):
+			return
+		name = value
+	get():
+		return name
 
 ## Use this to verify resource
 func is_data_valid() -> bool:

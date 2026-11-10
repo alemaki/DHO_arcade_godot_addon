@@ -2,14 +2,17 @@
 
 [ext_resource type="Script" uid="uid://bg7or48n4ho24" path="res://addons/dho_joypad/scripts/dho_name_setter.gd" id="1_7xf3h"]
 [ext_resource type="Theme" uid="uid://dubjvex4rp6ix" path="res://addons/dho_joypad/themes/default_theme.tres" id="1_8q4b8"]
+[ext_resource type="Script" uid="uid://dvm1g7vyj6p8d" path="res://addons/dho_joypad/scripts/dho_scene.gd" id="2_4a3pc"]
 [ext_resource type="FontFile" uid="uid://dpyjihv03bxd0" path="res://Fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="2_oj553"]
+[ext_resource type="Resource" uid="uid://da2fmscu3ojq3" path="res://addons/dho_joypad/resources/default_dho_scene_context.tres" id="3_4a3pc"]
 [ext_resource type="Script" uid="uid://4aubjdyqkpw1" path="res://addons/dho_joypad/scripts/labels/dho_blinking_label.gd" id="4_mar51"]
+[ext_resource type="Script" uid="uid://nsq2h8jylxni" path="res://addons/dho_joypad/scripts/dho_score_label.gd" id="7_r3w5j"]
 
 [sub_resource type="Theme" id="Theme_8q4b8"]
 default_font = ExtResource("2_oj553")
 Label/font_sizes/font_size = 64
 
-[node name="DhoSaveScore" type="Control" unique_id=901363687]
+[node name="DhoSaveScore" type="Control" unique_id=1252791888]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,44 +20,63 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_8q4b8")
+script = ExtResource("2_4a3pc")
+dho_context = ExtResource("3_4a3pc")
+metadata/_custom_type_script = "uid://dvm1g7vyj6p8d"
 
-[node name="CenterContainer" type="CenterContainer" parent="." unique_id=807651720]
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1633993758]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer" unique_id=200091839]
+[node name="CenterContainer3" type="CenterContainer" parent="PanelContainer" unique_id=2082393629]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/CenterContainer3" unique_id=530816116]
+layout_mode = 2
+
+[node name="YourScoreLabel" type="Label" parent="PanelContainer/CenterContainer3/MarginContainer" unique_id=960971313]
+layout_mode = 2
+text = "Your score: 001000"
+script = ExtResource("7_r3w5j")
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer" unique_id=807651720]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/CenterContainer" unique_id=200091839 node_paths=PackedStringArray("dho_scene", "bad_name_label")]
 layout_mode = 2
 theme = SubResource("Theme_8q4b8")
 theme_override_constants/separation = 10
 script = ExtResource("1_7xf3h")
+dho_scene = NodePath("../../..")
+bad_name_label = NodePath("../../CenterContainer2/MarginContainer/VBoxContainer/BadNameLabel")
 
-[node name="CenterContainer2" type="CenterContainer" parent="." unique_id=1090364554]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -40.0
-offset_right = 20.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="CenterContainer2" type="CenterContainer" parent="PanelContainer" unique_id=1090364554]
+layout_mode = 2
+size_flags_vertical = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer2" unique_id=1015699162]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/CenterContainer2" unique_id=967384459]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CenterContainer2/VBoxContainer" unique_id=1644693758]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/CenterContainer2/MarginContainer" unique_id=1015699162]
+layout_mode = 2
+
+[node name="BadNameLabel" type="Label" parent="PanelContainer/CenterContainer2/MarginContainer/VBoxContainer" unique_id=1767535429]
+layout_mode = 2
+text = "Name not allowed!"
+
+[node name="MoveLabel" type="Label" parent="PanelContainer/CenterContainer2/MarginContainer/VBoxContainer" unique_id=964971335]
 layout_mode = 2
 text = "Move: change letter / position"
+script = ExtResource("4_mar51")
+metadata/_custom_type_script = "uid://4aubjdyqkpw1"
 
-[node name="DHOBlinkingLabel" type="Label" parent="CenterContainer2/VBoxContainer" unique_id=776659118]
+[node name="DHOBlinkingLabel" type="Label" parent="PanelContainer/CenterContainer2/MarginContainer/VBoxContainer" unique_id=776659118]
 layout_mode = 2
+text = "A: OK   B: BACK"
 script = ExtResource("4_mar51")
 metadata/_custom_type_script = "uid://4aubjdyqkpw1"
