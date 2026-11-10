@@ -8,7 +8,6 @@ class_name PlayerScoreData
 const NAME_SIZE: int = 3
 # Currently fixed to six digits
 const MAX_SCORE: int = 999999
-const BAD_WORDS_FILE_PATH: String = "res://addons/dho_joypad/resources/bad_words.txt"
 
 @export var score: int = 0:
 	set(value):
@@ -18,10 +17,14 @@ const BAD_WORDS_FILE_PATH: String = "res://addons/dho_joypad/resources/bad_words
 @export var name: String = "AAA":
 	set(value):
 		if not self.is_name_valid(value):
+			push_warning("player name: %s not set, because invlalid" % value)
 			return
 		name = value
 	get():
 		return name
+
+static func is_name_allowed(name_str: String) -> bool:
+	return not DHOBadWords.contains(name_str)
 
 ## Use this to verify resource
 func is_data_valid() -> bool:
@@ -34,16 +37,6 @@ static func is_name_digits_and_letters(name_str: String) -> bool:
 	var result = regex.search(name_str)
 	return result != null and result.get_string() == name_str
 
-static func is_name_allowed(name_str: String) -> bool:
-	var f = FileAccess.open(BAD_WORDS_FILE_PATH, FileAccess.READ)
-	assert(f != null)
-	while not f.eof_reached():
-		var word = f.get_line()
-		if name_str.to_lower() == word.to_lower():
-			return false
-	f.close()
-	return true
-
 ## Us this to verify name before setting.
 static func is_name_valid(name_str: String) -> bool:
 	if name_str.length() != NAME_SIZE:
@@ -52,3 +45,21 @@ static func is_name_valid(name_str: String) -> bool:
 
 static func _bigger_score(score_data1: PlayerScoreData, score_data2: PlayerScoreData) -> bool:
 	return score_data1.score > score_data2.score
+
+func to_dict() -> Dictionary[String, Variant]:
+	return {
+		"score": score,
+		"name": name,
+	}
+
+static func from_dict(dict: Dictionary) -> PlayerScoreData:
+	var score_value: Variant = dict.get("score")
+	var name_value: Variant = dict.get("name")
+	if not (score_value is float or score_value is int) or not (name_value is String):
+		return null
+	if not is_name_valid(name_value):
+		return null
+	var result := PlayerScoreData.new()
+	result.score = int(score_value)
+	result.name = name_value
+	return result
