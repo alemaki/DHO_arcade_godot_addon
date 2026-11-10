@@ -12,6 +12,7 @@ var score_holder: ScoreDataHolder = null
 
 func _ready() -> void:
 	score_holder = ScoreDataHolder.load_scores()
+	assert(score_holder != null)
 	var index: int = 1
 	for score_data in self.score_holder.get_scores(BEST_SCORE_COUNT):
 		var label: Label = Label.new()

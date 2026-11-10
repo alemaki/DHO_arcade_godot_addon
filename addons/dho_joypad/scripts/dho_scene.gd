@@ -12,3 +12,10 @@ class_name DHOScene
 
 func _ready() -> void:
 	assert(dho_context != null)
+
+static func _walk_parents_to_find_dho_scene(current_node: Node):
+	if current_node is DHOScene:
+		return current_node
+	if current_node.get_parent() != null:
+		return _walk_parents_to_find_dho_scene(current_node.get_parent())
+	return null

@@ -10,7 +10,7 @@ var current_letter = 0
 var character_indexes: Array[int] = []
 var letter_labels: Array[Label] = []
 
-@onready @export var dho_scene: DHOScene = self.get_tree().current_scene
+@export var dho_scene: DHOScene = null
 
 @export var bad_name_label: Label = null
 
@@ -20,9 +20,11 @@ var letter_labels: Array[Label] = []
 @export var down_action = "ui_down"
 @export var save_action = "ui_accept"
 
-@export var scene_to_change_to = "res://addons/dho_joypad/scenes/dho_win.tscn"
+@export var scene_to_change_to = "res://addons/dho_joypad/scenes/dho_win_lose.tscn"
 
 func _ready() -> void:
+	if self.dho_scene == null:
+		self.dho_scene = DHOScene._walk_parents_to_find_dho_scene(self)
 	assert(dho_scene != null)
 	assert(bad_name_label != null)
 	bad_name_label.set_visible(false)
@@ -59,7 +61,7 @@ func try_save() -> bool:
 	if not PlayerScoreData.is_name_valid(self.get_result_name()):
 		return false
 	self.dho_scene.dho_context.player_info.name = self.get_result_name()
-	self.dho_scene.dho_context.score_saved = self.try_to_save_score()
+	self.dho_scene.dho_context.is_score_saved = self.try_to_save_score()
 	DHOSceneManager.change_scene(self, scene_to_change_to, self.dho_scene.dho_context)
 	return true
 

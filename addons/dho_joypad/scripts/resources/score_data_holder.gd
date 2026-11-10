@@ -15,13 +15,13 @@ func sort_scores() -> void:
 # TODO: remove_score()?? Check score validity? or not responsible.
 ## Adds score and sorts it in. If overflowing - deletes worst score.
 func add_score(score_data: PlayerScoreData) -> bool:
-	var score_deleted: bool = false
+	var score_added: bool = true
 	self.scores.push_back(score_data)
 	self.sort_scores()
 	while self.scores.size() > MAX_SCORE_HOLD:
 		if scores.pop_back() == score_data:
-			score_deleted = true
-	return score_deleted
+			score_added = false
+	return score_added
 
 
 ## Returns the best best_count scores or all of them if best_count = -1

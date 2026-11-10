@@ -1,9 +1,11 @@
 extends Label
 
-@export var dho_scene: DHOScene = self.get_tree().current_scene
+@export var dho_scene: DHOScene = null
 @export var display_text: String = "Score: "
 
 func _ready() -> void:
+	if self.dho_scene == null:
+		self.dho_scene = DHOScene._walk_parents_to_find_dho_scene(self)
 	assert(dho_scene != null)
 	DhoJoypad.dho_button_pressed.connect(self._on_button_pressed)
 
