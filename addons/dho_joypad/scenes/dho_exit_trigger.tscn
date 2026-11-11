@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d4b25sr8lvu76"]
 
 [ext_resource type="Script" uid="uid://bgk6rjlxieyhg" path="res://addons/dho_joypad/scripts/dho_exit_trigger.gd" id="1_aiuf5"]
-[ext_resource type="FontFile" uid="uid://dpyjihv03bxd0" path="res://addons/dho_joypad/fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="2_qkwjj"]
+[ext_resource type="FontFile" uid="uid://h1unk4jb5cjl" path="res://addons/dho_joypad/fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="2_qkwjj"]
 [ext_resource type="Script" uid="uid://1m3f1rp22asu" path="res://addons/dho_joypad/scripts/labels/dho_localized_label.gd" id="3_wegon"]
 [ext_resource type="Script" uid="uid://d21rys816bhtk" path="res://addons/dho_joypad/scripts/resources/dho_localized_text.gd" id="4_1iog5"]
 
@@ -18,6 +18,7 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
 [sub_resource type="Theme" id="Theme_m5iau"]
+default_font = ExtResource("2_qkwjj")
 Label/font_sizes/font_size = 12
 Label/fonts/font = ExtResource("2_qkwjj")
 MarginContainer/constants/margin_bottom = 10

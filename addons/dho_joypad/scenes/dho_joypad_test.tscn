@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://beq43jnkebwdo"]
 
-[ext_resource type="FontFile" uid="uid://dpyjihv03bxd0" path="res://addons/dho_joypad/fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="1_fusoy"]
+[ext_resource type="FontFile" uid="uid://h1unk4jb5cjl" path="res://addons/dho_joypad/fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="1_fusoy"]
 [ext_resource type="Script" uid="uid://dvm1g7vyj6p8d" path="res://addons/dho_joypad/scripts/dho_scene.gd" id="2_04svh"]
-[ext_resource type="Resource" uid="uid://da2fmscu3ojq3" path="res://addons/dho_joypad/resources/default_dho_scene_context.tres" id="3_wwp3o"]
+[ext_resource type="Resource" uid="uid://dw57mllgckaof" path="res://addons/dho_joypad/resources/default_dho_scene_context.tres" id="3_wwp3o"]
 [ext_resource type="Texture2D" uid="uid://bn6vnchewuuf2" path="res://icon.svg" id="4_8wl7c"]
 [ext_resource type="Script" uid="uid://cwsg5lygoewbf" path="res://addons/dho_joypad/scripts/labels/dho_xy_joystick_label.gd" id="5_imr4d"]
 [ext_resource type="Script" uid="uid://1m3f1rp22asu" path="res://addons/dho_joypad/scripts/labels/dho_localized_label.gd" id="5_nmvre"]
@@ -17,7 +17,7 @@
 [ext_resource type="Script" uid="uid://bgdlvsyh2nvxl" path="res://addons/dho_joypad/scripts/events/dho_win_lose_event.gd" id="12_04svh"]
 [ext_resource type="Script" uid="uid://d4a3ms1wru5dr" path="res://addons/dho_joypad/scripts/events/dho_show_details.gd" id="12_12j57"]
 [ext_resource type="Script" uid="uid://dvx4onvuv6cxa" path="res://addons/dho_joypad/scripts/events/dho_play_sound.gd" id="13_isph0"]
-[ext_resource type="AudioStream" uid="uid://cxek813k56rw5" path="res://addons/dho_joypad/sound/audio-test.mp3" id="14_7w2fm"]
+[ext_resource type="AudioStream" uid="uid://bra7w8gau3t8d" path="res://addons/dho_joypad/sound/audio-test.mp3" id="14_7w2fm"]
 [ext_resource type="Script" uid="uid://dp2ofv6qklaw5" path="res://addons/dho_joypad/scripts/events/dho_modulate_change.gd" id="15_22aq6"]
 
 [sub_resource type="Theme" id="Theme_qn1hh"]
@@ -291,9 +291,10 @@ name_of_event_res = SubResource("Resource_gkipy")
 hold_trigger_node = NodePath("DHOWinHoldTrigger")
 localized_text_res = SubResource("Resource_ro22j")
 
-[node name="DHOWinHoldTrigger" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/BButtonHoldLabel" unique_id=121355694]
+[node name="DHOWinHoldTrigger" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/BButtonHoldLabel" unique_id=121355694 node_paths=PackedStringArray("trigger_event")]
 script = ExtResource("11_gkipy")
 button_capture = 1
+trigger_event = NodePath("DHOWinLose")
 
 [node name="DHOWinLose" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/BButtonHoldLabel/DHOWinHoldTrigger" unique_id=1217351933 node_paths=PackedStringArray("dho_scene")]
 script = ExtResource("12_04svh")
@@ -309,9 +310,10 @@ name_of_event_res = SubResource("Resource_qeyga")
 hold_trigger_node = NodePath("DHOShowDetailsHoldTrigger")
 localized_text_res = SubResource("Resource_ro22j")
 
-[node name="DHOShowDetailsHoldTrigger" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/CButtonHoldLabel" unique_id=1536857706]
+[node name="DHOShowDetailsHoldTrigger" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/CButtonHoldLabel" unique_id=1536857706 node_paths=PackedStringArray("trigger_event")]
 script = ExtResource("11_gkipy")
 button_capture = 2
+trigger_event = NodePath("DHOWinLose")
 
 [node name="DHOWinLose" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/CButtonHoldLabel/DHOShowDetailsHoldTrigger" unique_id=1400051763 node_paths=PackedStringArray("dho_scene")]
 script = ExtResource("12_04svh")
@@ -343,9 +345,10 @@ name_of_event_res = SubResource("Resource_isph0")
 hold_trigger_node = NodePath("DHOPlaySoundHoldTrigger")
 localized_text_res = SubResource("Resource_ro22j")
 
-[node name="DHOPlaySoundHoldTrigger" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/EButtonHoldLabel" unique_id=434003374]
+[node name="DHOPlaySoundHoldTrigger" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/EButtonHoldLabel" unique_id=434003374 node_paths=PackedStringArray("trigger_event")]
 script = ExtResource("11_gkipy")
 button_capture = 4
+trigger_event = NodePath("DHOPlaySound")
 
 [node name="DHOPlaySound" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/EButtonHoldLabel/DHOPlaySoundHoldTrigger" unique_id=1647040260 node_paths=PackedStringArray("player")]
 script = ExtResource("13_isph0")

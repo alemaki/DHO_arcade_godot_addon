@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bg7or48n4ho24" path="res://addons/dho_joypad/scripts/dho_name_setter.gd" id="1_7xf3h"]
 [ext_resource type="Theme" uid="uid://dubjvex4rp6ix" path="res://addons/dho_joypad/themes/default_theme.tres" id="1_8q4b8"]
 [ext_resource type="Script" uid="uid://dvm1g7vyj6p8d" path="res://addons/dho_joypad/scripts/dho_scene.gd" id="2_4a3pc"]
-[ext_resource type="FontFile" uid="uid://dpyjihv03bxd0" path="res://addons/dho_joypad/fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="2_oj553"]
+[ext_resource type="FontFile" uid="uid://h1unk4jb5cjl" path="res://addons/dho_joypad/fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="2_oj553"]
 [ext_resource type="Resource" uid="uid://dw57mllgckaof" path="res://addons/dho_joypad/resources/default_dho_scene_context.tres" id="3_4a3pc"]
 [ext_resource type="Script" uid="uid://4aubjdyqkpw1" path="res://addons/dho_joypad/scripts/labels/dho_blinking_label.gd" id="4_mar51"]
 [ext_resource type="Script" uid="uid://d21rys816bhtk" path="res://addons/dho_joypad/scripts/resources/dho_localized_text.gd" id="5_r3w5j"]

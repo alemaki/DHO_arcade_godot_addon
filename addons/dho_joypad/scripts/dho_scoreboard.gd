@@ -16,7 +16,7 @@ func _ready() -> void:
 	var index: int = 1
 	for score_data in self.score_holder.get_scores(BEST_SCORE_COUNT):
 		var label: Label = Label.new()
-		label.text = "#%d   %s   %06d" % [index, score_data.name, score_data.score]
+		label.text = "#%02d   %s   %06d" % [index, score_data.name, score_data.score]
 		index += 1
 		self.add_child(label)
 
