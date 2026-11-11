@@ -13,11 +13,11 @@ func _ready() -> void:
 func update_text():
 	self.set_text("%s: %06d" % [
 		self.localized_text_res.get_text(),
-		self.dho_scene.dho_context.player_info.score
+		self.dho_scene.dho_context.score
 	])
 
 func _on_button_pressed(button: DHOJoypad.BUTTON, device):
 	if button == DHOJoypad.BUTTON.A:
-		self.dho_scene.dho_context.player_info.score += 10
+		self.dho_scene.dho_context.score += 10
 		self.update_text()
 	

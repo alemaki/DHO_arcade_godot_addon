@@ -21,8 +21,8 @@ var letter_labels: Array[Label] = []
 @export var save_action = "ui_accept"
 @export var exit_action = "ui_back"
 
-@export var accept_scene_to_change_to = "res://addons/dho_joypad/scenes/dho_win_lose.tscn"
-@export var back_scene_to_change_to = "res://addons/dho_joypad/scenes/dho_win_lose.tscn"
+@export_file("*.tscn") var accept_scene_to_change_to = "res://addons/dho_joypad/scenes/dho_win_lose.tscn"
+@export_file("*.tscn") var back_scene_to_change_to = "res://addons/dho_joypad/scenes/dho_win_lose.tscn"
 
 func _ready() -> void:
 	if self.dho_scene == null:
@@ -51,17 +51,20 @@ func get_result_name() -> String:
 		result_name += CHARACTER_CYCLE[character_indexes[i]]
 	return result_name
 
-func try_to_save_score() -> bool:
+func try_to_save_score(player_score_data: DHOPlayerScoreData) -> bool:
 	var score_data: DHOScoreDataHolder = DHOScoreDataHolder.load_scores()
 	if score_data == null:
 		return false
-	var saved: bool = score_data.add_score(self.dho_scene.dho_context.player_info)
-	score_data.save_scores()
-	return saved
+	var saved: bool = score_data.add_score(player_score_data)
+	if not saved:
+		return false
+	return score_data.save_scores()
 
 func try_save() -> bool:
-	self.dho_scene.dho_context.player_info.name = self.get_result_name()
-	self.dho_scene.dho_context.is_score_saved = self.try_to_save_score()
+	var player_score_data: DHOPlayerScoreData = DHOPlayerScoreData.new()
+	player_score_data.name = self.get_result_name()
+	player_score_data.score = self.dho_scene.dho_context.score
+	self.dho_scene.dho_context.is_score_saved = self.try_to_save_score(player_score_data)
 	var result := await DHOSceneManager.change_scene(
 		self,
 		accept_scene_to_change_to,
@@ -77,7 +80,7 @@ func show_bad_name_label():
 func hide_bad_name_label():
 	self.bad_name_label.set_visible(false)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed(self.left_action):
 		self.current_letter -= 1
 		if self.current_letter < 0:

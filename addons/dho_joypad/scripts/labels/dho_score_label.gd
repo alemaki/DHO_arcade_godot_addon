@@ -13,5 +13,5 @@ func _ready() -> void:
 	assert(dho_scene != null)
 	self.set_text("%s: %06d" % [
 		self.localized_text_res.get_text(),
-		dho_scene.dho_context.player_info.score
+		dho_scene.dho_context.score
 		])

@@ -11,8 +11,9 @@ class_name DHOSceneManager
 static func change_scene(current_node: Node, to_path: String, context: DHOSceneContext) -> Error:
 	var tree: SceneTree = current_node.get_tree()
 	var old_root: Node = tree.get_current_scene()
-	var new_root: DHOScene =  load(to_path).instantiate() as DHOScene
-	assert(new_root != null)
+	var new_root: DHOScene = load(to_path).instantiate() as DHOScene
+	if new_root == null:
+		return Error.ERR_PARSE_ERROR
 	new_root.dho_context = context
 	var error: Error = tree.change_scene_to_node(new_root)
 	if error == OK:
@@ -22,6 +23,8 @@ static func change_scene(current_node: Node, to_path: String, context: DHOSceneC
 ## Changes the current scene to the next creates new context for that scene.[br]
 ## [param current_node] : any node from the current scene will do.[br]
 ## [param to_path] : scene path to change to. The resulting scene MUST inherit [DHOScene][br]
-static func change_scene_new_context(current_node: Node, to_path: String) -> Error:
+## [param score] : Optional. Set the score in a new scene. Otherwise will be set to 0.[br]
+static func change_scene_new_context(current_node: Node, to_path: String, score: int = 0) -> Error:
 	var context = DHOSceneContext.new()
+	context.score = score
 	return await change_scene(current_node, to_path, context)

@@ -1,14 +1,14 @@
 # Copyright (c) 2026 Alexander Makedonski
 # SPDX-License-Identifier: MIT
 
-# NOTE: See dho_joypad.gd for more information.
-# This scripts' purpose is for the devhubone test scene. It is not intended to be used in your game.
-# Make of that what you will.
-
+## You can use this node to switch to different [DHOScene]. Normally when the game ends
+## you should switch to the save_score.tscn. You can do whatever you want, tho. Set is_win before
+## switching to know if the player won or lost. Other info will be handled.
+## NOTE: This node requires a current [DHOScene]. If not set it will search for it.
 extends DHOEvent
 class_name DHOWinLoseEvent
 
-@export var win_lose_scene: String = "res://addons/dho_joypad/scenes/dho_win_lose.tscn"
+@export_file("*.tscn") var win_lose_scene: String = "res://addons/dho_joypad/scenes/dho_save_score.tscn"
 @export var dho_scene: DHOScene = null
 @export var is_win: bool = false
 

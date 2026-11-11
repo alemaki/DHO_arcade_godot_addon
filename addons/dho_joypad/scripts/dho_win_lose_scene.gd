@@ -2,12 +2,12 @@
 # SPDX-License-Identifier: MIT
 
 extends DHOScene
-class_name DHOWinLose # TODO: rename
+class_name DHOWinLoseScene
 
 @export var play_again_action = "ui_accept"
 @export var menu_action = "ui_back"
-@export var play_again_scene = "res://addons/dho_joypad/scenes/dho_joypad_test.tscn"
-@export var menu_scene = "res://addons/dho_joypad/scenes/dho_scoreboard.tscn"
+@export_file("*.tscn") var play_again_scene = "res://addons/dho_joypad/scenes/dho_joypad_test.tscn"
+@export_file("*.tscn") var menu_scene = "res://addons/dho_joypad/scenes/dho_scoreboard.tscn"
 
 @export var score_saved_label: Label = null
 
@@ -32,7 +32,7 @@ func _ready() -> void:
 		self.win_lose_label.set_text(lose_text_ref.get_text())
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed(self.play_again_action):
 		DHOSceneManager.change_scene_new_context(self, self.play_again_scene)
 	if Input.is_action_just_pressed(self.menu_action):

@@ -8,7 +8,7 @@ const BEST_SCORE_COUNT = 10
 var score_holder: DHOScoreDataHolder = null
 
 @export var start_action = "ui_accept"
-@export var start_scene = "res://addons/dho_joypad/scenes/dho_joypad_test.tscn"
+@export_file("*.tscn") var start_scene = "res://addons/dho_joypad/scenes/dho_joypad_test.tscn"
 
 func _ready() -> void:
 	score_holder = DHOScoreDataHolder.load_scores()

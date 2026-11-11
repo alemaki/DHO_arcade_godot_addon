@@ -14,7 +14,7 @@
 [ext_resource type="Script" uid="uid://b4b6km7il5ch1" path="res://addons/dho_joypad/scripts/labels/dho_hold_label.gd" id="10_ro22j"]
 [ext_resource type="Script" uid="uid://dxwmmxtwjw1xy" path="res://addons/dho_joypad/scripts/dho_score_changer.gd" id="10_wwp3o"]
 [ext_resource type="Script" uid="uid://qkevjtyxu8q1" path="res://addons/dho_joypad/scripts/dho_hold_detector.gd" id="11_gkipy"]
-[ext_resource type="Script" uid="uid://bgdlvsyh2nvxl" path="res://addons/dho_joypad/scripts/events/dho_win_lose.gd" id="12_04svh"]
+[ext_resource type="Script" uid="uid://bgdlvsyh2nvxl" path="res://addons/dho_joypad/scripts/events/dho_win_lose_event.gd" id="12_04svh"]
 [ext_resource type="Script" uid="uid://d4a3ms1wru5dr" path="res://addons/dho_joypad/scripts/events/dho_show_details.gd" id="12_12j57"]
 [ext_resource type="Script" uid="uid://dvx4onvuv6cxa" path="res://addons/dho_joypad/scripts/events/dho_play_sound.gd" id="13_isph0"]
 [ext_resource type="AudioStream" uid="uid://cxek813k56rw5" path="res://addons/dho_joypad/sound/audio-test.mp3" id="14_7w2fm"]
