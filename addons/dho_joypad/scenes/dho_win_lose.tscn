@@ -2,9 +2,34 @@
 
 [ext_resource type="Theme" uid="uid://dubjvex4rp6ix" path="res://addons/dho_joypad/themes/default_theme.tres" id="1_3jmed"]
 [ext_resource type="Script" uid="uid://bdp4lq8x0ixe0" path="res://addons/dho_joypad/scripts/dho_win_lose.gd" id="2_3jmed"]
+[ext_resource type="Script" uid="uid://d21rys816bhtk" path="res://addons/dho_joypad/scripts/resources/dho_localized_text.gd" id="3_3jmed"]
 [ext_resource type="Resource" uid="uid://da2fmscu3ojq3" path="res://addons/dho_joypad/resources/default_dho_scene_context.tres" id="3_dg5ra"]
 [ext_resource type="Script" uid="uid://nsq2h8jylxni" path="res://addons/dho_joypad/scripts/dho_score_label.gd" id="3_te1d3"]
 [ext_resource type="Script" uid="uid://4aubjdyqkpw1" path="res://addons/dho_joypad/scripts/labels/dho_blinking_label.gd" id="6_vdcf1"]
+
+[sub_resource type="Resource" id="Resource_dg5ra"]
+script = ExtResource("3_3jmed")
+format = "%s!"
+text_keys = Array[String](["STRING_YOU_WIN"])
+metadata/_custom_type_script = "uid://d21rys816bhtk"
+
+[sub_resource type="Resource" id="Resource_3jmed"]
+script = ExtResource("3_3jmed")
+format = "%s!"
+text_keys = Array[String](["STRING_YOU_LOSE"])
+metadata/_custom_type_script = "uid://d21rys816bhtk"
+
+[sub_resource type="Resource" id="Resource_te1d3"]
+script = ExtResource("3_3jmed")
+format = "%s"
+text_keys = Array[String](["STRING_YOUR_SCORE"])
+metadata/_custom_type_script = "uid://d21rys816bhtk"
+
+[sub_resource type="Resource" id="Resource_r24im"]
+script = ExtResource("3_3jmed")
+format = "%s: %s   %s: %s"
+text_keys = Array[String](["BUTTON_A", "STRING_PLAY_AGAIN", "BUTTON_B", "STRING_MENU"])
+metadata/_custom_type_script = "uid://d21rys816bhtk"
 
 [node name="WinLose" type="Control" unique_id=1649914357 node_paths=PackedStringArray("score_saved_label", "win_lose_label")]
 layout_mode = 3
@@ -17,6 +42,8 @@ theme = ExtResource("1_3jmed")
 script = ExtResource("2_3jmed")
 score_saved_label = NodePath("PanelContainer/CenterContainer2/MarginContainer/VBoxContainer/RecordIsSavedLabel")
 win_lose_label = NodePath("PanelContainer/CenterContainer3/MarginContainer/VBoxContainer/MarginContainer/WinLoseLabel")
+win_text_ref = SubResource("Resource_dg5ra")
+lose_text_ref = SubResource("Resource_3jmed")
 dho_context = ExtResource("3_dg5ra")
 metadata/_custom_type_script = "uid://dvm1g7vyj6p8d"
 
@@ -54,6 +81,7 @@ layout_mode = 2
 text = "Your score: 001000"
 script = ExtResource("3_te1d3")
 dho_scene = NodePath("../../../../../..")
+localized_text_res = SubResource("Resource_te1d3")
 
 [node name="CenterContainer2" type="CenterContainer" parent="PanelContainer" unique_id=2056637183]
 layout_mode = 2
@@ -72,4 +100,5 @@ layout_mode = 2
 layout_mode = 2
 text = "A: PLAY AGAIN    B: MENU"
 script = ExtResource("6_vdcf1")
+localized_text_res = SubResource("Resource_r24im")
 metadata/_custom_type_script = "uid://4aubjdyqkpw1"

@@ -15,6 +15,7 @@ class_name DHOBlinkingLabel
 
 # YOU THINK YOU CAN STOP ME?!
 func _ready() -> void:
+	super._ready()
 	self._show_label()
 
 func _show_label() -> void:

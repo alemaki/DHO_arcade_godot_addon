@@ -6,11 +6,37 @@
 [ext_resource type="FontFile" uid="uid://dpyjihv03bxd0" path="res://addons/dho_joypad/fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="2_oj553"]
 [ext_resource type="Resource" uid="uid://da2fmscu3ojq3" path="res://addons/dho_joypad/resources/default_dho_scene_context.tres" id="3_4a3pc"]
 [ext_resource type="Script" uid="uid://4aubjdyqkpw1" path="res://addons/dho_joypad/scripts/labels/dho_blinking_label.gd" id="4_mar51"]
+[ext_resource type="Script" uid="uid://d21rys816bhtk" path="res://addons/dho_joypad/scripts/resources/dho_localized_text.gd" id="5_r3w5j"]
 [ext_resource type="Script" uid="uid://nsq2h8jylxni" path="res://addons/dho_joypad/scripts/dho_score_label.gd" id="7_r3w5j"]
+[ext_resource type="Script" uid="uid://1m3f1rp22asu" path="res://addons/dho_joypad/scripts/labels/dho_localized_label.gd" id="8_tgki7"]
+
+[sub_resource type="Resource" id="Resource_4a3pc"]
+script = ExtResource("5_r3w5j")
+format = "%s"
+text_keys = Array[String](["STRING_YOUR_SCORE"])
+metadata/_custom_type_script = "uid://d21rys816bhtk"
 
 [sub_resource type="Theme" id="Theme_8q4b8"]
 default_font = ExtResource("2_oj553")
 Label/font_sizes/font_size = 64
+
+[sub_resource type="Resource" id="Resource_efcoe"]
+script = ExtResource("5_r3w5j")
+format = "%s!"
+text_keys = Array[String](["STRING_NAME_NOT_ALLOWED"])
+metadata/_custom_type_script = "uid://d21rys816bhtk"
+
+[sub_resource type="Resource" id="Resource_dytl1"]
+script = ExtResource("5_r3w5j")
+format = "%s"
+text_keys = Array[String](["STRING_MOVE_CHANGE_LETTER_POSITION"])
+metadata/_custom_type_script = "uid://d21rys816bhtk"
+
+[sub_resource type="Resource" id="Resource_tgki7"]
+script = ExtResource("5_r3w5j")
+format = "%s: %s   %s: %s"
+text_keys = Array[String](["BUTTON_A", "STRING_OK", "BUTTON_B", "STRING_BACK"])
+metadata/_custom_type_script = "uid://d21rys816bhtk"
 
 [node name="DhoSaveScore" type="Control" unique_id=1252791888]
 layout_mode = 3
@@ -43,6 +69,7 @@ layout_mode = 2
 layout_mode = 2
 text = "Your score: 001000"
 script = ExtResource("7_r3w5j")
+localized_text_res = SubResource("Resource_4a3pc")
 
 [node name="CenterContainer" type="CenterContainer" parent="PanelContainer" unique_id=807651720]
 layout_mode = 2
@@ -65,18 +92,23 @@ layout_mode = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/CenterContainer2/MarginContainer" unique_id=1015699162]
 layout_mode = 2
 
-[node name="BadNameLabel" type="Label" parent="PanelContainer/CenterContainer2/MarginContainer/VBoxContainer" unique_id=1767535429]
+[node name="BadNameLabel" type="Label" parent="PanelContainer/CenterContainer2/MarginContainer/VBoxContainer" unique_id=373060520]
 layout_mode = 2
 text = "Name not allowed!"
+script = ExtResource("8_tgki7")
+localized_text_res = SubResource("Resource_efcoe")
+metadata/_custom_type_script = "uid://1m3f1rp22asu"
 
 [node name="MoveLabel" type="Label" parent="PanelContainer/CenterContainer2/MarginContainer/VBoxContainer" unique_id=964971335]
 layout_mode = 2
 text = "Move: change letter / position"
 script = ExtResource("4_mar51")
+localized_text_res = SubResource("Resource_dytl1")
 metadata/_custom_type_script = "uid://4aubjdyqkpw1"
 
 [node name="DHOBlinkingLabel" type="Label" parent="PanelContainer/CenterContainer2/MarginContainer/VBoxContainer" unique_id=776659118]
 layout_mode = 2
 text = "A: OK   B: BACK"
 script = ExtResource("4_mar51")
+localized_text_res = SubResource("Resource_tgki7")
 metadata/_custom_type_script = "uid://4aubjdyqkpw1"

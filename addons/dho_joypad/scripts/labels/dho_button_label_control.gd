@@ -9,8 +9,12 @@ extends DHODetailedLabel # TODO: This doesn't make sense to be detailed label, m
 
 @export var button_capture: DHOJoypad.BUTTON = DHOJoypad.BUTTON.A
 
-@onready var ON_TEXT  := "[%-4s]" % [tr("TEST_SCENE_TEXT_ON")]
-@onready var OFF_TEXT := "[%-4s]" % [tr("TEST_SCENE_TEXT_OFF")]
+@onready var TEXT_WIDTH	:= maxi(
+	tr("TEST_SCENE_TEXT_ON").length(),
+	tr("TEST_SCENE_TEXT_OFF").length()
+	)
+@onready var ON_TEXT	:= "[%s]" % [tr("TEST_SCENE_TEXT_ON").rpad(TEXT_WIDTH)]
+@onready var OFF_TEXT	:= "[%s]" % [tr("TEST_SCENE_TEXT_OFF").rpad(TEXT_WIDTH)]
 
 func show_details() -> void:
 	self.is_showing_details = not self.is_showing_details
@@ -20,7 +24,7 @@ func update_text(is_on: bool = false) -> void:
 	var display_text := "%s" % [(ON_TEXT if is_on else OFF_TEXT)]
 	display_text += " %s" % [DHOJoypad.BUTTON_INFORMATION[self.button_capture].button_name]
 	if self.is_showing_details:
-		display_text += "  (%s)" % [DHOJoypad.BUTTON_INFORMATION[self.button_capture].event_name]
+		display_text += " (%s)" % [DHOJoypad.BUTTON_INFORMATION[self.button_capture].event_name]
 	self.set_text(display_text)
 
 func _ready() -> void:

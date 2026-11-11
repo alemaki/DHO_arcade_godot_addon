@@ -12,10 +12,12 @@ class_name DHOWinLose # TODO: rename
 @export var score_saved_label: Label = null
 
 @export var win_lose_label: Label = null
-@export var win_text: String = "YOU WIN!"
-@export var lose_text: String = "GAME OVER!"
+@export var win_text_ref: DHOLocalizedText = null
+@export var lose_text_ref: DHOLocalizedText = null
 
 func _ready() -> void:
+	assert(self.win_text_ref != null)
+	assert(self.lose_text_ref != null)
 	assert(self.score_saved_label != null)
 	assert(self.win_lose_label != null)
 	super._ready()
@@ -25,9 +27,9 @@ func _ready() -> void:
 		self.score_saved_label.set_visible(false)
 	
 	if self.dho_context.is_win:
-		self.win_lose_label.set_text(win_text)
+		self.win_lose_label.set_text(win_text_ref.get_text())
 	else:
-		self.win_lose_label.set_text(lose_text)
+		self.win_lose_label.set_text(lose_text_ref.get_text())
 
 
 func _process(delta: float) -> void:

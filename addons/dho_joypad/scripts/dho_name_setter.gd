@@ -19,8 +19,10 @@ var letter_labels: Array[Label] = []
 @export var up_action = "ui_up"
 @export var down_action = "ui_down"
 @export var save_action = "ui_accept"
+@export var exit_action = "ui_back"
 
-@export var scene_to_change_to = "res://addons/dho_joypad/scenes/dho_win_lose.tscn"
+@export var accept_scene_to_change_to = "res://addons/dho_joypad/scenes/dho_win_lose.tscn"
+@export var back_scene_to_change_to = "res://addons/dho_joypad/scenes/dho_win_lose.tscn"
 
 func _ready() -> void:
 	if self.dho_scene == null:
@@ -58,11 +60,15 @@ func try_to_save_score() -> bool:
 	return saved
 
 func try_save() -> bool:
-	if not PlayerScoreData.is_name_valid(self.get_result_name()):
-		return false
 	self.dho_scene.dho_context.player_info.name = self.get_result_name()
 	self.dho_scene.dho_context.is_score_saved = self.try_to_save_score()
-	DHOSceneManager.change_scene(self, scene_to_change_to, self.dho_scene.dho_context)
+	var result := await DHOSceneManager.change_scene(
+		self,
+		accept_scene_to_change_to,
+		self.dho_scene.dho_context
+	)
+	if result != OK:
+		return false
 	return true
 
 func show_bad_name_label():
@@ -87,7 +93,11 @@ func _process(delta: float) -> void:
 		self.character_indexes[self.current_letter] += 1
 		self.character_indexes[self.current_letter] %= CHARACTER_CYCLE.length()
 	if Input.is_action_just_pressed(self.save_action):
-		if not self.try_save():
+		if not PlayerScoreData.is_name_valid(self.get_result_name()):
 			self.show_bad_name_label()
-			self.get_tree().create_timer(1).timeout.connect(self.hide_bad_name_label)
+			self.get_tree().create_timer(2).timeout.connect(self.hide_bad_name_label)
+		elif not await self.try_save():
+			push_warning("Something went horribly wrong.")
+	if Input.is_action_just_pressed(self.exit_action):
+		DHOSceneManager.change_scene(self, back_scene_to_change_to, self.dho_scene.dho_context)
 	self.update_labels()
