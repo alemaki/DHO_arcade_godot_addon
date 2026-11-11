@@ -223,6 +223,10 @@ ui_down_device_1={
 ]
 }
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://addons/dho_joypad/language/dho_arcade_plugin_translations.en.translation", "res://addons/dho_joypad/language/dho_arcade_plugin_translations.bg.translation")
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
