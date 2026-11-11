@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d4b25sr8lvu76"]
 
 [ext_resource type="Script" uid="uid://bgk6rjlxieyhg" path="res://addons/dho_joypad/scripts/dho_exit_trigger.gd" id="1_aiuf5"]
-[ext_resource type="FontFile" uid="uid://dpyjihv03bxd0" path="res://Fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="2_qkwjj"]
+[ext_resource type="FontFile" uid="uid://dpyjihv03bxd0" path="res://addons/dho_joypad/fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="2_qkwjj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1nfdl"]
 bg_color = Color(0, 0, 0, 1)

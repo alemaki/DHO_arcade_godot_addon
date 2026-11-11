@@ -5,7 +5,7 @@
 # This scripts' purpose is for the devhubone test scene. It is not intended to be used in your game.
 # Make of that what you will.
 
-extends Label
+extends DHOLocalizedLabel
 class_name DHOBlinkingLabel
 
 ## Measured in seconds

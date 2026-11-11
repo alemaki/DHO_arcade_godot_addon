@@ -1,11 +1,13 @@
 [gd_scene format=3 uid="uid://beq43jnkebwdo"]
 
-[ext_resource type="FontFile" uid="uid://dpyjihv03bxd0" path="res://Fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="1_fusoy"]
+[ext_resource type="FontFile" uid="uid://dpyjihv03bxd0" path="res://addons/dho_joypad/fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="1_fusoy"]
 [ext_resource type="Script" uid="uid://dvm1g7vyj6p8d" path="res://addons/dho_joypad/scripts/dho_scene.gd" id="2_04svh"]
 [ext_resource type="Resource" uid="uid://da2fmscu3ojq3" path="res://addons/dho_joypad/resources/default_dho_scene_context.tres" id="3_wwp3o"]
 [ext_resource type="Texture2D" uid="uid://bn6vnchewuuf2" path="res://icon.svg" id="4_8wl7c"]
 [ext_resource type="Script" uid="uid://cwsg5lygoewbf" path="res://addons/dho_joypad/scripts/labels/dho_xy_joystick_label.gd" id="5_imr4d"]
+[ext_resource type="Script" uid="uid://1m3f1rp22asu" path="res://addons/dho_joypad/scripts/labels/dho_localized_label.gd" id="5_nmvre"]
 [ext_resource type="Script" uid="uid://dux0gucsr622e" path="res://addons/dho_joypad/scripts/labels/dho_currently_pressed_button_label.gd" id="6_nmvre"]
+[ext_resource type="Script" uid="uid://d21rys816bhtk" path="res://addons/dho_joypad/scripts/resources/dho_localized_text.gd" id="6_yr8fd"]
 [ext_resource type="Script" uid="uid://b42bfkgiqte6e" path="res://addons/dho_joypad/scripts/labels/dho_button_label_control.gd" id="7_yr8fd"]
 [ext_resource type="Script" uid="uid://diehq1u621bbw" path="res://addons/dho_joypad/scripts/labels/dho_last_pressed_label.gd" id="8_jcfpx"]
 [ext_resource type="Script" uid="uid://cxxx6xl2huta8" path="res://addons/dho_joypad/scripts/labels/dho_detailed_label.gd" id="9_qeyga"]
@@ -15,7 +17,7 @@
 [ext_resource type="Script" uid="uid://bgdlvsyh2nvxl" path="res://addons/dho_joypad/scripts/events/dho_win_lose.gd" id="12_04svh"]
 [ext_resource type="Script" uid="uid://d4a3ms1wru5dr" path="res://addons/dho_joypad/scripts/events/dho_show_details.gd" id="12_12j57"]
 [ext_resource type="Script" uid="uid://dvx4onvuv6cxa" path="res://addons/dho_joypad/scripts/events/dho_play_sound.gd" id="13_isph0"]
-[ext_resource type="AudioStream" uid="uid://cxek813k56rw5" path="res://sound/audio-test.mp3" id="14_7w2fm"]
+[ext_resource type="AudioStream" uid="uid://cxek813k56rw5" path="res://addons/dho_joypad/sound/audio-test.mp3" id="14_7w2fm"]
 [ext_resource type="Script" uid="uid://dp2ofv6qklaw5" path="res://addons/dho_joypad/scripts/events/dho_modulate_change.gd" id="15_22aq6"]
 
 [sub_resource type="Theme" id="Theme_qn1hh"]
@@ -25,6 +27,96 @@ MarginContainer/constants/margin_bottom = 10
 MarginContainer/constants/margin_left = 20
 MarginContainer/constants/margin_right = 0
 MarginContainer/constants/margin_top = 10
+
+[sub_resource type="Resource" id="Resource_wu4yw"]
+script = ExtResource("6_yr8fd")
+format = "%s"
+text_keys = Array[String](["TEST_SCENE_TITLE"])
+metadata/_custom_type_script = "uid://d21rys816bhtk"
+
+[sub_resource type="Resource" id="Resource_7bjyk"]
+script = ExtResource("6_yr8fd")
+format = "%s:"
+text_keys = Array[String](["TEST_SCENE_MOVEMENT"])
+metadata/_custom_type_script = "uid://d21rys816bhtk"
+
+[sub_resource type="Resource" id="Resource_x1137"]
+script = ExtResource("6_yr8fd")
+format = "%s: - - - -"
+text_keys = Array[String](["TEST_SCENE_HAT"])
+metadata/_custom_type_script = "uid://d21rys816bhtk"
+
+[sub_resource type="Resource" id="Resource_h7q1p"]
+script = ExtResource("6_yr8fd")
+format = "%s"
+text_keys = Array[String](["TEST_SCENE_CURENTLY_PRESSED"])
+metadata/_custom_type_script = "uid://d21rys816bhtk"
+
+[sub_resource type="Resource" id="Resource_ihi2c"]
+script = ExtResource("6_yr8fd")
+format = "%s"
+text_keys = Array[String](["TEST_SCENE_LAST_PRESSED"])
+metadata/_custom_type_script = "uid://d21rys816bhtk"
+
+[sub_resource type="Resource" id="Resource_nmvre"]
+script = ExtResource("6_yr8fd")
+format = "%s: "
+text_keys = Array[String](["TEST_SCENE_DETAILS"])
+metadata/_custom_type_script = "uid://d21rys816bhtk"
+
+[sub_resource type="Resource" id="Resource_yr8fd"]
+script = ExtResource("6_yr8fd")
+format = "%-4s"
+text_keys = Array[String](["TEST_SCENE_TEXT_ON"])
+metadata/_custom_type_script = "uid://d21rys816bhtk"
+
+[sub_resource type="Resource" id="Resource_jcfpx"]
+script = ExtResource("6_yr8fd")
+format = "%-4s"
+text_keys = Array[String](["TEST_SCENE_TEXT_OFF"])
+metadata/_custom_type_script = "uid://d21rys816bhtk"
+
+[sub_resource type="Resource" id="Resource_22aq6"]
+script = ExtResource("6_yr8fd")
+format = "%s"
+text_keys = Array[String](["STRING_SCORE"])
+metadata/_custom_type_script = "uid://d21rys816bhtk"
+
+[sub_resource type="Resource" id="Resource_gkipy"]
+script = ExtResource("6_yr8fd")
+format = "%s"
+text_keys = Array[String](["TEST_SCENE_WIN"])
+metadata/_custom_type_script = "uid://d21rys816bhtk"
+
+[sub_resource type="Resource" id="Resource_ro22j"]
+script = ExtResource("6_yr8fd")
+format = "%s"
+text_keys = Array[String](["TEST_SCENE_HOLD"])
+metadata/_custom_type_script = "uid://d21rys816bhtk"
+
+[sub_resource type="Resource" id="Resource_qeyga"]
+script = ExtResource("6_yr8fd")
+format = "%s"
+text_keys = Array[String](["TEST_SCENE_LOSE"])
+metadata/_custom_type_script = "uid://d21rys816bhtk"
+
+[sub_resource type="Resource" id="Resource_12j57"]
+script = ExtResource("6_yr8fd")
+format = "%s"
+text_keys = Array[String](["TEST_SCENE_DETAILS"])
+metadata/_custom_type_script = "uid://d21rys816bhtk"
+
+[sub_resource type="Resource" id="Resource_isph0"]
+script = ExtResource("6_yr8fd")
+format = "%s"
+text_keys = Array[String](["TEST_SCENE_SOUND"])
+metadata/_custom_type_script = "uid://d21rys816bhtk"
+
+[sub_resource type="Resource" id="Resource_7w2fm"]
+script = ExtResource("6_yr8fd")
+format = "%s"
+text_keys = Array[String](["STRING_GODOT"])
+metadata/_custom_type_script = "uid://d21rys816bhtk"
 
 [node name="DHOJoypadTest" type="Control" unique_id=1122718511]
 layout_mode = 3
@@ -52,9 +144,12 @@ offset_bottom = 648.0
 [node name="TitleContainer" type="MarginContainer" parent="Tree" unique_id=811352856]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="Tree/TitleContainer" unique_id=967050855]
+[node name="Title" type="Label" parent="Tree/TitleContainer" unique_id=263234383]
 layout_mode = 2
 text = "DevHubOne Godot joypad test scene"
+script = ExtResource("5_nmvre")
+localized_text_res = SubResource("Resource_wu4yw")
+metadata/_custom_type_script = "uid://1m3f1rp22asu"
 
 [node name="HSeparator" type="HSeparator" parent="Tree" unique_id=1189057095]
 layout_mode = 2
@@ -65,18 +160,24 @@ layout_mode = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="Tree/MovementContainer" unique_id=1383159312]
 layout_mode = 2
 
-[node name="Movement label" type="Label" parent="Tree/MovementContainer/VBoxContainer" unique_id=688321827]
+[node name="Movement label" type="Label" parent="Tree/MovementContainer/VBoxContainer" unique_id=598003651]
 layout_mode = 2
 text = "Movement:"
+script = ExtResource("5_nmvre")
+localized_text_res = SubResource("Resource_7bjyk")
+metadata/_custom_type_script = "uid://1m3f1rp22asu"
 
 [node name="XY_Joystick_detector" type="Label" parent="Tree/MovementContainer/VBoxContainer" unique_id=563201456]
 layout_mode = 2
 text = "X=0.00, Y=0.00"
 script = ExtResource("5_imr4d")
 
-[node name="Movement label2" type="Label" parent="Tree/MovementContainer/VBoxContainer" unique_id=1861503890]
+[node name="Movement label2" type="Label" parent="Tree/MovementContainer/VBoxContainer" unique_id=1939290041]
 layout_mode = 2
 text = "Hat: - - - -"
+script = ExtResource("5_nmvre")
+localized_text_res = SubResource("Resource_x1137")
+metadata/_custom_type_script = "uid://1m3f1rp22asu"
 
 [node name="HSeparator2" type="HSeparator" parent="Tree" unique_id=272448615]
 layout_mode = 2
@@ -88,6 +189,7 @@ layout_mode = 2
 layout_mode = 2
 text = "Currently pressed buttons:"
 script = ExtResource("6_nmvre")
+localized_text_res = SubResource("Resource_h7q1p")
 
 [node name="ButtonContainer" type="MarginContainer" parent="Tree" unique_id=1828789745]
 layout_mode = 2
@@ -149,6 +251,7 @@ layout_mode = 2
 layout_mode = 2
 text = "Last pressed button:"
 script = ExtResource("8_jcfpx")
+localized_text_res = SubResource("Resource_ihi2c")
 
 [node name="DetailedContainer" type="MarginContainer" parent="Tree" unique_id=1125020950]
 layout_mode = 2
@@ -157,16 +260,18 @@ layout_mode = 2
 layout_mode = 2
 text = "Details: OFF"
 script = ExtResource("9_qeyga")
-fixed_text = "Details:"
-no_details_text = " OFF"
-details_text = " ON"
+fixed_text_res = SubResource("Resource_nmvre")
+details_text_res = SubResource("Resource_yr8fd")
+no_details_text_res = SubResource("Resource_jcfpx")
 
 [node name="ScoreContainer" type="MarginContainer" parent="Tree" unique_id=1680782125]
 layout_mode = 2
 
-[node name="ScoreChanger" type="Label" parent="Tree/ScoreContainer" unique_id=96261030]
+[node name="ScoreChanger" type="Label" parent="Tree/ScoreContainer" unique_id=96261030 node_paths=PackedStringArray("dho_scene")]
 layout_mode = 2
 script = ExtResource("10_wwp3o")
+dho_scene = NodePath("../../..")
+localized_text_res = SubResource("Resource_22aq6")
 
 [node name="HSeparator3" type="HSeparator" parent="Tree" unique_id=2111930718]
 layout_mode = 2
@@ -181,8 +286,9 @@ layout_mode = 2
 layout_mode = 2
 text = "Hold B = WIN     (0.0s / 3.0s)"
 script = ExtResource("10_ro22j")
-name_of_event = "WIN"
+name_of_event_res = SubResource("Resource_gkipy")
 hold_trigger_node = NodePath("DHOWinHoldTrigger")
+localized_text_res = SubResource("Resource_ro22j")
 
 [node name="DHOWinHoldTrigger" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/BButtonHoldLabel" unique_id=121355694]
 script = ExtResource("11_gkipy")
@@ -198,8 +304,9 @@ metadata/_custom_type_script = "uid://bgdlvsyh2nvxl"
 layout_mode = 2
 text = "Hold C = LOSE    (0.0s / 3.0s)"
 script = ExtResource("10_ro22j")
-name_of_event = "LOSE"
+name_of_event_res = SubResource("Resource_qeyga")
 hold_trigger_node = NodePath("DHOShowDetailsHoldTrigger")
+localized_text_res = SubResource("Resource_ro22j")
 
 [node name="DHOShowDetailsHoldTrigger" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/CButtonHoldLabel" unique_id=1536857706]
 script = ExtResource("11_gkipy")
@@ -214,8 +321,9 @@ metadata/_custom_type_script = "uid://bgdlvsyh2nvxl"
 layout_mode = 2
 text = "Hold D = DETAILS (0.0s / 3.0s)"
 script = ExtResource("10_ro22j")
-name_of_event = "DETAILS"
+name_of_event_res = SubResource("Resource_12j57")
 hold_trigger_node = NodePath("DHOShowDetailsHoldTrigger")
+localized_text_res = SubResource("Resource_ro22j")
 
 [node name="DHOShowDetailsHoldTrigger" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/DButtonHoldLabel" unique_id=1736415264 node_paths=PackedStringArray("trigger_event")]
 script = ExtResource("11_gkipy")
@@ -230,8 +338,9 @@ metadata/_custom_type_script = "uid://d4a3ms1wru5dr"
 layout_mode = 2
 text = "Hold E = SOUND   (0.0s / 3.0s)"
 script = ExtResource("10_ro22j")
-name_of_event = "SOUND"
+name_of_event_res = SubResource("Resource_isph0")
 hold_trigger_node = NodePath("DHOPlaySoundHoldTrigger")
+localized_text_res = SubResource("Resource_ro22j")
 
 [node name="DHOPlaySoundHoldTrigger" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/EButtonHoldLabel" unique_id=434003374]
 script = ExtResource("11_gkipy")
@@ -250,8 +359,9 @@ modulate = Color(1, 1, 1, 0.078431375)
 layout_mode = 2
 text = "Hold A = GODOT   (0.0s / 3.0s)"
 script = ExtResource("10_ro22j")
-name_of_event = "?????"
+name_of_event_res = SubResource("Resource_7w2fm")
 hold_trigger_node = NodePath("DHOModulateHoldTrigger")
+localized_text_res = SubResource("Resource_ro22j")
 
 [node name="DHOModulateHoldTrigger" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/AButtonHoldLabel" unique_id=845339037 node_paths=PackedStringArray("trigger_event")]
 script = ExtResource("11_gkipy")

@@ -5,16 +5,15 @@
 # This scripts' purpose is for the devhubone test scene. It is not intended to be used in your game.
 # Make of that what you will.
 
-extends Label
-
-@export var display_text: String = "Currently pressed buttons: "
+extends DHOLocalizedLabel
 
 func _ready() -> void:
-	self.set_text(self.display_text)
+	super._ready()
+	self.set_text(self.localized_text_res.get_text() + ": ")
 
 func _process(_delta: float) -> void:
 	var first: bool = true
-	var result_text: String = self.display_text
+	var result_text: String = self.localized_text_res.get_text() + ": "
 	for button in DHOJoypad.BUTTON.values():
 		if DhoJoypad.is_button_pressed(button):
 			if first:

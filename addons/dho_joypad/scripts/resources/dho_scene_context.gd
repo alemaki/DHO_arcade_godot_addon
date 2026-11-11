@@ -5,7 +5,7 @@
 extends Resource
 class_name DHOSceneContext
 
-## WARNING: PlayerScoreData is required for the plugin's scenes.
+## WARNING: The data fields below are required for the plugin's scenes.
 @export var player_info: PlayerScoreData = PlayerScoreData.new()
 @export var is_score_saved: bool = false
 @export var is_win: bool = false

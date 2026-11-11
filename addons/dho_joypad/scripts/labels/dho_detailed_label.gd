@@ -8,22 +8,25 @@
 extends Label
 class_name DHODetailedLabel
 
-@export var fixed_text: String = ""
-@export var no_details_text: String = ""
-@export var details_text: String = ""
+@export var fixed_text_res: DHOLocalizedText = null
+@export var details_text_res: DHOLocalizedText = null
+@export var no_details_text_res: DHOLocalizedText = null
 @export var is_showing_details: bool = false
+
+func _ready() -> void:
+	assert(self.fixed_text_res != null)
+	assert(self.no_details_text_res != null)
+	assert(self.details_text_res != null)
+	self.update_text()
 
 func show_details() -> void:
 	self.is_showing_details = not self.is_showing_details
 	self.update_text()
 
 func update_text() -> void:
-	var display_text := fixed_text
+	var display_text := self.fixed_text_res.get_text()
 	if self.is_showing_details:
-		display_text += details_text
+		display_text += self.details_text_res.get_text()
 	else:
-		display_text += no_details_text
+		display_text += self.no_details_text_res.get_text()
 	self.set_text(display_text)
-
-func _ready() -> void:
-	self.update_text()
