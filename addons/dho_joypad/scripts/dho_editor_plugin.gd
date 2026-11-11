@@ -4,9 +4,14 @@
 @tool
 extends EditorPlugin
 
-
+const TRANSLATIONS_SETTING: String = "internationalization/locale/translations"
 const TRANSLATION_PATH_EN: String = "res://addons/dho_joypad/language/dho_arcade_plugin_translations.en.translation"
 const TRANSLATION_PATH_BG: String = "res://addons/dho_joypad/language/dho_arcade_plugin_translations.bg.translation"
+const TRANSLATION_PATHS: PackedStringArray = [
+	TRANSLATION_PATH_EN,
+	TRANSLATION_PATH_BG
+]
+
 const DEVICE_NAME_SUFFIX: String = "_device_"
 const DHO_AUTOLOAD_NAME: String = "DhoJoypad"
 const DHO_AUTOLOAD_PATH: String = "res://addons/dho_joypad/scripts/dho_joypad.gd"
@@ -83,18 +88,36 @@ func register_input_actions() -> void:
 	for device in range(-1, DHOJoypad.MAX_DEVICES_HANDLED):
 		change_settings_for_buttons_on_device(device)
 		change_settings_for_axes_on_device(device)
-	ProjectSettings.save() 
+	ProjectSettings.save()
+
+func register_translations() -> void:
+	var current: PackedStringArray = ProjectSettings.get_setting(TRANSLATIONS_SETTING, PackedStringArray())
+	var updated: PackedStringArray = current.duplicate()
+	for path in TRANSLATION_PATHS:
+		if not updated.has(path):
+			updated.append(path)
+	ProjectSettings.set_setting(TRANSLATIONS_SETTING, updated)
+
+func unregister_translations() -> void:
+	var current: PackedStringArray = ProjectSettings.get_setting(TRANSLATIONS_SETTING, PackedStringArray())
+	var updated := PackedStringArray()
+	for path in current:
+		if not TRANSLATION_PATHS.has(path):
+			updated.append(path)
+	ProjectSettings.set_setting(TRANSLATIONS_SETTING, updated)
 
 func _enable_plugin() -> void:
 	self.add_autoload_singleton(DHO_AUTOLOAD_NAME, DHO_AUTOLOAD_PATH)
 	self.add_autoload_singleton(QUIT_AUTOLOAD_NAME, QUIT_AUTOLOAD_PATH)
-	TranslationServer.add_translation(load(TRANSLATION_PATH_EN))
-	TranslationServer.add_translation(load(TRANSLATION_PATH_BG))
+	register_translations()
 	register_input_actions()
+	ProjectSettings.save()
 
 func _disable_plugin() -> void:
 	self.remove_autoload_singleton(DHO_AUTOLOAD_NAME)
 	self.remove_autoload_singleton(QUIT_AUTOLOAD_NAME)
+	unregister_translations()
+	ProjectSettings.save()
 
 func _enter_tree() -> void:
 	pass
