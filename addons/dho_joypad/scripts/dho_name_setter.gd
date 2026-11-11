@@ -3,7 +3,7 @@
 
 extends HBoxContainer
 
-const LETTER_COUNT = PlayerScoreData.NAME_SIZE
+const LETTER_COUNT = DHOPlayerScoreData.NAME_SIZE
 # TODO: there's gotta be a better solution for this.
 const CHARACTER_CYCLE: String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 var current_letter = 0
@@ -52,7 +52,7 @@ func get_result_name() -> String:
 	return result_name
 
 func try_to_save_score() -> bool:
-	var score_data: ScoreDataHolder = ScoreDataHolder.load_scores()
+	var score_data: DHOScoreDataHolder = DHOScoreDataHolder.load_scores()
 	if score_data == null:
 		return false
 	var saved: bool = score_data.add_score(self.dho_scene.dho_context.player_info)
@@ -93,7 +93,7 @@ func _process(delta: float) -> void:
 		self.character_indexes[self.current_letter] += 1
 		self.character_indexes[self.current_letter] %= CHARACTER_CYCLE.length()
 	if Input.is_action_just_pressed(self.save_action):
-		if not PlayerScoreData.is_name_valid(self.get_result_name()):
+		if not DHOPlayerScoreData.is_name_valid(self.get_result_name()):
 			self.show_bad_name_label()
 			self.get_tree().create_timer(2).timeout.connect(self.hide_bad_name_label)
 		elif not await self.try_save():

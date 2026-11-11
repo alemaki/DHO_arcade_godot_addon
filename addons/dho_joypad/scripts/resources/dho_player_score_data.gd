@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MIT
 
 extends Resource			
-class_name PlayerScoreData
+class_name DHOPlayerScoreData
 
 # Currently the size of the name is fixed to 3 symbols (digits and letters)
 const NAME_SIZE: int = 3
@@ -43,7 +43,7 @@ static func is_name_valid(name_str: String) -> bool:
 		return false
 	return is_name_digits_and_letters(name_str) and is_name_allowed(name_str)
 
-static func _bigger_score(score_data1: PlayerScoreData, score_data2: PlayerScoreData) -> bool:
+static func _bigger_score(score_data1: DHOPlayerScoreData, score_data2: DHOPlayerScoreData) -> bool:
 	return score_data1.score > score_data2.score
 
 func to_dict() -> Dictionary[String, Variant]:
@@ -52,14 +52,14 @@ func to_dict() -> Dictionary[String, Variant]:
 		"name": name,
 	}
 
-static func from_dict(dict: Dictionary) -> PlayerScoreData:
+static func from_dict(dict: Dictionary) -> DHOPlayerScoreData:
 	var score_value: Variant = dict.get("score")
 	var name_value: Variant = dict.get("name")
 	if not (score_value is float or score_value is int) or not (name_value is String):
 		return null
 	if not is_name_valid(name_value):
 		return null
-	var result := PlayerScoreData.new()
+	var result := DHOPlayerScoreData.new()
 	result.score = int(score_value)
 	result.name = name_value
 	return result

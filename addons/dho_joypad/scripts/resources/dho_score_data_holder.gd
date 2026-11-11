@@ -2,19 +2,19 @@
 # SPDX-License-Identifier: MIT
 
 extends Resource
-class_name ScoreDataHolder
+class_name DHOScoreDataHolder
 
 const MAX_SCORE_HOLD = 10 # Can hold more than 10 but currently shows just 10, so why bother.
-@export var player_data: Array[PlayerScoreData]
+@export var player_data: Array[DHOPlayerScoreData]
 const PLAYER_DATA_LOCATION: String = "user://score_data.json"
 const TEMP_PLAYER_DATA_LOCATION: String = "user://score_data_temp.json"
 # TODO: what to do with equal scores?
 func sort_scores() -> void:
-	self.player_data.sort_custom(PlayerScoreData._bigger_score)
+	self.player_data.sort_custom(DHOPlayerScoreData._bigger_score)
 
 # TODO: remove_score()?? Check score validity? or not responsible.
 ## Adds score and sorts it in. If overflowing - deletes worst score.
-func add_score(score_data: PlayerScoreData) -> bool:
+func add_score(score_data: DHOPlayerScoreData) -> bool:
 	var score_added: bool = true
 	self.player_data.push_back(score_data)
 	self.sort_scores()
@@ -25,13 +25,13 @@ func add_score(score_data: PlayerScoreData) -> bool:
 
 
 ## Returns the best best_count scores or all of them if best_count = -1
-func get_scores(best_count: int = -1) -> Array[PlayerScoreData]:
+func get_scores(best_count: int = -1) -> Array[DHOPlayerScoreData]:
 	if best_count == -1:
 		return self.player_data
 	return self.player_data.slice(0, best_count)
 
-static func load_scores() -> ScoreDataHolder:
-	var result: ScoreDataHolder = ScoreDataHolder.new()
+static func load_scores() -> DHOScoreDataHolder:
+	var result: DHOScoreDataHolder = DHOScoreDataHolder.new()
 	if not FileAccess.file_exists(PLAYER_DATA_LOCATION):
 		return result
 	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(PLAYER_DATA_LOCATION))
@@ -43,7 +43,7 @@ static func load_scores() -> ScoreDataHolder:
 		if dict is not Dictionary:
 			push_warning("Player data is not dict; scores might be corrupted: " + str(dict))
 			continue
-		var player_data: PlayerScoreData = PlayerScoreData.from_dict(dict)
+		var player_data: DHOPlayerScoreData = DHOPlayerScoreData.from_dict(dict)
 		if player_data == null:
 			push_warning("Player data in save file could not be parsed: " + str(dict))
 			continue
@@ -54,7 +54,7 @@ static func load_scores() -> ScoreDataHolder:
 
 func save_scores() -> bool:
 	var json_information: Array[Dictionary] = []
-	for data: PlayerScoreData in self.player_data:
+	for data: DHOPlayerScoreData in self.player_data:
 		var player_data_dict: Dictionary[String, Variant] = data.to_dict()
 		json_information.push_back(player_data_dict)
 	var json_string: String = JSON.stringify(json_information, "\t")

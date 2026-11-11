@@ -8,7 +8,7 @@
 extends DHOEvent
 class_name DHOShowDetails
 
-static var GROUP_NAME = "hidden_details"
+const GROUP_NAME = "hidden_details"
 
 func execute() -> void:
 	get_tree().call_group(GROUP_NAME, "show_details")

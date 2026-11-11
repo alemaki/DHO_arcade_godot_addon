@@ -13,14 +13,14 @@ func get_text() -> String:
 	for text_key in self.text_keys:
 		var text: String = TranslationServer.translate(text_key)
 		if text == text_key:
-			push_warning("DHOLocalizedText: Missing translation for key: %s, locale: %s)" % [
+			DHOWarner.warn_once("DHOLocalizedText: Missing translation for key: %s, locale: %s)" % [
 				text_key,
 				TranslationServer.get_locale()
 			])
 		result_arr.push_back(text)
 	var placeholder_count: int = self.format.replace("%%", "").count("%")
 	if placeholder_count != result_arr.size():
-		push_warning("DHOLocalizedText: format '%s' has %d placeholders but %d keys" % [
+		DHOWarner.warn_once("DHOLocalizedText: format '%s' has %d placeholders but %d keys" % [
 			self.format,
 			placeholder_count,
 			result_arr.size()
