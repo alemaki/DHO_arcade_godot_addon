@@ -1,8 +1,9 @@
 # Copyright (c) 2026 Alexander Makedonski
 # SPDX-License-Identifier: MIT
 
-# NOTE: See dho_joypad.gd for more information.
-# This scripts' purpose is for the devhubone test scene. It is not intended to be used in your game.
+# NOTE: See the README.md for more information.
+# This scripts' purpose is to be a part of the DevHubOne's plugin scenes.
+# It is not intended to be used in your game. 
 # Make of that what you will.
 
 extends DHOLocalizedLabel
@@ -24,8 +25,10 @@ func update_text() -> void:
 
 func _ready() -> void:
 	super._ready()
-	assert(name_of_event_res != null)
-	assert(hold_trigger_node != null)
+	assert(self.name_of_event_res != null)
+	if self.hold_trigger_node == null:
+		self.hold_trigger_node = $DHOHoldTrigger
+	assert(self.hold_trigger_node != null)
 	self.update_text()
 
 func _process(_delta: float) -> void:

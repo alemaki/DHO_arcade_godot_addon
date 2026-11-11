@@ -1,7 +1,13 @@
 # Copyright (c) 2026 Alexander Makedonski
 # SPDX-License-Identifier: MIT
 
-## You are not required to do localization in your game but this might help
+# NOTE: See the README.md for more information.
+# This scripts' purpose is to be a part of the DevHubOne's plugin scenes.
+# It is not intended to be used in your game. 
+# Make of that what you will.
+
+## This class stores localized keys and writes them in the given format. You can make use of it,
+## however I would recommend against it in a game jam setting, because you won't need localization.
 extends Resource
 class_name DHOLocalizedText
 

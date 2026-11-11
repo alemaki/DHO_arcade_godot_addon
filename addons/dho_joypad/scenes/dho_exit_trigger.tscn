@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://d4b25sr8lvu76"]
 
-[ext_resource type="Script" uid="uid://bgk6rjlxieyhg" path="res://addons/dho_joypad/scripts/dho_exit_trigger.gd" id="1_aiuf5"]
+[ext_resource type="Script" uid="uid://bgk6rjlxieyhg" path="res://addons/dho_joypad/scripts/control_nodes/dho_exit_trigger.gd" id="1_aiuf5"]
 [ext_resource type="FontFile" uid="uid://h1unk4jb5cjl" path="res://addons/dho_joypad/fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="2_qkwjj"]
-[ext_resource type="Script" uid="uid://1m3f1rp22asu" path="res://addons/dho_joypad/scripts/labels/dho_localized_label.gd" id="3_wegon"]
+[ext_resource type="Script" uid="uid://1m3f1rp22asu" path="res://addons/dho_joypad/scripts/control_nodes/labels/dho_localized_label.gd" id="3_wegon"]
 [ext_resource type="Script" uid="uid://d21rys816bhtk" path="res://addons/dho_joypad/scripts/resources/dho_localized_text.gd" id="4_1iog5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1nfdl"]
@@ -33,13 +33,17 @@ format = "%s!"
 text_keys = Array[String](["DHO_STRING_PRESS_EXIT_AGAIN"])
 metadata/_custom_type_script = "uid://d21rys816bhtk"
 
-[node name="DHOExitTrigger" type="Node" unique_id=59560413]
+[node name="DHOExitTrigger" type="Control" unique_id=1274321383]
+physics_interpolation_mode = 0
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_aiuf5")
 second_press_trigger_time_window = 1.5
 metadata/_custom_type_script = "uid://bgk6rjlxieyhg"
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1940373516]
 z_index = 1000
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
 anchor_right = 1.0

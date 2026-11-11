@@ -1,6 +1,8 @@
 # Copyright (c) 2026 Alexander Makedonski
 # SPDX-License-Identifier: MIT
 
+# NOTE: See the README.md for more information.
+
 @tool
 extends Resource
 class_name DHOButtonInformation

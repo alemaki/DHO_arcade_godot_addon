@@ -1,6 +1,9 @@
 # Copyright (c) 2026 Alexander Makedonski
 # SPDX-License-Identifier: MIT
 
+## You can use this class to print a warning to the output only once when the game has started.
+## Intended for error messages that are checked during frame functions (e.g. _process) so they
+## don't spam the output.
 extends RefCounted
 class_name DHOWarner
 

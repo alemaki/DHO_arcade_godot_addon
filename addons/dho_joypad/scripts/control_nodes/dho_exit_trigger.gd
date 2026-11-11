@@ -5,7 +5,7 @@
 ## It's an UI Node that stays hidden until the exit button is pressed. If the exit button is pressed
 ## twice, this scene will trigger an exit of the game.
 ## WARNING: It is required for DevHubOne's arcade!
-extends Node
+extends Control
 class_name DHOExitTrigger
 
 # Measured in seconds

@@ -1,6 +1,8 @@
 # Copyright (c) 2026 Alexander Makedonski
 # SPDX-License-Identifier: MIT
 
+# NOTE: See the README.md for more information.
+
 ## A static class that contains method for changing scenes for DevHubOne's arcade.
 class_name DHOSceneManager
 
