@@ -313,6 +313,9 @@ func _ready():
 #
 # NOTE: Documentation for this section ends here.
 
+@export_range(0.0, 1, 0.001)
+var axis_deadzone: float = 0.5 # default in godot
+
 func _input(event: InputEvent) -> void:
 	if not self.is_device_valid(event.device):
 		return
@@ -323,6 +326,8 @@ func _input(event: InputEvent) -> void:
 			self._button_released(EVENT_TRIGGER_BUTTONS[event.get_button_index()], event.device)
 	
 	if event is InputEventJoypadMotion:
+		if absf(event.axis_value) < self.axis_deadzone:
+			event.axis_value = 0
 		if event.axis == 0:
 			self._axis_X_changed(event.axis_value, event.device)
 		elif event.axis == 1:
