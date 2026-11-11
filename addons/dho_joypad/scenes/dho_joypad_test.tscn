@@ -201,48 +201,57 @@ layout_mode = 2
 layout_mode = 2
 text = "[OFF] A"
 script = ExtResource("7_yr8fd")
+button_capture = null
+is_showing_details = null
 
 [node name="BDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1934291228]
 layout_mode = 2
 text = "[OFF] B"
 script = ExtResource("7_yr8fd")
 button_capture = 1
+is_showing_details = null
 
 [node name="CDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1004974948]
 layout_mode = 2
 text = "[OFF] C"
 script = ExtResource("7_yr8fd")
 button_capture = 2
+is_showing_details = null
 
 [node name="DDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=331940295]
 layout_mode = 2
 text = "[OFF] D"
 script = ExtResource("7_yr8fd")
 button_capture = 3
+is_showing_details = null
 
 [node name="EDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=404314665]
 layout_mode = 2
 text = "[OFF] E"
 script = ExtResource("7_yr8fd")
 button_capture = 4
+is_showing_details = null
 
 [node name="FDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1666167827]
 layout_mode = 2
 text = "[OFF] F"
 script = ExtResource("7_yr8fd")
 button_capture = 5
+is_showing_details = null
 
 [node name="PlayDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1456398126]
 layout_mode = 2
 text = "[OFF] Play (Left)"
 script = ExtResource("7_yr8fd")
 button_capture = 6
+is_showing_details = null
 
 [node name="ExitDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1705070263]
 layout_mode = 2
 text = "[OFF] ChangeGame (Right)"
 script = ExtResource("7_yr8fd")
 button_capture = 7
+is_showing_details = null
 
 [node name="LastPressedButtonContainer" type="MarginContainer" parent="Tree" unique_id=104521971]
 layout_mode = 2
@@ -263,6 +272,7 @@ script = ExtResource("9_qeyga")
 fixed_text_res = SubResource("Resource_nmvre")
 details_text_res = SubResource("Resource_yr8fd")
 no_details_text_res = SubResource("Resource_jcfpx")
+is_showing_details = null
 
 [node name="ScoreContainer" type="MarginContainer" parent="Tree" unique_id=1680782125]
 layout_mode = 2

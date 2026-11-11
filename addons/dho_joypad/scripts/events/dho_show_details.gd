@@ -8,17 +8,7 @@
 extends DHOEvent
 class_name DHOShowDetails
 
-# Yeah this is ugly. Too lazy to do it the right way...
-static func get_all_button_detectors(root: Node) -> Array[DHODetailedLabel]:
-	var button_detectors: Array[DHODetailedLabel] = []
-	if root is DHODetailedLabel:
-		button_detectors.push_back(root)
-	for child in root.get_children():
-		button_detectors += get_all_button_detectors(child)
-	return button_detectors
+static var GROUP_NAME = "hidden_details"
 
 func execute() -> void:
-	var root := self.get_tree().get_root()
-	var press_buttons: Array[DHODetailedLabel] = get_all_button_detectors(root)
-	for button in press_buttons:
-		button.show_details()
+	get_tree().call_group(GROUP_NAME, "show_details")

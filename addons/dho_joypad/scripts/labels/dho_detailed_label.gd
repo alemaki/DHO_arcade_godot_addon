@@ -17,6 +17,7 @@ func _ready() -> void:
 	assert(self.fixed_text_res != null)
 	assert(self.no_details_text_res != null)
 	assert(self.details_text_res != null)
+	self.add_to_group(DHOShowDetails.GROUP_NAME)
 	self.update_text()
 
 func show_details() -> void:

@@ -28,8 +28,8 @@ STRING_MENU,Menu,Меню,general
 STRING_YOUR_SCORE,Your score,Твоят резултат,general
 STRING_SCORE,Score,Резултат,general
 STRING_NAME_NOT_ALLOWED,Name not allowed,Името не е позволено,"general, change name scene"
-STRING_MOVE_CHANGE_LETTER_POSITION,Move: change letter / position,Движи: промени буква / позиция,general
+STRING_MOVE_CHANGE_LETTER_POSITION,Move: change letter / position,Движи: промени буква / позиция,"general, change name scene"
 STRING_PRESS_A_TO_START,Press A to start,"Натисни A, за да започнеш",title scene
-STRING_YOU_WIN,You win!,Печелиш!,end scene
-STRING_YOU_LOSE,You lose!,Ти загуби!,end scene
+STRING_YOU_WIN,You win,Печелиш,end scene
+STRING_YOU_LOSE,You lose,Ти загуби,end scene
 STRING_GODOT,Godot,Гъдоу,general

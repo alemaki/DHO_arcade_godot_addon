@@ -5,7 +5,7 @@
 # This scripts' purpose is for the devhubone test scene. It is not intended to be used in your game.
 # Make of that what you will.
 
-extends DHODetailedLabel # TODO: This doesn't make sense to be detailed label, make a better solution!!!!
+extends Label
 
 @export var button_capture: DHOJoypad.BUTTON = DHOJoypad.BUTTON.A
 
@@ -15,6 +15,8 @@ extends DHODetailedLabel # TODO: This doesn't make sense to be detailed label, m
 	)
 @onready var ON_TEXT	:= "[%s]" % [tr("TEST_SCENE_TEXT_ON").rpad(TEXT_WIDTH)]
 @onready var OFF_TEXT	:= "[%s]" % [tr("TEST_SCENE_TEXT_OFF").rpad(TEXT_WIDTH)]
+
+@export var is_showing_details: bool = false
 
 func show_details() -> void:
 	self.is_showing_details = not self.is_showing_details
@@ -28,7 +30,7 @@ func update_text(is_on: bool = false) -> void:
 	self.set_text(display_text)
 
 func _ready() -> void:
-	# Won't assert missing resources
+	self.add_to_group(DHOShowDetails.GROUP_NAME)
 	self.update_text(false)
 	DhoJoypad.dho_button_pressed.connect(self._on_button_pressed)
 	DhoJoypad.dho_button_released.connect(self._on_button_released)
