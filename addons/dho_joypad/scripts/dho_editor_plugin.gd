@@ -4,6 +4,9 @@
 @tool
 extends EditorPlugin
 
+
+const TRANSLATION_PATH_EN: String = "res://addons/dho_joypad/language/dho_arcade_plugin_translations.en.translation"
+const TRANSLATION_PATH_BG: String = "res://addons/dho_joypad/language/dho_arcade_plugin_translations.bg.translation"
 const DEVICE_NAME_SUFFIX: String = "_device_"
 const DHO_AUTOLOAD_NAME: String = "DhoJoypad"
 const DHO_AUTOLOAD_PATH: String = "res://addons/dho_joypad/scripts/dho_joypad.gd"
@@ -85,6 +88,8 @@ func register_input_actions() -> void:
 func _enable_plugin() -> void:
 	self.add_autoload_singleton(DHO_AUTOLOAD_NAME, DHO_AUTOLOAD_PATH)
 	self.add_autoload_singleton(QUIT_AUTOLOAD_NAME, QUIT_AUTOLOAD_PATH)
+	TranslationServer.add_translation(load(TRANSLATION_PATH_EN))
+	TranslationServer.add_translation(load(TRANSLATION_PATH_BG))
 	register_input_actions()
 
 func _disable_plugin() -> void:

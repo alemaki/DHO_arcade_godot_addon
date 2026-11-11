@@ -9,11 +9,21 @@ class_name DHOLocalizedText
 @export var text_keys: Array[String] = []
 
 func get_text() -> String:
-	# TODO: do i need to set language somewhere or godot knows?
-	#var preferred_language = OS.get_locale_language()
-	#print("Language: ", preferred_language)
-	# TranslationServer.set_locale("bg")
 	var result_arr: Array[String] = []
 	for text_key in self.text_keys:
-		result_arr.push_back(TranslationServer.translate(text_key)) # TODO: warning if no translation?
+		var text: String = TranslationServer.translate(text_key)
+		if text == text_key:
+			push_warning("DHOLocalizedText: Missing translation for key: %s, locale: %s)" % [
+				text_key,
+				TranslationServer.get_locale()
+			])
+		result_arr.push_back(text)
+	var placeholder_count: int = self.format.replace("%%", "").count("%")
+	if placeholder_count != result_arr.size():
+		push_warning("DHOLocalizedText: format '%s' has %d placeholders but %d keys" % [
+			self.format,
+			placeholder_count,
+			result_arr.size()
+		])
+		return self.format
 	return self.format % result_arr

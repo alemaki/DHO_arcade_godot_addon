@@ -10,11 +10,11 @@ extends Label
 @export var button_capture: DHOJoypad.BUTTON = DHOJoypad.BUTTON.A
 
 @onready var TEXT_WIDTH	:= maxi(
-	tr("TEST_SCENE_TEXT_ON").length(),
-	tr("TEST_SCENE_TEXT_OFF").length()
+	tr("DHO_TEST_SCENE_TEXT_ON").length(),
+	tr("DHO_TEST_SCENE_TEXT_OFF").length()
 	)
-@onready var ON_TEXT	:= "[%s]" % [tr("TEST_SCENE_TEXT_ON").rpad(TEXT_WIDTH)]
-@onready var OFF_TEXT	:= "[%s]" % [tr("TEST_SCENE_TEXT_OFF").rpad(TEXT_WIDTH)]
+@onready var ON_TEXT	:= "[%s]" % [tr("DHO_TEST_SCENE_TEXT_ON").rpad(TEXT_WIDTH)]
+@onready var OFF_TEXT	:= "[%s]" % [tr("DHO_TEST_SCENE_TEXT_OFF").rpad(TEXT_WIDTH)]
 
 @export var is_showing_details: bool = false
 

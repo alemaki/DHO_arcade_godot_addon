@@ -4,31 +4,38 @@
 [ext_resource type="Script" uid="uid://bdp4lq8x0ixe0" path="res://addons/dho_joypad/scripts/dho_win_lose.gd" id="2_3jmed"]
 [ext_resource type="Script" uid="uid://d21rys816bhtk" path="res://addons/dho_joypad/scripts/resources/dho_localized_text.gd" id="3_3jmed"]
 [ext_resource type="Resource" uid="uid://da2fmscu3ojq3" path="res://addons/dho_joypad/resources/default_dho_scene_context.tres" id="3_dg5ra"]
-[ext_resource type="Script" uid="uid://nsq2h8jylxni" path="res://addons/dho_joypad/scripts/dho_score_label.gd" id="3_te1d3"]
+[ext_resource type="Script" uid="uid://nsq2h8jylxni" path="res://addons/dho_joypad/scripts/resources/dho_score_label.gd" id="3_te1d3"]
+[ext_resource type="Script" uid="uid://1m3f1rp22asu" path="res://addons/dho_joypad/scripts/labels/dho_localized_label.gd" id="6_te1d3"]
 [ext_resource type="Script" uid="uid://4aubjdyqkpw1" path="res://addons/dho_joypad/scripts/labels/dho_blinking_label.gd" id="6_vdcf1"]
 
 [sub_resource type="Resource" id="Resource_dg5ra"]
 script = ExtResource("3_3jmed")
 format = "%s!"
-text_keys = Array[String](["STRING_YOU_WIN"])
+text_keys = Array[String](["DHO_STRING_YOU_WIN"])
 metadata/_custom_type_script = "uid://d21rys816bhtk"
 
 [sub_resource type="Resource" id="Resource_3jmed"]
 script = ExtResource("3_3jmed")
 format = "%s!"
-text_keys = Array[String](["STRING_YOU_LOSE"])
+text_keys = Array[String](["DHO_STRING_YOU_LOSE"])
 metadata/_custom_type_script = "uid://d21rys816bhtk"
 
 [sub_resource type="Resource" id="Resource_te1d3"]
 script = ExtResource("3_3jmed")
 format = "%s"
-text_keys = Array[String](["STRING_YOUR_SCORE"])
+text_keys = Array[String](["DHO_STRING_YOUR_SCORE"])
+metadata/_custom_type_script = "uid://d21rys816bhtk"
+
+[sub_resource type="Resource" id="Resource_efcoe"]
+script = ExtResource("3_3jmed")
+format = "%s!"
+text_keys = Array[String](["DHO_STRING_RECORD_SAVED"])
 metadata/_custom_type_script = "uid://d21rys816bhtk"
 
 [sub_resource type="Resource" id="Resource_r24im"]
 script = ExtResource("3_3jmed")
 format = "%s: %s   %s: %s"
-text_keys = Array[String](["BUTTON_A", "STRING_PLAY_AGAIN", "BUTTON_B", "STRING_MENU"])
+text_keys = Array[String](["DHO_BUTTON_A", "DHO_STRING_PLAY_AGAIN", "DHO_BUTTON_B", "DHO_STRING_MENU"])
 metadata/_custom_type_script = "uid://d21rys816bhtk"
 
 [node name="WinLose" type="Control" unique_id=1649914357 node_paths=PackedStringArray("score_saved_label", "win_lose_label")]
@@ -93,8 +100,11 @@ layout_mode = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/CenterContainer2/MarginContainer" unique_id=814084828]
 layout_mode = 2
 
-[node name="RecordIsSavedLabel" type="Label" parent="PanelContainer/CenterContainer2/MarginContainer/VBoxContainer" unique_id=124856059]
+[node name="RecordIsSavedLabel" type="Label" parent="PanelContainer/CenterContainer2/MarginContainer/VBoxContainer" unique_id=648433871]
 layout_mode = 2
+script = ExtResource("6_te1d3")
+localized_text_res = SubResource("Resource_efcoe")
+metadata/_custom_type_script = "uid://1m3f1rp22asu"
 
 [node name="DHOBlinkingLabel" type="Label" parent="PanelContainer/CenterContainer2/MarginContainer/VBoxContainer" unique_id=1178194896]
 layout_mode = 2

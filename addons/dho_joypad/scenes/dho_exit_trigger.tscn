@@ -29,7 +29,7 @@ PanelContainer/styles/panel = SubResource("StyleBoxFlat_1nfdl")
 [sub_resource type="Resource" id="Resource_f3pki"]
 script = ExtResource("4_1iog5")
 format = "%s!"
-text_keys = Array[String](["STRING_PRESS_EXIT_AGAIN"])
+text_keys = Array[String](["DHO_STRING_PRESS_EXIT_AGAIN"])
 metadata/_custom_type_script = "uid://d21rys816bhtk"
 
 [node name="DHOExitTrigger" type="Node" unique_id=59560413]

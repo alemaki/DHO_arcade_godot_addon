@@ -31,91 +31,91 @@ MarginContainer/constants/margin_top = 10
 [sub_resource type="Resource" id="Resource_wu4yw"]
 script = ExtResource("6_yr8fd")
 format = "%s"
-text_keys = Array[String](["TEST_SCENE_TITLE"])
+text_keys = Array[String](["DHO_TEST_SCENE_TITLE"])
 metadata/_custom_type_script = "uid://d21rys816bhtk"
 
 [sub_resource type="Resource" id="Resource_7bjyk"]
 script = ExtResource("6_yr8fd")
 format = "%s:"
-text_keys = Array[String](["TEST_SCENE_MOVEMENT"])
+text_keys = Array[String](["DHO_TEST_SCENE_MOVEMENT"])
 metadata/_custom_type_script = "uid://d21rys816bhtk"
 
 [sub_resource type="Resource" id="Resource_x1137"]
 script = ExtResource("6_yr8fd")
 format = "%s: - - - -"
-text_keys = Array[String](["TEST_SCENE_HAT"])
+text_keys = Array[String](["DHO_TEST_SCENE_HAT"])
 metadata/_custom_type_script = "uid://d21rys816bhtk"
 
 [sub_resource type="Resource" id="Resource_h7q1p"]
 script = ExtResource("6_yr8fd")
 format = "%s"
-text_keys = Array[String](["TEST_SCENE_CURENTLY_PRESSED"])
+text_keys = Array[String](["DHO_TEST_SCENE_CURRENTLY_PRESSED"])
 metadata/_custom_type_script = "uid://d21rys816bhtk"
 
 [sub_resource type="Resource" id="Resource_ihi2c"]
 script = ExtResource("6_yr8fd")
 format = "%s"
-text_keys = Array[String](["TEST_SCENE_LAST_PRESSED"])
+text_keys = Array[String](["DHO_TEST_SCENE_LAST_PRESSED"])
 metadata/_custom_type_script = "uid://d21rys816bhtk"
 
 [sub_resource type="Resource" id="Resource_nmvre"]
 script = ExtResource("6_yr8fd")
 format = "%s: "
-text_keys = Array[String](["TEST_SCENE_DETAILS"])
+text_keys = Array[String](["DHO_TEST_SCENE_DETAILS"])
 metadata/_custom_type_script = "uid://d21rys816bhtk"
 
 [sub_resource type="Resource" id="Resource_yr8fd"]
 script = ExtResource("6_yr8fd")
 format = "%-4s"
-text_keys = Array[String](["TEST_SCENE_TEXT_ON"])
+text_keys = Array[String](["DHO_TEST_SCENE_TEXT_ON"])
 metadata/_custom_type_script = "uid://d21rys816bhtk"
 
 [sub_resource type="Resource" id="Resource_jcfpx"]
 script = ExtResource("6_yr8fd")
 format = "%-4s"
-text_keys = Array[String](["TEST_SCENE_TEXT_OFF"])
+text_keys = Array[String](["DHO_TEST_SCENE_TEXT_OFF"])
 metadata/_custom_type_script = "uid://d21rys816bhtk"
 
 [sub_resource type="Resource" id="Resource_22aq6"]
 script = ExtResource("6_yr8fd")
 format = "%s"
-text_keys = Array[String](["STRING_SCORE"])
+text_keys = Array[String](["DHO_STRING_SCORE"])
 metadata/_custom_type_script = "uid://d21rys816bhtk"
 
 [sub_resource type="Resource" id="Resource_gkipy"]
 script = ExtResource("6_yr8fd")
 format = "%s"
-text_keys = Array[String](["TEST_SCENE_WIN"])
+text_keys = Array[String](["DHO_TEST_SCENE_WIN"])
 metadata/_custom_type_script = "uid://d21rys816bhtk"
 
 [sub_resource type="Resource" id="Resource_ro22j"]
 script = ExtResource("6_yr8fd")
 format = "%s"
-text_keys = Array[String](["TEST_SCENE_HOLD"])
+text_keys = Array[String](["DHO_TEST_SCENE_HOLD"])
 metadata/_custom_type_script = "uid://d21rys816bhtk"
 
 [sub_resource type="Resource" id="Resource_qeyga"]
 script = ExtResource("6_yr8fd")
 format = "%s"
-text_keys = Array[String](["TEST_SCENE_LOSE"])
+text_keys = Array[String](["DHO_TEST_SCENE_LOSE"])
 metadata/_custom_type_script = "uid://d21rys816bhtk"
 
 [sub_resource type="Resource" id="Resource_12j57"]
 script = ExtResource("6_yr8fd")
 format = "%s"
-text_keys = Array[String](["TEST_SCENE_DETAILS"])
+text_keys = Array[String](["DHO_TEST_SCENE_DETAILS"])
 metadata/_custom_type_script = "uid://d21rys816bhtk"
 
 [sub_resource type="Resource" id="Resource_isph0"]
 script = ExtResource("6_yr8fd")
 format = "%s"
-text_keys = Array[String](["TEST_SCENE_SOUND"])
+text_keys = Array[String](["DHO_TEST_SCENE_SOUND"])
 metadata/_custom_type_script = "uid://d21rys816bhtk"
 
 [sub_resource type="Resource" id="Resource_7w2fm"]
 script = ExtResource("6_yr8fd")
 format = "%s"
-text_keys = Array[String](["STRING_GODOT"])
+text_keys = Array[String](["DHO_STRING_GODOT"])
 metadata/_custom_type_script = "uid://d21rys816bhtk"
 
 [node name="DHOJoypadTest" type="Control" unique_id=1122718511]
@@ -201,57 +201,48 @@ layout_mode = 2
 layout_mode = 2
 text = "[OFF] A"
 script = ExtResource("7_yr8fd")
-button_capture = null
-is_showing_details = null
 
 [node name="BDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1934291228]
 layout_mode = 2
 text = "[OFF] B"
 script = ExtResource("7_yr8fd")
 button_capture = 1
-is_showing_details = null
 
 [node name="CDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1004974948]
 layout_mode = 2
 text = "[OFF] C"
 script = ExtResource("7_yr8fd")
 button_capture = 2
-is_showing_details = null
 
 [node name="DDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=331940295]
 layout_mode = 2
 text = "[OFF] D"
 script = ExtResource("7_yr8fd")
 button_capture = 3
-is_showing_details = null
 
 [node name="EDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=404314665]
 layout_mode = 2
 text = "[OFF] E"
 script = ExtResource("7_yr8fd")
 button_capture = 4
-is_showing_details = null
 
 [node name="FDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1666167827]
 layout_mode = 2
 text = "[OFF] F"
 script = ExtResource("7_yr8fd")
 button_capture = 5
-is_showing_details = null
 
 [node name="PlayDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1456398126]
 layout_mode = 2
 text = "[OFF] Play (Left)"
 script = ExtResource("7_yr8fd")
 button_capture = 6
-is_showing_details = null
 
 [node name="ExitDetectorLabel" type="Label" parent="Tree/ButtonContainer/VBoxContainer" unique_id=1705070263]
 layout_mode = 2
 text = "[OFF] ChangeGame (Right)"
 script = ExtResource("7_yr8fd")
 button_capture = 7
-is_showing_details = null
 
 [node name="LastPressedButtonContainer" type="MarginContainer" parent="Tree" unique_id=104521971]
 layout_mode = 2

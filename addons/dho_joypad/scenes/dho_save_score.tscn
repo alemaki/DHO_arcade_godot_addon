@@ -7,13 +7,13 @@
 [ext_resource type="Resource" uid="uid://da2fmscu3ojq3" path="res://addons/dho_joypad/resources/default_dho_scene_context.tres" id="3_4a3pc"]
 [ext_resource type="Script" uid="uid://4aubjdyqkpw1" path="res://addons/dho_joypad/scripts/labels/dho_blinking_label.gd" id="4_mar51"]
 [ext_resource type="Script" uid="uid://d21rys816bhtk" path="res://addons/dho_joypad/scripts/resources/dho_localized_text.gd" id="5_r3w5j"]
-[ext_resource type="Script" uid="uid://nsq2h8jylxni" path="res://addons/dho_joypad/scripts/dho_score_label.gd" id="7_r3w5j"]
+[ext_resource type="Script" uid="uid://nsq2h8jylxni" path="res://addons/dho_joypad/scripts/resources/dho_score_label.gd" id="7_r3w5j"]
 [ext_resource type="Script" uid="uid://1m3f1rp22asu" path="res://addons/dho_joypad/scripts/labels/dho_localized_label.gd" id="8_tgki7"]
 
 [sub_resource type="Resource" id="Resource_4a3pc"]
 script = ExtResource("5_r3w5j")
 format = "%s"
-text_keys = Array[String](["STRING_YOUR_SCORE"])
+text_keys = Array[String](["DHO_STRING_YOUR_SCORE"])
 metadata/_custom_type_script = "uid://d21rys816bhtk"
 
 [sub_resource type="Theme" id="Theme_8q4b8"]
@@ -23,19 +23,19 @@ Label/font_sizes/font_size = 64
 [sub_resource type="Resource" id="Resource_efcoe"]
 script = ExtResource("5_r3w5j")
 format = "%s!"
-text_keys = Array[String](["STRING_NAME_NOT_ALLOWED"])
+text_keys = Array[String](["DHO_STRING_NAME_NOT_ALLOWED"])
 metadata/_custom_type_script = "uid://d21rys816bhtk"
 
 [sub_resource type="Resource" id="Resource_dytl1"]
 script = ExtResource("5_r3w5j")
 format = "%s"
-text_keys = Array[String](["STRING_MOVE_CHANGE_LETTER_POSITION"])
+text_keys = Array[String](["DHO_STRING_MOVE_CHANGE_LETTER_POSITION"])
 metadata/_custom_type_script = "uid://d21rys816bhtk"
 
 [sub_resource type="Resource" id="Resource_tgki7"]
 script = ExtResource("5_r3w5j")
 format = "%s: %s   %s: %s"
-text_keys = Array[String](["BUTTON_A", "STRING_OK", "BUTTON_B", "STRING_BACK"])
+text_keys = Array[String](["DHO_BUTTON_A", "DHO_STRING_OK", "DHO_BUTTON_B", "DHO_STRING_BACK"])
 metadata/_custom_type_script = "uid://d21rys816bhtk"
 
 [node name="DhoSaveScore" type="Control" unique_id=1252791888]

@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ScoreDataHolder" format=3 uid="uid://cmyk44ofmil67"]
 
-[ext_resource type="Script" uid="uid://bh6ll7o7c4b01" path="res://addons/dho_joypad/scripts/resources/player_score_data.gd" id="1_55u2m"]
-[ext_resource type="Script" uid="uid://dbj0q0nqpy2lq" path="res://addons/dho_joypad/scripts/resources/score_data_holder.gd" id="1_bm7m5"]
+[ext_resource type="Script" uid="uid://bh6ll7o7c4b01" path="res://addons/dho_joypad/scripts/resources/dho_player_score_data.gd" id="1_55u2m"]
+[ext_resource type="Script" uid="uid://dbj0q0nqpy2lq" path="res://addons/dho_joypad/scripts/resources/dho_score_data_holder.gd" id="1_bm7m5"]
 
 [sub_resource type="Resource" id="Resource_a35r5"]
 script = ExtResource("1_55u2m")

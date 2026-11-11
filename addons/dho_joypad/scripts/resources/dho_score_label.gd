@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MIT
 
 extends DHOLocalizedLabel
-class_name ScoreLabel
+class_name DHOScoreLabel
 
 @export var dho_scene: DHOScene = null
 
