@@ -107,7 +107,7 @@ func is_device_valid(device: int) -> bool:
 # DhoJoypad.dho_button_released.connect(<your function>)
 # There is also a small API which can also by accessed like :
 # DhoJoypad.is_button_pressed(<button>, <device number>)
-# DhoJoypad.get_button_hold_time(<button>, <device number>)
+# DhoJoypad.get_button_hold_duration_sec(<button>, <device number>)
 # See the implementations below. Keep in mind, they only work for joypads.
 #
 # NOTE: Documentation for this section ends here.
@@ -233,8 +233,8 @@ func _button_released(button: BUTTON, device: int) -> void:
 # have interactions with the UI.
 # 
 # To get input information just capture the action mappings:
-# var axis_X: float = Input.get_axis("ui_left, ui_right")
-# var axis_Y: float = Input.get_axis("ui_up, ui_down")
+# var axis_X: float = Input.get_axis("ui_left", "ui_right")
+# var axis_Y: float = Input.get_axis("ui_up", "ui_down")
 #
 # Feel free to get the direct input with:
 # var input_left: float = Input.get_action_strength("ui_left") # for example
