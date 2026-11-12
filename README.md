@@ -3,28 +3,30 @@ title: "DHO Arcade Godot Addon"
 author: "Alexander Makedonski"
 ---
 ### Description
-This is a godot plugin that gives access to predefined input actions for [DevHubOne](https://www.devhubone.com/en)'s joypad, scenes used in DevHubOne's arcade and API classes for anyone who needs a deeper integration with the joypad in their game.
+This is a godot plugin that gives access to predefined input actions for [DevHubOne](https://www.devhubone.com/en)'s joypad, scenes used in DevHubOne's arcade and API classes for anyone who needs a deeper integration with the joypad in the game they are developing.
 
+---
 ### Table of Contents
 - [Installation](#installation)
 - [Getting started](#getting-started)
+- [Input capture](#input-capture)
 - [Joypad API](#joypad-api)
-- [Scenes and passing information between scenes](#scenes-and-passing-information-between-scenes)
-- [Score saving](#score-saving)
+- [Scenes](#Scenes)
+- [Passing information between scenes](#passing-information-between-scenes)
 - [Localization](#localization)
 - [Credits](#credits)
 
 
 ### Installation
-Go to ...[TODO] the godot asset library and download there or download this plugin manually from the github and place the addon folder directly in your project. After that go to <code> Project -> Project Settings -> Plugins </code> and enable this plugin. Restart the editor so any changes to the project can load properly.
+Go to ...[TODO] the godot asset library and download there or download this plugin manually from the [git repo](https://github.com/alemaki/DHO_arcade_godot_addon) and place the "addon" folder directly in your project. After that go to <code> Project -> Project Settings -> Plugins </code> and enable this plugin. Restart the editor so any changes to the project can load properly.
 
-### How to Use the Project
+### How to use the plugin
 #### Getting started
-After downloading the plugin and enabling it you can take a look at the newly defined input actions in your project in <code>Project -> Project Settings -> Input Map</code>. There are also a few autoloads that will work in the background one of which you can access in your code.
+After downloading the plugin and enabling it you can take a look at the newly defined input actions in your project in <code>Project -> Project Settings -> Input Map</code>. There are also a few autoloads that will work in the background.
 
 
 #### Input capture
-The actions are added when enabling the plugin. Some of them are godot's built in actions. They mapped to DevHubOne's joypad like this:
+The actions are mapped to DevHubOne's joypad like this (some of them are built-in):
 
 | DHO button | Action name |                            Joypad button event name                            |
 |------------|-------------|--------------------------------------------------------------------------------|
@@ -48,14 +50,16 @@ To get input information just capture the action mappings:
 ```
 var axis_X: float = Input.get_axis("ui_left", "ui_right")
 var axis_Y: float = Input.get_axis("ui_up", "ui_down")
+var is_A_pressed: bool = Input.is_action_pressed("ui_accept")
+var is_B_just_pressed: bool = Input.is_action_just_pressed("ui_back")
 ```
 
-Feel free to get the direct input with:
+Easy as it gets. Feel free to get the direct movement input with:
 ```
 var input_left: float = Input.get_action_strength("ui_left") # for example
 ```
 
-##### If you wish to create a game that works both with keyboard and the DHO's joypad you can map your keyboard variants to those actions.
+If you wish to create a game that works both with keyboard and the DHO's joypad you can map your keyboard variants to those actions.
 
 WARNING: DO NOT USE `Input.get_vector` like this:
 ```
@@ -64,119 +68,106 @@ var input_direction := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down
 As of currently (6th November 2026), in godot 4.x, joypad inputs will result with some error along the axis that is not pressed when calling the Input.get_vector with combination of keyboard input.
 Issue to resolve: https://github.com/godotengine/godot/issues/90515#issuecomment-2616602880
 
-I recommend using these defaults since they are better integrated in the engine and even have interactions with the UI.
-#### Creating your own input actions
-If you want to define your own actions, read below:
-
 WARNING:
-Deleting those actions will require you to reload the plugin to have them again. Otherwise you can create your own input actions and map them yourself. You are not required to use the ones provided in the plugin. The test scene for the joypad works with the raw input and won't break if the defaults have been removed. However the asset scenes provided in this plugin work with input actions, so you will have to edit them and include your own actions.
+Deleting those actions will require you to reload the plugin to have them again. The test scene for the joypad works with the raw input and won't break if the defaults have been removed. However the asset scenes provided in this plugin work with input actions, so you will have to change the scenes and include your own actions.
 
-You can also create your own actions with mappings for DHO's buttons with their respective input event names given in the table above.
+#### Creating your own input actions
+You can create your own input actions and map them yourself with their respective input event names given in the table above. You are not required to use the ones provided in the plugin.
 
-##### Multiple devices (e.g. 2 or more joypads)
-Any mention of any the input actions above is a description for all devices actions. Each input action has its mirror for a single device with the same name with appended "_device_[num]" (devices are 0-counted) string at the end. For example: "ui_accept" is the the action that all devices activate when pressing the A button. "ui_accept_device_0" is the input action for device 0 (the first device) and device 1 (the second device) has an action "ui_accept_device_1" mapped to it. "ui_left" is for all devices, "ui_left_device_0" for the first device and "ui_left_device_1" for the second device, etc.
 
-If you want to create a game with single player, by all means use the general actions. However, If you wish to create a game that uses multiple DevHubOne's joypads you might have to use the more targeted actions, the Joypad API or define your own.
+#### Multiple devices (e.g. 2 or more joypads)
+Any mention of input actions above is a description for "all devices" actions. Each input action has its mirror for a single device with the same name with appended "\_device_[num]" (devices are 0-counted) string at the end. For example: 
+| action for all devices | action for device 0 | action for device 1|
+|-|-|-|
+| "ui_accept" | "ui_accept_device_0" | "ui_accept_device_1" |
+| "ui_left" | "ui_left_device_0" | "ui_left_device_1" |
+
+
+If you want to create a game with single player, by all means use the general actions. However, if you wish to create a game that uses multiple DevHubOne's joypads you might have to use the more targeted actions, the Joypad API or define your own.
 
 Just in case you plan on making a game with more than 2 joypads connected :
-- Increase `MAX_DEVICES_HANDLED` as you like and reload the plugin. It will create new actions for you and map the joypads. `DHOJoypad` class requires it too, for the API to work.
-
+- Increase `MAX_DEVICES_HANDLED` in `DHOJoypad`as you like and reload the plugin. It will create new actions for you and map the joypads.
 ### Joypad API
 Skip this section if you are planning on using only the predefined input actions stated above!
 
-`DhoJoypad` is the autoloaded node of this plugin.
+`DhoJoypad` is the autoloaded node (of type `DHOJoypad`) of this plugin.
 
-You can capture input from DhoJoypad signals like:
+You can capture input from `DhoJoypad` signals like:
 ```GDScript
 DhoJoypad.dho_button_pressed.connect(<your function(button, device)>)
 DhoJoypad.dho_button_released.connect(<your function(button, device)>)
-```GDScript
+```
 There is also a small API which can also be accessed like :
+```GDScript
+var is_pressed: bool = DhoJoypad.is_button_pressed(\<button>, \<device number>)
+var hold_time: float = DhoJoypad.get_button_hold_duration_sec(\<button>, \<device number>)
 ```
-DhoJoypad.is_button_pressed(<button>, <device number>)
-DhoJoypad.get_button_hold_duration_sec(<button>, <device number>)
-```
-For movement:
+For axes:
 ```GDScript
 DhoJoypad.dho_joystick_changed.connect(<your function(device)>) # emits normalized input
-DhoJoypad.get_input_vector() 
-DhoJoypad.get_normalized_input_vector()
+var input_vec: Vector2 = DhoJoypad.get_input_vector() 
+var n_input_vec: Vector2 = DhoJoypad.get_normalized_input_vector()
 ```
 
 WARNING: Disabling the autoload of this node (or disabling the plugin) will BREAK the joypad test scene provided by this plugin.
 
-### Scenes and passing information between scenes
-#### DHOScene
-Every scene root in your game must inherit from this node (or be it) for you to use DHOSceneManager to change scenes with passing the contex around in your game. If you do not want to pass context in your scenes, you can jsut pass a new context whenever you switch to one of the plugin's scene and ignore this class.
+### Scenes
 
-#### DHOSceneContext
-A resource for managing information between scenes. Use this in your scenes paired with `DHOScene` to pass the game information around scenes. You will have to pass this to the plugin's scenes so they will work properly.
+- `dho_scoreboard.tscn` - Set this as your main scene. It requires you to set a scene in your game to switch to afterwards when pressing the button A.
+- `dho_save_score.tscn` - Switch to this scene when the game is over and pass it the `DHOSceneContext` (using `DHOSceneManager` or `DHOWinLoseEvent`). It will handle setting the player's name, saving their score and switching to win/lose scene afterwards. If the new score is not a top 10 highscore, it will switch directly to win/lose scene without saving anything.
+- `dho_win_lose.tscn` - If you do not want to have scores in your game, switch directly to this scene. Otherwise, switch to `dho_save_score.tscn`.
+- `dho_exit_trigger.tscn` - Autoloaded by the plugin. It's an UI Node that stays hidden until the exit button is pressed. If the exit button is pressed twice in quick succession, this scene will trigger an exit of the game. WARNING: It is required for DevHubOne's arcade! 
+- `dho_joypad_test.tscn` - This scene is only meant for you to test the joypad on your own device. It is not meant to be included in your game.
 
-The data fields below are required for the plugin's scenes. You can edit these in your own scenes to keep track of information then pass it to other DHO scenes from the plugin. They will take care of the information for you.
+### Passing information between scenes
+
+#### `DHOSceneContext` Resource
+A resource for managing information between scenes. You pair this with `DHOScene` node to pass game information between scenes, however it's not required. You will have to pass `DHOSceneContext` to the plugin's scenes so they will work properly.
+
+The data fields below are required for those scenes. You can edit the fields in your own game to keep track of information then pass it to other DHO scenes from the plugin. They will take care of the information for you after that.
 
 | Field | Description |
 |-------|-------------|
-| `score` | How much score did the player get. Keep value between 0 and 999999. |
-| `is_win` | Before changing the scene set this to `true` if player won. Otherwise set to `false`. |
+| `score` | How much the player scored. Keep value between 0 and 999999. |
+| `is_win` | Before changing the scene set this to `true` if player won. Otherwise, set to `false`. |
 
 Add other information for your scenes as you see fit. Or even better: extend this class.
 
-#### DHOSceneManager
-A static class that contains method for changing scenes for DevHubOne's arcade.
-
-`change_scene(current_node, to_path, context)`: Changes the current scene to the next and passes the context to that scene.
-- `current_node` : any node from the current scene will do.
-- `to_path` : scene path to change to. The resulting scene MUST inherit `DHOScene`
-- `context`: The context to pass to the next scene.
-
-`change_scene_new_context(current_node, to_path, score = 0)`: Changes the current scene to the next creates new context for that scene.
-- `current_node` : any node from the current scene will do.
-- `to_path` : scene path to change to. The resulting scene MUST inherit `DHOScene`
-- `score` : Optional. Set the score in a new scene. Otherwise will be set to 0.
-
-#### How to swotch to score saving / win / lose scenes
+#### How to switch to score_saving scene or win/lose scene
 ##### 1. You can use `DHOSceneManager` directly
-This is a static class that contains method for changing scenes for DevHubOne's arcade.
+This is a static class that contains a method for changing scenes for DevHubOne's arcade.
 
-`change_scene(current_node, to_path, context)`: Changes the current scene to the next and passes the context to that scene. Use this to switch if you have a current context.
-- `current_node` : any node from the current scene will do.
-- `to_path` : scene path to change to. The resulting scene MUST inherit `DHOScene`
-- `context`: The context to pass to the next scene.
+The function you will mostly need:
+```
+change_scene(current_node, to_path, context)
+```
 
-`change_scene_new_context(current_node, to_path, score = 0)`: Changes the current scene to the next creates new context for that scene. Use this for restarts of the game.
-- `current_node` : any node from the current scene will do.
-- `to_path` : scene path to change to. The resulting scene MUST inherit `DHOScene`
-- `score` : Optional. Set the score in a new scene. Otherwise will be set to 0.
+You can read what this function does in the file `scripts/dho_scene_manager.gd`.
 
 ##### 2. You can use `DHOWinLoseEvent`
-You can use this node to switch to a different `DHOScene`. Normally when the game ends you should switch to the save_score.tscn. You can do whatever you want, tho. Set `is_win` before switching to save_score or win_lose scene to know if the player won or lost. Other info will be handled.
+You can use this node to switch to a different `DHOScene`. Normally when the game ends you should switch to the save_score.tscn. You can do whatever you want, though. Set `is_win` before switching to save_score or win_lose scene to know if the player won or lost.
 
-NOTE: This node requires a current `DHOScene`. If not set it will search for it.
+NOTE: This node requires a current `DHOScene`. If not set, it will search for it.
 
 Call `execute()` when ready to change scene.
 
-
-#### Scenes provided by the plugin
-
-`dho_exit_trigger.tscn` - Autoloaded by the plugin. It's an UI Node that stays hidden until the exit button is pressed. If the exit button is pressed twice, this scene will trigger an exit of the game. WARNING: It is required for DevHubOne's arcade! 
-`dho_joypad_test.tscn` - TODO:
-`dho_save_score.tscn` - TODO:
-`dho_win_lose.tscn` - TODO: 
-`dho_scoreboard.tscn` - TODO: 
-
-### Score saving
-The dho_save_score.tscn handles the score saving for you. All you need is at the end of the game to pass the dho_context with value for the score and is_win set. Everything will be handled from there. If the score is not a new record (top 10 scores) the scene will skip saving and go directly to win / lose scene.
-
 ### Localization
-These classes are a part of the plugin's scenes. You can make use of them, however I would recommend against it in a game jam setting, because you won't need localization.
+The classes below are a part of the plugin's scenes. You can make use of them, however I would recommend against it in a game jam setting, because you won't need localization.
 - `DHOLocalizedText`: This class stores localized keys and writes them in the given format.
 - `DHOLocalizedLabel`: This class sets a label with localized text.
-- `DHOBlinkingLabel`: This class sets a label with localized text and then blinks.
-- `DHOScoreLabel`: You can use this score label in your games. See how in the score_saver or win_lose scene.
-
+- `DHOBlinkingLabel`: This class sets a blinking label with localized text
+- `DHOScoreLabel`: You can use this score label in your games to show the player's score. See how in the score_saver or win_lose scene.
 
 ### Credits
-#TODO
+[Alexander Makedonski](https://github.com/alemaki)
 
 ### License
-#TODO
+The MIT License (MIT)
+
+Copyright (c) 2026 Alexander Makedonski
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
