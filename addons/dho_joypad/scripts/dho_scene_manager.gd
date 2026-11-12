@@ -27,6 +27,6 @@ static func change_scene(current_node: Node, to_path: String, context: DHOSceneC
 ## [param to_path] : scene path to change to. The resulting scene MUST inherit [DHOScene][br]
 ## [param score] : Optional. Set the score in a new scene. Otherwise will be set to 0.[br]
 static func change_scene_new_context(current_node: Node, to_path: String, score: int = 0) -> Error:
-	var context = DHOSceneContext.new()
+	var context := DHOSceneContext.new()
 	context.score = score
 	return await change_scene(current_node, to_path, context)

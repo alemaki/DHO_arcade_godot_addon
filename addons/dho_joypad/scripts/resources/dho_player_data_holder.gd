@@ -14,13 +14,11 @@ const IS_ZERO_SCORE_COUNTED := true
 @export var player_data_arr: Array[DHOPlayerData]
 
 const PLAYER_DATA_LOCATION: String = "user://score_data.json"
-const TEMP_PLAYER_DATA_LOCATION: String = "user://score_data_temp.json"
+const PLAYER_TMP_DATA_LOCATION: String = "user://score_data_temp.json"
 
-# TODO: what to do with equal scores?
 func sort_player_data() -> void:
 	self.player_data_arr.sort_custom(DHOPlayerData._bigger_score)
 
-# TODO: remove_score()?? Check score validity? or not responsible.
 ## Adds score and sorts it in. If overflowing - deletes worst score.
 ## Returns true if new score is added, false if it was too low.
 func add_player_data(player_data_to_add: DHOPlayerData) -> bool:
@@ -63,13 +61,16 @@ static func load_player_data() -> DHOPlayerDataHolder:
 	result.sort_player_data()
 	return result
 
-func save_player_data() -> bool:
+func _get_json_str() -> String:
 	var json_information: Array[Dictionary] = []
 	for data: DHOPlayerData in self.player_data_arr:
 		var player_data_dict: Dictionary[String, Variant] = data.to_dict()
 		json_information.push_back(player_data_dict)
-	var json_string: String = JSON.stringify(json_information, "\t")
-	var file := FileAccess.open(TEMP_PLAYER_DATA_LOCATION, FileAccess.WRITE)
+	return JSON.stringify(json_information, "\t")
+
+func _write_temp_json() -> bool:
+	var json_string := self._get_json_str()
+	var file := FileAccess.open(PLAYER_TMP_DATA_LOCATION, FileAccess.WRITE)
 	if file == null:
 		push_error("DHOPlayerDataHolder: Could not open save file: %s" % error_string(FileAccess.get_open_error()))
 		return false
@@ -78,13 +79,21 @@ func save_player_data() -> bool:
 	file.close()	
 	if not written or write_error != OK:
 		push_error("DHOPlayerDataHolder: Could not write save file; the previous save is unchanged: %s"\
-			% error_string(write_error))
-		DirAccess.remove_absolute(TEMP_PLAYER_DATA_LOCATION)
+				% error_string(write_error))
+		DirAccess.remove_absolute(PLAYER_TMP_DATA_LOCATION)
 		return false
-	var rename_error := DirAccess.rename_absolute(TEMP_PLAYER_DATA_LOCATION, PLAYER_DATA_LOCATION)
+	return true
+
+func _rename_temp_json() -> bool:
+	var rename_error := DirAccess.rename_absolute(PLAYER_TMP_DATA_LOCATION, PLAYER_DATA_LOCATION)
 	if rename_error != OK:
 		push_error("DHOPlayerDataHolder: Could not replace save file: %s" % error_string(rename_error))
-		DirAccess.remove_absolute(TEMP_PLAYER_DATA_LOCATION)
+		DirAccess.remove_absolute(PLAYER_TMP_DATA_LOCATION)
+		return false
+	return true
+
+func save_player_data() -> bool:
+	if not self._write_temp_json() or not self._rename_temp_json():
 		return false
 	return true
 

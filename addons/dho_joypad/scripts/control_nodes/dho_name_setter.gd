@@ -9,9 +9,9 @@
 extends HBoxContainer
 
 const LETTER_COUNT = DHOPlayerData.NAME_SIZE
-# TODO: there's gotta be a better solution for this.
+# There's gotta be a better solution for this.
 const CHARACTER_CYCLE: String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-var current_letter = 0
+var current_letter := 0
 var character_indexes: Array[int] = []
 var letter_labels: Array[Label] = []
 
@@ -79,16 +79,16 @@ func create_and_save_player_data() -> void:
 
 func go_next_scene(scene_path: String) -> Error:
 	var result := await DHOSceneManager.change_scene(
-		self,
-		scene_path,
-		self.dho_scene.dho_context
+			self,
+			scene_path,
+			self.dho_scene.dho_context
 	)
 	return result
 
-func show_bad_name_label():
+func show_bad_name_label() -> void:
 	self.bad_name_label.set_visible(true)
 
-func hide_bad_name_label():
+func hide_bad_name_label() -> void:
 	self.bad_name_label.set_visible(false)
 
 func handle_input_label_change() -> void:

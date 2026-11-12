@@ -10,4 +10,4 @@ extends Node
 class_name DHOEvent
 
 func execute() -> void:
-	pass
+	return

@@ -180,7 +180,7 @@ func get_button_hold_duration_msec(button: BUTTON, device: int = -1) -> float:
 
 ## Returns 0 if button is not held. Defaults to device 0 if param device = -1.
 func get_button_hold_duration_sec(button: BUTTON, device: int = -1) -> float:
-	return self.get_button_hold_duration_msec(button, device) / 1000.
+	return self.get_button_hold_duration_msec(button, device) / 1000.0
 
 ## Returns last held time for the button. (current not included)
 ## Defaults to device 0 if param device = -1.
@@ -193,7 +193,7 @@ func get_button_last_held_time_msec(button: BUTTON, device: int = -1) -> float:
 ## Returns last held time for the button. (current not included)
 ## Defaults to device 0 if param device = -1.
 func get_button_last_held_time_sec(button: BUTTON, device: int = -1) -> float:
-	return self.get_button_last_held_time_msec(button, device) / 1000.
+	return self.get_button_last_held_time_msec(button, device) / 1000.0
 
 ## Handle for event.
 func _button_pressed(button: BUTTON, device: int) -> void:
@@ -273,19 +273,19 @@ func get_input_vector(device: int = -1) -> Vector2:
 	if device == -1:
 		device = 0
 	return Vector2(
-		self._device_contexts[device].left_joystick_X_axis, 
-		self._device_contexts[device].left_joystick_Y_axis
+			self._device_contexts[device].left_joystick_X_axis, 
+			self._device_contexts[device].left_joystick_Y_axis
 	)
 
 ## If device = -1 it will default to 0.
 func get_normalized_input_vector(device: int = -1) -> Vector2:
 	return get_input_vector(device).normalized()
 
-func _axis_X_changed(axis_value: float, device: int) -> void:
+func _axis_x_changed(axis_value: float, device: int) -> void:
 	self._device_contexts[device].left_joystick_X_axis = axis_value
 	self.dho_joystick_changed.emit(self.get_normalized_input_vector(device), device)
 
-func _axis_Y_changed(axis_value: float, device: int) -> void:
+func _axis_y_changed(axis_value: float, device: int) -> void:
 	self._device_contexts[device].left_joystick_Y_axis = axis_value
 	self.dho_joystick_changed.emit(self.get_normalized_input_vector(device), device)
 
@@ -298,12 +298,6 @@ func _init() -> void:
 		var device_context := _DHOJoypadContext.new()
 		device_context.device = device
 		self._device_contexts[device] = device_context
-
-func _process(_delta: float):
-	pass
-
-func _ready():
-	pass
 
 """ -------------------------------------------------------------------------------------------- """
 """ SECTION: INPUT HANDLING """
@@ -329,6 +323,6 @@ func _input(event: InputEvent) -> void:
 		if absf(event.axis_value) < self.axis_deadzone:
 			event.axis_value = 0
 		if event.axis == 0:
-			self._axis_X_changed(event.axis_value, event.device)
+			self._axis_x_changed(event.axis_value, event.device)
 		elif event.axis == 1:
-			self._axis_Y_changed(event.axis_value, event.device)
+			self._axis_y_changed(event.axis_value, event.device)

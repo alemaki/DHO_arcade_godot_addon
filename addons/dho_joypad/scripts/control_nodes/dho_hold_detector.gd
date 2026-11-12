@@ -15,17 +15,18 @@ class_name DHOHoldTrigger
 @export var trigger_event: DHOEvent = null
 
 # Shouldn't fire multiple times.
-var fired = false
-
-func _ready() -> void:
-	pass
+var fired := false
 
 func _process(_delta: float) -> void:
-	if not self.fired\
-		and DhoJoypad.get_button_hold_duration_sec(self.button_capture) >= self.max_hold_duration:
+	if (
+			not self.fired
+			and DhoJoypad.get_button_hold_duration_sec(self.button_capture) >= self.max_hold_duration
+	):
 		self.fired = true
 		if trigger_event != null:
 			trigger_event.execute()
-	elif self.fired\
-		and DhoJoypad.get_button_hold_duration_sec(self.button_capture) < self.max_hold_duration:
+	elif (
+			self.fired
+			and DhoJoypad.get_button_hold_duration_sec(self.button_capture) < self.max_hold_duration
+	):
 		self.fired = false

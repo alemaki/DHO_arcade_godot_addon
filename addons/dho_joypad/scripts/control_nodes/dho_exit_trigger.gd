@@ -30,16 +30,17 @@ func _ready() -> void:
 
 
 func _on_button_pressed(button: DHOJoypad.BUTTON, _device: int) -> void:
-	if button == DHOJoypad.BUTTON.EXIT:
-		if not pressed_once:
-			self.pressed_once = true
-			self.get_tree()\
+	if button != DHOJoypad.BUTTON.EXIT:
+		return
+	if not pressed_once:
+		self.pressed_once = true
+		self.get_tree()\
 				.create_timer(second_press_trigger_time_window)\
 				.timeout\
 				.connect(self._on_first_press_timeout)
-			self.show_children()
-		else:
-			self.get_tree().quit()
+		self.show_children()
+	else:
+		self.get_tree().quit()
 
 func _on_first_press_timeout() -> void:
 	self.hide_children()

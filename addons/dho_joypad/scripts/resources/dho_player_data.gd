@@ -35,8 +35,8 @@ func is_data_valid() -> bool:
 	return is_name_valid(self.name)
 
 static func is_name_digits_and_letters(name_str: String) -> bool:
-	var regex = RegEx.create_from_string("[0-9a-zA-Z]+")
-	var result = regex.search(name_str)
+	var regex := RegEx.create_from_string("[0-9a-zA-Z]+")
+	var result := regex.search(name_str)
 	return result != null and result.get_string() == name_str
 
 ## Us this to verify name before setting.

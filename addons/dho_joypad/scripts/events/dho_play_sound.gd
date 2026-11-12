@@ -13,6 +13,6 @@ class_name DHOPlaySound
 
 func execute() -> void:
 	if !player:
-		print("AudioStreamPlayer NOT SET IN DHOPlaySound event.")
+		push_error("AudioStreamPlayer NOT SET IN DHOPlaySound event.")
 		return
 	player.set_playing(not player.is_playing())

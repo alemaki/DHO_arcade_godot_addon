@@ -10,6 +10,8 @@ extends DHOLocalizedLabel
 
 @export var dho_scene: DHOScene = null
 
+const SCORE_ADD := 10
+
 func _ready() -> void:
 	super._ready()
 	if self.dho_scene == null:
@@ -18,14 +20,14 @@ func _ready() -> void:
 	DhoJoypad.dho_button_pressed.connect(self._on_button_pressed)
 	self.update_text()
 
-func update_text():
+func update_text() -> void:
 	self.set_text("%s: %06d" % [
 		self.localized_text_res.get_text(),
 		self.dho_scene.dho_context.score
 	])
 
-func _on_button_pressed(button: DHOJoypad.BUTTON, device):
+func _on_button_pressed(button: DHOJoypad.BUTTON, _device: int):
 	if button == DHOJoypad.BUTTON.A:
-		self.dho_scene.dho_context.score += 10
+		self.dho_scene.dho_context.score += SCORE_ADD
 		self.update_text()
 	

@@ -8,9 +8,6 @@
 
 extends Label
 
-func _ready() -> void:
-	pass
-
 func _process(_delta: float) -> void:
 	var direction: Vector2 = DhoJoypad.get_input_vector()
 	self.set_text("X=%3.2f, Y=%3.2f" % [direction.x, direction.y])

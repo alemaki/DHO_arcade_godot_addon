@@ -37,7 +37,7 @@ func create_joypad_axis_event(axis: JoyAxis, axis_value: float, device: int = -1
 	event.device = device
 	event.axis = axis
 	event.axis_value = axis_value
-	# event.pressed = true # TODO: is this relevant?
+	# event.pressed = true # Is this relevant? doesn't come up in tests.
 	return event
 
 func has_joypad_button_event(events: Array, ev: InputEventJoypadButton) -> bool:
@@ -49,16 +49,19 @@ func has_joypad_button_event(events: Array, ev: InputEventJoypadButton) -> bool:
 
 func has_joypad_axis_event(events: Array, ev: InputEventJoypadMotion) -> bool:
 	for existing: InputEvent in events:
-		if existing is InputEventJoypadMotion:
-			if existing.axis == ev.axis\
-				and is_equal_approx(existing.axis_value, ev.axis_value)\
-				and existing.device == ev.device:
-				return true
+		if existing is not InputEventJoypadMotion:
+			continue
+		if (
+				existing.axis == ev.axis
+				and is_equal_approx(existing.axis_value, ev.axis_value)
+				and existing.device == ev.device
+		):
+			return true
 	return false
 
 func get_action_setting_path(input_action: String, device: int) -> String:
 	assert(not input_action.is_empty())
-	var setting_path = "input/"+ input_action
+	var setting_path := "input/"+ input_action
 	if device >= 0:
 		setting_path += DEVICE_NAME_SUFFIX + str(device)
 	return setting_path
@@ -125,8 +128,7 @@ func _disable_plugin() -> void:
 	ProjectSettings.save()
 
 func _enter_tree() -> void:
-	pass
-
+	return
 
 func _exit_tree() -> void:
-	pass
+	return

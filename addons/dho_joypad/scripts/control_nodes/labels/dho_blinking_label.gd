@@ -16,15 +16,17 @@ class_name DHOBlinkingLabel
 ## Measured in seconds
 @export var hide_duration = 0.2
 
+const FADE_DURATION = 0.15
+
 # YOU THINK YOU CAN STOP ME?!
 func _ready() -> void:
 	super._ready()
 	self._show_label()
 
 func _show_label() -> void:
-	self.get_tree().create_tween().tween_property(self, "modulate:a", 1, 0.15)
+	self.get_tree().create_tween().tween_property(self, "modulate:a", 1, FADE_DURATION)
 	self.get_tree().create_timer(show_duration).timeout.connect(self._hide_label)
 
 func _hide_label() -> void:
-	self.get_tree().create_tween().tween_property(self, "modulate:a", 0, 0.15)
+	self.get_tree().create_tween().tween_property(self, "modulate:a", 0, FADE_DURATION)
 	self.get_tree().create_timer(hide_duration).timeout.connect(self._show_label)

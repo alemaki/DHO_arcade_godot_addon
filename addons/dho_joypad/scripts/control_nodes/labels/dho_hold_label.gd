@@ -18,7 +18,7 @@ func update_text() -> void:
 		button_info.button_name,
 		self.name_of_event_res.get_text(),
 		min(DhoJoypad.get_button_hold_duration_sec(self.hold_trigger_node.button_capture),
-			self.hold_trigger_node.max_hold_duration),
+				self.hold_trigger_node.max_hold_duration),
 		self.hold_trigger_node.max_hold_duration
 		]
 	self.set_text(display_text)
