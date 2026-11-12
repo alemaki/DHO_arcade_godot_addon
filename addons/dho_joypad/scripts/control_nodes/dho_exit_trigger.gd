@@ -27,7 +27,17 @@ func show_children() -> void:
 func _ready() -> void:
 	self.hide_children()
 	DhoJoypad.dho_button_pressed.connect(self._on_button_pressed)
+	self._set_language()
 
+## Since this node is autoloaded I will set language here. not the best idea but good enough.
+func _set_language() -> void:
+	var args: PackedStringArray = OS.get_cmdline_user_args()
+	for arg in args:
+		if arg.to_lower().begins_with("-language="):
+			var language: String = arg.trim_prefix("-language=")
+			if language in ["en", "bg"]:
+				TranslationServer.set_locale(language)
+			break
 
 func _on_button_pressed(button: DHOJoypad.BUTTON, _device: int) -> void:
 	if button != DHOJoypad.BUTTON.EXIT:
