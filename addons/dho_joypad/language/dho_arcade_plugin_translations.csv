@@ -33,4 +33,5 @@ DHO_STRING_PRESS_A_TO_START,Press A to start,"Натисни A, за да зап
 DHO_STRING_YOU_WIN,You win,Печелиш,end scene
 DHO_STRING_YOU_LOSE,You lose,Ти загуби,end scene
 DHO_STRING_GODOT,Godot,Гъдоу,general
-DHO_STRING_RECORD_SAVED, Your record is saved, Рекордът е запазен,end scene
+DHO_STRING_RECORD_SAVED, Your highscore is saved, Резултатът е запазен,end scene
+DHO_STRING_NEW_RECORD, New highscore, Нов най-високрезултат,save score scene

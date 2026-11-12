@@ -10,18 +10,18 @@ extends VBoxContainer
 class_name DHOScoreboard
 
 const BEST_SCORE_COUNT = 10
-var score_holder: DHOScoreDataHolder = null
+var player_data_holder: DHOPlayerDataHolder = null
 
 @export var start_action = "ui_accept"
 @export_file("*.tscn") var start_scene = "res://addons/dho_joypad/scenes/dho_joypad_test.tscn"
 
 func _ready() -> void:
-	score_holder = DHOScoreDataHolder.load_scores()
-	assert(score_holder != null)
+	self.player_data_holder = DHOPlayerDataHolder.load_player_data()
+	assert(self.player_data_holder != null)
 	var index: int = 1
-	for score_data in self.score_holder.get_scores(BEST_SCORE_COUNT):
+	for player_data in self.player_data_holder.get_player_data(BEST_SCORE_COUNT):
 		var label: Label = Label.new()
-		label.text = "#%02d   %s   %06d" % [index, score_data.name, score_data.score]
+		label.text = "#%02d   %s   %06d" % [index, player_data.name, player_data.score]
 		index += 1
 		self.add_child(label)
 

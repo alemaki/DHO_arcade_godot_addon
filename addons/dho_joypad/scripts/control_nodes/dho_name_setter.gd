@@ -8,7 +8,7 @@
 
 extends HBoxContainer
 
-const LETTER_COUNT = DHOPlayerScoreData.NAME_SIZE
+const LETTER_COUNT = DHOPlayerData.NAME_SIZE
 # TODO: there's gotta be a better solution for this.
 const CHARACTER_CYCLE: String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 var current_letter = 0
@@ -42,6 +42,12 @@ func _ready() -> void:
 		letter_labels[i] = Label.new()
 		self.add_child(letter_labels[i])
 	self.update_labels()
+	
+	# No need to save a score that is not a new highscore!
+	if not DHOPlayerDataHolder.is_new_highscore(dho_scene.dho_context.score):
+		self.set_process(false)
+		# Call deferred since scene is still loading in _ready
+		self.call_deferred("go_next_scene", accept_scene_to_change_to)
 
 func update_labels() -> void:
 	for i in LETTER_COUNT:
@@ -56,28 +62,28 @@ func get_result_name() -> String:
 		result_name += CHARACTER_CYCLE[character_indexes[i]]
 	return result_name
 
-func try_to_save_score(player_score_data: DHOPlayerScoreData) -> bool:
-	var score_data: DHOScoreDataHolder = DHOScoreDataHolder.load_scores()
-	if score_data == null:
+func try_save_player_data(player_data: DHOPlayerData) -> bool:
+	var player_data_holder: DHOPlayerDataHolder = DHOPlayerDataHolder.load_player_data()
+	if player_data_holder == null:
 		return false
-	var saved: bool = score_data.add_score(player_score_data)
+	var saved: bool = player_data_holder.add_player_data(player_data)
 	if not saved:
 		return false
-	return score_data.save_scores()
+	return player_data_holder.save_player_data()
 
-func try_save() -> bool:
-	var player_score_data: DHOPlayerScoreData = DHOPlayerScoreData.new()
-	player_score_data.name = self.get_result_name()
-	player_score_data.score = self.dho_scene.dho_context.score
-	self.dho_scene.dho_context.is_score_saved = self.try_to_save_score(player_score_data)
+func create_and_save_player_data() -> void:
+	var player_data: DHOPlayerData = DHOPlayerData.new()
+	player_data.name = self.get_result_name()
+	player_data.score = self.dho_scene.dho_context.score
+	self.dho_scene.dho_context.is_score_saved = self.try_save_player_data(player_data)
+
+func go_next_scene(scene_path: String) -> Error:
 	var result := await DHOSceneManager.change_scene(
 		self,
-		accept_scene_to_change_to,
+		scene_path,
 		self.dho_scene.dho_context
 	)
-	if result != OK:
-		return false
-	return true
+	return result
 
 func show_bad_name_label():
 	self.bad_name_label.set_visible(true)
@@ -85,7 +91,7 @@ func show_bad_name_label():
 func hide_bad_name_label():
 	self.bad_name_label.set_visible(false)
 
-func _process(_delta: float) -> void:
+func handle_input_label_change() -> void:
 	if Input.is_action_just_pressed(self.left_action):
 		self.current_letter -= 1
 		if self.current_letter < 0:
@@ -100,12 +106,22 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed(self.down_action):
 		self.character_indexes[self.current_letter] += 1
 		self.character_indexes[self.current_letter] %= CHARACTER_CYCLE.length()
+
+func handle_input_scene_change() -> void:
 	if Input.is_action_just_pressed(self.save_action):
-		if not DHOPlayerScoreData.is_name_valid(self.get_result_name()):
+		if not DHOPlayerData.is_name_valid(self.get_result_name()):
 			self.show_bad_name_label()
 			self.get_tree().create_timer(2).timeout.connect(self.hide_bad_name_label)
-		elif not await self.try_save():
-			push_warning("Something went horribly wrong.")
+		else:
+			self.create_and_save_player_data()
+			if await go_next_scene(self.accept_scene_to_change_to) != OK:
+				push_warning("ScoreSaver: Something went horribly wrong.")
+				self.get_tree().quit() # not okay if player can save scores multiple times.
 	if Input.is_action_just_pressed(self.exit_action):
-		DHOSceneManager.change_scene(self, back_scene_to_change_to, self.dho_scene.dho_context)
+		if await go_next_scene(self.back_scene_to_change_to) != OK:
+			push_warning("ScoreSaver: Something went horribly wrong.")
+
+func _process(_delta: float) -> void:
+	self.handle_input_label_change()
+	self.handle_input_scene_change()
 	self.update_labels()

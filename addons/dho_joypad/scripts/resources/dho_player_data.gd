@@ -8,7 +8,7 @@
 
 ## This is used later for storing the player score in score_saver scene.
 extends Resource			
-class_name DHOPlayerScoreData
+class_name DHOPlayerData
 
 # Currently the size of the name is fixed to 3 symbols (digits and letters)
 const NAME_SIZE: int = 3
@@ -18,16 +18,12 @@ const MAX_SCORE: int = 999999
 @export var score: int = 0:
 	set(value):
 		score = clampi(value, 0, MAX_SCORE)
-	get():
-		return score
 @export var name: String = "AAA":
 	set(value):
 		if not self.is_name_valid(value):
 			push_warning("player name: %s not set, because invlalid" % value)
 			return
 		name = value
-	get():
-		return name
 
 static func is_name_allowed(name_str: String) -> bool:
 	return not DHOBadWords.contains(name_str)
@@ -49,7 +45,7 @@ static func is_name_valid(name_str: String) -> bool:
 		return false
 	return is_name_digits_and_letters(name_str) and is_name_allowed(name_str)
 
-static func _bigger_score(score_data1: DHOPlayerScoreData, score_data2: DHOPlayerScoreData) -> bool:
+static func _bigger_score(score_data1: DHOPlayerData, score_data2: DHOPlayerData) -> bool:
 	return score_data1.score > score_data2.score
 
 func to_dict() -> Dictionary[String, Variant]:
@@ -58,14 +54,14 @@ func to_dict() -> Dictionary[String, Variant]:
 		"name": name,
 	}
 
-static func from_dict(dict: Dictionary) -> DHOPlayerScoreData:
+static func from_dict(dict: Dictionary) -> DHOPlayerData:
 	var score_value: Variant = dict.get("score")
 	var name_value: Variant = dict.get("name")
 	if not (score_value is float or score_value is int) or not (name_value is String):
 		return null
 	if not is_name_valid(name_value):
 		return null
-	var result := DHOPlayerScoreData.new()
+	var result := DHOPlayerData.new()
 	result.score = int(score_value)
 	result.name = name_value
 	return result
