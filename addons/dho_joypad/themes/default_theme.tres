@@ -1,6 +1,6 @@
 [gd_resource type="Theme" format=3 uid="uid://dubjvex4rp6ix"]
 
-[ext_resource type="FontFile" uid="uid://h1unk4jb5cjl" path="res://addons/dho_joypad/fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="1_7i3h3"]
+[ext_resource type="FontFile" uid="uid://dpyjihv03bxd0" path="res://addons/dho_joypad/fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="1_7i3h3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2px8l"]
 bg_color = Color(0, 0, 0, 1)

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://beq43jnkebwdo"]
 
-[ext_resource type="FontFile" uid="uid://h1unk4jb5cjl" path="res://addons/dho_joypad/fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="1_fusoy"]
+[ext_resource type="FontFile" uid="uid://dpyjihv03bxd0" path="res://addons/dho_joypad/fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="1_fusoy"]
 [ext_resource type="Script" uid="uid://dvm1g7vyj6p8d" path="res://addons/dho_joypad/scripts/control_nodes/dho_scene.gd" id="2_04svh"]
 [ext_resource type="Resource" uid="uid://dw57mllgckaof" path="res://addons/dho_joypad/resources/default_dho_scene_context.tres" id="3_wwp3o"]
 [ext_resource type="Texture2D" uid="uid://bn6vnchewuuf2" path="res://icon.svg" id="4_8wl7c"]
@@ -17,7 +17,7 @@
 [ext_resource type="Script" uid="uid://bgdlvsyh2nvxl" path="res://addons/dho_joypad/scripts/events/dho_win_lose_event.gd" id="12_04svh"]
 [ext_resource type="Script" uid="uid://d4a3ms1wru5dr" path="res://addons/dho_joypad/scripts/events/dho_show_details.gd" id="12_12j57"]
 [ext_resource type="Script" uid="uid://dvx4onvuv6cxa" path="res://addons/dho_joypad/scripts/events/dho_play_sound.gd" id="13_isph0"]
-[ext_resource type="AudioStream" uid="uid://bra7w8gau3t8d" path="res://addons/dho_joypad/sound/audio-test.mp3" id="14_7w2fm"]
+[ext_resource type="AudioStream" uid="uid://cxek813k56rw5" path="res://addons/dho_joypad/sound/audio-test.mp3" id="14_7w2fm"]
 [ext_resource type="Script" uid="uid://dp2ofv6qklaw5" path="res://addons/dho_joypad/scripts/events/dho_modulate_change.gd" id="15_22aq6"]
 
 [sub_resource type="Theme" id="Theme_qn1hh"]
@@ -320,12 +320,11 @@ script = ExtResource("12_04svh")
 dho_scene = NodePath("../../../../../..")
 metadata/_custom_type_script = "uid://bgdlvsyh2nvxl"
 
-[node name="DButtonHoldLabel" type="Label" parent="Tree/LongPressButtonContainer/VBoxContainer" unique_id=1313128028 node_paths=PackedStringArray("hold_trigger_node")]
+[node name="DButtonHoldLabel" type="Label" parent="Tree/LongPressButtonContainer/VBoxContainer" unique_id=1313128028]
 layout_mode = 2
 text = "Hold D = DETAILS (0.0s / 3.0s)"
 script = ExtResource("10_ro22j")
 name_of_event_res = SubResource("Resource_12j57")
-hold_trigger_node = NodePath("")
 localized_text_res = SubResource("Resource_ro22j")
 
 [node name="DHOHoldTrigger" type="Control" parent="Tree/LongPressButtonContainer/VBoxContainer/DButtonHoldLabel" unique_id=215561870 node_paths=PackedStringArray("trigger_event")]
@@ -339,12 +338,11 @@ metadata/_custom_type_script = "uid://qkevjtyxu8q1"
 script = ExtResource("12_12j57")
 metadata/_custom_type_script = "uid://d4a3ms1wru5dr"
 
-[node name="EButtonHoldLabel" type="Label" parent="Tree/LongPressButtonContainer/VBoxContainer" unique_id=1742257614 node_paths=PackedStringArray("hold_trigger_node")]
+[node name="EButtonHoldLabel" type="Label" parent="Tree/LongPressButtonContainer/VBoxContainer" unique_id=1742257614]
 layout_mode = 2
 text = "Hold E = SOUND   (0.0s / 3.0s)"
 script = ExtResource("10_ro22j")
 name_of_event_res = SubResource("Resource_isph0")
-hold_trigger_node = NodePath("")
 localized_text_res = SubResource("Resource_ro22j")
 
 [node name="DHOHoldTrigger" type="Control" parent="Tree/LongPressButtonContainer/VBoxContainer/EButtonHoldLabel" unique_id=1133437556 node_paths=PackedStringArray("trigger_event")]
@@ -362,13 +360,12 @@ metadata/_custom_type_script = "uid://dvx4onvuv6cxa"
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Tree/LongPressButtonContainer/VBoxContainer/EButtonHoldLabel/DHOHoldTrigger/DHOPlaySound" unique_id=1942069304]
 stream = ExtResource("14_7w2fm")
 
-[node name="AButtonHoldLabel" type="Label" parent="Tree/LongPressButtonContainer/VBoxContainer" unique_id=323323367 node_paths=PackedStringArray("hold_trigger_node")]
+[node name="AButtonHoldLabel" type="Label" parent="Tree/LongPressButtonContainer/VBoxContainer" unique_id=323323367]
 modulate = Color(1, 1, 1, 0.078431375)
 layout_mode = 2
 text = "Hold A = GODOT   (0.0s / 3.0s)"
 script = ExtResource("10_ro22j")
 name_of_event_res = SubResource("Resource_7w2fm")
-hold_trigger_node = NodePath("")
 localized_text_res = SubResource("Resource_ro22j")
 
 [node name="DHOHoldTrigger" type="Control" parent="Tree/LongPressButtonContainer/VBoxContainer/AButtonHoldLabel" unique_id=1917277179 node_paths=PackedStringArray("trigger_event")]
