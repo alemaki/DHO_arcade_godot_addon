@@ -3,7 +3,7 @@
 [ext_resource type="FontFile" uid="uid://dpyjihv03bxd0" path="res://addons/dho_joypad/fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="1_fusoy"]
 [ext_resource type="Script" uid="uid://dvm1g7vyj6p8d" path="res://addons/dho_joypad/scripts/control_nodes/dho_scene.gd" id="2_04svh"]
 [ext_resource type="Resource" uid="uid://dw57mllgckaof" path="res://addons/dho_joypad/resources/default_dho_scene_context.tres" id="3_wwp3o"]
-[ext_resource type="Texture2D" uid="uid://bn6vnchewuuf2" path="res://icon.svg" id="4_8wl7c"]
+[ext_resource type="Texture2D" uid="uid://bn6vnchewuuf2" path="res://addons/dho_joypad/assets/icon.svg" id="4_8wl7c"]
 [ext_resource type="Script" uid="uid://cwsg5lygoewbf" path="res://addons/dho_joypad/scripts/control_nodes/labels/dho_xy_joystick_label.gd" id="5_imr4d"]
 [ext_resource type="Script" uid="uid://1m3f1rp22asu" path="res://addons/dho_joypad/scripts/control_nodes/labels/dho_localized_label.gd" id="5_nmvre"]
 [ext_resource type="Script" uid="uid://dux0gucsr622e" path="res://addons/dho_joypad/scripts/control_nodes/labels/dho_currently_pressed_button_label.gd" id="6_nmvre"]
