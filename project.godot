@@ -13,7 +13,7 @@ config_version=5
 config/name="devhubone_test_project"
 run/main_scene="uid://cd68803horyb"
 config/features=PackedStringArray("4.7", "Forward Plus")
-config/icon="res://addons/dho_joypad/assets/icon.svg"
+config/icon="res://addons/dho_arcade_godot_addon/assets/icon.svg"
 
 [autoload]
 
@@ -27,7 +27,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dho_joypad/plugin.cfg")
+enabled=PackedStringArray("res://addons/dho_arcade_godot_addon/plugin.cfg", "res://addons/dho_joypad/plugin.cfg")
 
 [input]
 
@@ -225,7 +225,7 @@ ui_down_device_1={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://addons/dho_joypad/language/dho_arcade_plugin_translations.en.translation", "res://addons/dho_joypad/language/dho_arcade_plugin_translations.bg.translation")
+locale/translations=PackedStringArray("res://addons/dho_arcade_godot_addon/language/dho_arcade_plugin_translations.en.translation", "res://addons/dho_arcade_godot_addon/language/dho_arcade_plugin_translations.bg.translation")
 
 [physics]
 

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="DHOJoystickAxisInformation" format=3 uid="uid://d2bdp63r8kuea"]
+
+[ext_resource type="Script" uid="uid://cu4srpuvy2g7q" path="res://addons/dho_arcade_godot_addon/scripts/resources/dho_joystick_axis.gd" id="1_7pvwr"]
+
+[resource]
+script = ExtResource("1_7pvwr")
+axis_name = "down"
+input_action = "ui_down"
+axis_value = null
+joy_axis = 1
+event_name = "Joypad Axis 1 + (Left stick Down, Joystick 0 Down)"
+metadata/_custom_type_script = "uid://cu4srpuvy2g7q"

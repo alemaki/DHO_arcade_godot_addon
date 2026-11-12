@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="DHOButtonInformation" format=3 uid="uid://73o2yahwp0q2"]
+
+[ext_resource type="Script" uid="uid://doge6v11mn3ks" path="res://addons/dho_arcade_godot_addon/scripts/resources/dho_button.gd" id="1_w1bow"]
+
+[resource]
+script = ExtResource("1_w1bow")
+button = 5
+button_name = "F"
+input_action = "ui_f"
+joy_button = 10
+event_name = "Joypad Button 10 (Right Shoulder, Sony R1, Xbox RB)"
+metadata/_custom_type_script = "uid://doge6v11mn3ks"

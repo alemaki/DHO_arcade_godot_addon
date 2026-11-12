@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="DHOSceneContext" format=3 uid="uid://dw57mllgckaof"]
+
+[ext_resource type="Script" uid="uid://dlv3fgnl36c2o" path="res://addons/dho_arcade_godot_addon/scripts/resources/dho_scene_context.gd" id="1_nsqhc"]
+
+[resource]
+script = ExtResource("1_nsqhc")
+metadata/_custom_type_script = "uid://dlv3fgnl36c2o"
