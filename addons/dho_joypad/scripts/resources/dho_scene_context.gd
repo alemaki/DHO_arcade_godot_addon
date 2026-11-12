@@ -3,7 +3,7 @@
 
 # NOTE: See the README.md for more information.
 
-## A resource for managing inforamtion between scenes. Use this in your scenes paired with [DHOScene]
+## A resource for managing information between scenes. Use this in your scenes paired with [DHOScene]
 ## to pass the game information around scenes. You will have to pass this to the plugin's scenes
 ## so they will work properly.
 extends Resource
