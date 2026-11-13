@@ -27,7 +27,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dho_arcade_godot_addon/plugin.cfg", "res://addons/dho_joypad/plugin.cfg")
+enabled=PackedStringArray("res://addons/dho_arcade_godot_addon/plugin.cfg")
 
 [input]
 
