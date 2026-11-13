@@ -3,7 +3,7 @@ title: "DHO Arcade Godot Addon"
 author: "Alexander Makedonski"
 ---
 ### Description
-This is a godot plugin that gives access to predefined input actions for [DevHubOne](https://www.devhubone.com/en)'s joypad, scenes used in DevHubOne's arcade and API classes for anyone who needs a deeper integration with the joypad in the game they are developing.
+This is a Godot plugin that gives access to predefined input actions for [DevHubOne](https://www.devhubone.com/en)'s joypad, scenes used in DevHubOne's arcade and API classes for anyone who needs a deeper integration with the joypad in the game they are developing.
 
 ---
 ### Table of Contents
@@ -18,7 +18,7 @@ This is a godot plugin that gives access to predefined input actions for [DevHub
 
 
 ### Installation
-Go to ...[TODO] the godot asset library and download there or download this plugin manually from the [git repo](https://github.com/alemaki/DHO_arcade_godot_addon) and place the "addon" folder directly in your project. After that go to <code> Project -> Project Settings -> Plugins </code> and enable this plugin. Restart the editor so any changes to the project can load properly.
+Go to ...[TODO] the Godot asset library and download there or download this plugin manually from the [git repo](https://github.com/alemaki/DHO_arcade_godot_addon) and place the "addon" folder directly in your project. After that go to <code> Project -> Project Settings -> Plugins </code> and enable this plugin. Restart the editor so any changes to the project can load properly.
 
 ### How to use the plugin
 #### Getting started
@@ -65,7 +65,7 @@ WARNING: DO NOT USE `Input.get_vector` like this:
 ```
 var input_direction := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 ```
-As of currently (6th November 2026), in godot 4.x, joypad inputs will result with some error along the axis that is not pressed when calling the Input.get_vector with combination of keyboard input.
+As of currently (6th November 2026), in Godot 4.x, joypad inputs will result with some error along the axis that is not pressed when calling the Input.get_vector with combination of keyboard input.
 Issue to resolve: https://github.com/godotengine/godot/issues/90515#issuecomment-2616602880
 
 WARNING:

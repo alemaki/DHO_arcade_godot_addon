@@ -1,2 +1,10 @@
 # Normalize EOL for all files that Git considers text files.
 * text=auto eol=lf
+
+# Exclude everything from the repo
+/**               export-ignore
+
+# except the addon folder
+/addons           !export-ignore
+/addons/dho_arcade_godot_addon        !export-ignore
+/addons/dho_arcade_godot_addon/**     !export-ignore
