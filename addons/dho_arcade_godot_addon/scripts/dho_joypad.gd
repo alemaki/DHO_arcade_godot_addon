@@ -87,13 +87,13 @@ func is_device_valid(device: int) -> bool:
 # "ui_e"		: the E button
 # "ui_f"		: the F button
 # "ui_play"		: the Play (Left) button
-# "ui_menu"		: the Exit (Right) button
+# "ui_exit"		: the Exit (Right) button
 #
 # You can also create your own actions with mappngs for DHO's buttons like this:
-# A		: Joypad Button 3 (Top Action, Sony Triangle, Xbox Y, Nintendo X) - All devices
-# B		: Joypad Button 1 (Right Action, Sony Circle, Xbox B, Nintendo A) - All devices
-# C		: Joypad Button 0 (Bottom Action, Sony Cross, Xbox A, Nintendo B) - All devices
-# D		: Joypad Button 2 (Left Action, Sony Square, Xbox X, Nintendo Y) - All devices
+# A		: Joypad Button 3 (Top Action, Sony Triangle, Xbox Y, Nintendo X)
+# B		: Joypad Button 1 (Right Action, Sony Circle, Xbox B, Nintendo A)
+# C		: Joypad Button 0 (Bottom Action, Sony Cross, Xbox A, Nintendo B)
+# D		: Joypad Button 2 (Left Action, Sony Square, Xbox X, Nintendo Y)
 # E		: Joypad Button 9 (Left Shoulder, Sony L1, Xbox LB)
 # F		: Joypad Button 10 (Right Shoulder, Sony R1, Xbox RB)
 # PLAY	: Joypad Button 6 (Start, Xbox Menu, Nintendo +)

@@ -8,5 +8,5 @@ button = 3
 button_name = "D"
 input_action = "ui_d"
 joy_button = 2
-event_name = "Joypad Button 2 (Left Action, Sony Square, Xbox X, Nintendo Y)-All devices"
+event_name = "Joypad Button 2 (Left Action, Sony Square, Xbox X, Nintendo Y)"
 metadata/_custom_type_script = "uid://doge6v11mn3ks"

@@ -26,8 +26,11 @@ func show_children() -> void:
 
 func _ready() -> void:
 	self.hide_children()
-	DhoJoypad.dho_button_pressed.connect(self._on_button_pressed)
 	self._set_language()
+
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("ui_exit"):
+		self._on_button_pressed()
 
 ## Since this node is autoloaded I will set language here. not the best idea but good enough.
 func _set_language() -> void:
@@ -39,9 +42,7 @@ func _set_language() -> void:
 				TranslationServer.set_locale(language)
 			break
 
-func _on_button_pressed(button: DHOJoypad.BUTTON, _device: int) -> void:
-	if button != DHOJoypad.BUTTON.EXIT:
-		return
+func _on_button_pressed() -> void:
 	if not pressed_once:
 		self.pressed_once = true
 		self.get_tree()\

@@ -7,5 +7,5 @@ script = ExtResource("1_tycjf")
 button = 2
 button_name = "C"
 input_action = "ui_c"
-event_name = "Joypad Button 0 (Bottom Action, Sony Cross, Xbox A, Nintendo B)-All devices"
+event_name = "Joypad Button 0 (Bottom Action, Sony Cross, Xbox A, Nintendo B)"
 metadata/_custom_type_script = "uid://doge6v11mn3ks"

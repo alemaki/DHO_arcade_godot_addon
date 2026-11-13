@@ -8,5 +8,5 @@ button = 6
 button_name = "Play (Left)"
 input_action = "ui_play"
 joy_button = 6
-event_name = "Joypad Button 6 (Start, Xbox Menu, Nintendo +)d"
+event_name = "Joypad Button 6 (Start, Xbox Menu, Nintendo +)"
 metadata/_custom_type_script = "uid://doge6v11mn3ks"
