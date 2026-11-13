@@ -99,8 +99,8 @@ DhoJoypad.dho_button_released.connect(<your function(button, device)>)
 ```
 There is also a small API which can also be accessed like :
 ```GDScript
-var is_pressed: bool = DhoJoypad.is_button_pressed(\<button>, \<device number>)
-var hold_time: float = DhoJoypad.get_button_hold_duration_sec(\<button>, \<device number>)
+var is_pressed: bool = DhoJoypad.is_button_pressed(<button>, <device number>)
+var hold_time: float = DhoJoypad.get_button_hold_duration_sec(<button>, <device number>)
 ```
 For axes:
 ```GDScript
