@@ -1,5 +1,11 @@
-extends DHOScene
+# Copyright (c) 2026 Alexander Makedonski
+# SPDX-License-Identifier: MIT
 
+# NOTE: See the README.md for more information.
+# This scripts' purpose is to be a part of the DevHubOne's plugin scenes.
+# It is not intended to be used in your game.
+
+extends DHOScene
 
 @export var start_action = "ui_accept"
 ## Set this to your game's start scene. It can be a [DHOScene] type, but not required.
