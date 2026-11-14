@@ -19,7 +19,7 @@ This is a Godot plugin that gives access to predefined input actions for [DevHub
 
 
 ## Installation
-Go to ...[TODO] the Godot asset library and download there or download this plugin manually from the [git repo](https://github.com/alemaki/DHO_arcade_godot_addon) and copy the whole `addons/dho_arcade_godot_addon` folder into the `addons` folder of your project. After that go to <code> Project -> Project Settings -> Plugins </code> and enable this plugin. Restart the editor so any changes to the project can load properly.
+Go to the [Godot asset library](https://godotengine.org/asset-library/asset/5605) and download there or download this plugin manually from the [git repo](https://github.com/alemaki/DHO_arcade_godot_addon) and copy the whole `addons/dho_arcade_godot_addon` folder into the `addons` folder of your project. After that go to <code> Project -> Project Settings -> Plugins </code> and enable this plugin. Restart the editor so any changes to the project can load properly.
 
 ## Getting started
 After downloading the plugin and enabling it you can take a look at the newly defined input actions in your project in <code>Project -> Project Settings -> Input Map</code>. There are also a few autoloads that will work in the background.
@@ -112,7 +112,7 @@ var n_input_vec: Vector2 = DhoJoypad.get_normalized_input_vector()
 WARNING: Disabling the autoload of this node (or disabling the plugin) will BREAK the joypad test scene provided by this plugin.
 
 ## Scenes
-
+The scenes are made for 1920 x 1200 resolution a.k.a. WUXGA (Widescreen Ultra Extended Graphics Array). DevHubOne's arcade works with this resolution. Use these scenes in your games:
 - `dho_scoreboard.tscn` - Set this as your main scene. It requires you to set a scene for your game to switch to in the `start_scene` var in the root node. It will change the scene when action "ui_accept" is pressed (joypad A button). It is not required for the start scene to inherit `DHOScene` class, however it is recommended.
 - `dho_save_score.tscn` - Switch to this scene when the game is over and pass it the `DHOSceneContext` (using `DHOSceneManager` or `DHOWinLoseEvent`). It will handle setting the player's name, saving their score and switching to win/lose scene afterwards. If the new score is not a top 10 highscore, it will switch directly to win/lose scene without saving anything.
 - `dho_win_lose.tscn` - If you do not want to have scores in your game, switch directly to this scene. Otherwise, switch to `dho_save_score.tscn`. This scene will have a `play_again_scene` var. This should be the path to the same start scene in `dho_scoreboard.tscn`.
