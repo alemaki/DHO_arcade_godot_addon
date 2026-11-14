@@ -47,8 +47,8 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_3jmed")
 script = ExtResource("2_3jmed")
-score_saved_label = NodePath("PanelContainer/CenterContainer2/MarginContainer/VBoxContainer/RecordIsSavedLabel")
-win_lose_label = NodePath("PanelContainer/CenterContainer3/MarginContainer/VBoxContainer/MarginContainer/WinLoseLabel")
+score_saved_label = NodePath("PanelContainer/MarginContainer2/VBoxContainer/CenterContainer2/RecordIsSavedLabel")
+win_lose_label = NodePath("PanelContainer/MarginContainer/VBoxContainer/MarginContainer/CenterContainer/WinLoseLabel")
 win_text_ref = SubResource("Resource_dg5ra")
 lose_text_ref = SubResource("Resource_3jmed")
 dho_context = ExtResource("3_dg5ra")
@@ -62,51 +62,53 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CenterContainer3" type="CenterContainer" parent="PanelContainer" unique_id=1721384858]
-layout_mode = 2
-size_flags_vertical = 0
-
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/CenterContainer3" unique_id=1451461090]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=1451461090]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/CenterContainer3/MarginContainer" unique_id=910088988]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=910088988]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/CenterContainer3/MarginContainer/VBoxContainer" unique_id=957700448]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=957700448]
 layout_mode = 2
 
-[node name="WinLoseLabel" type="Label" parent="PanelContainer/CenterContainer3/MarginContainer/VBoxContainer/MarginContainer" unique_id=1644023357]
-layout_mode = 2
-theme_override_font_sizes/font_size = 60
-text = "GAME TITLE"
-
-[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/CenterContainer3/MarginContainer/VBoxContainer" unique_id=2139322426]
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer" unique_id=555935492]
 layout_mode = 2
 
-[node name="YourScoreLabel" type="Label" parent="PanelContainer/CenterContainer3/MarginContainer/VBoxContainer/CenterContainer" unique_id=1059718895 node_paths=PackedStringArray("dho_scene")]
+[node name="WinLoseLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/MarginContainer/CenterContainer" unique_id=1644023357]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "You win!"
+
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=2139322426]
+layout_mode = 2
+
+[node name="YourScoreLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/CenterContainer" unique_id=1059718895 node_paths=PackedStringArray("dho_scene")]
 layout_mode = 2
 text = "Your score: 001000"
 script = ExtResource("3_te1d3")
-dho_scene = NodePath("../../../../../..")
+dho_scene = NodePath("../../../../..")
 localized_text_res = SubResource("Resource_te1d3")
 
-[node name="CenterContainer2" type="CenterContainer" parent="PanelContainer" unique_id=2056637183]
+[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer" unique_id=566414049]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/CenterContainer2" unique_id=566414049]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer2" unique_id=814084828]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/CenterContainer2/MarginContainer" unique_id=814084828]
+[node name="CenterContainer2" type="CenterContainer" parent="PanelContainer/MarginContainer2/VBoxContainer" unique_id=699852266]
 layout_mode = 2
 
-[node name="RecordIsSavedLabel" type="Label" parent="PanelContainer/CenterContainer2/MarginContainer/VBoxContainer" unique_id=648433871]
+[node name="RecordIsSavedLabel" type="Label" parent="PanelContainer/MarginContainer2/VBoxContainer/CenterContainer2" unique_id=648433871]
 layout_mode = 2
 script = ExtResource("6_te1d3")
 localized_text_res = SubResource("Resource_efcoe")
 metadata/_custom_type_script = "uid://1m3f1rp22asu"
 
-[node name="DHOBlinkingLabel" type="Label" parent="PanelContainer/CenterContainer2/MarginContainer/VBoxContainer" unique_id=1178194896]
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/MarginContainer2/VBoxContainer" unique_id=1834868990]
+layout_mode = 2
+
+[node name="DHOBlinkingLabel" type="Label" parent="PanelContainer/MarginContainer2/VBoxContainer/CenterContainer" unique_id=1178194896]
 layout_mode = 2
 text = "A: PLAY AGAIN    B: MENU"
 script = ExtResource("6_vdcf1")

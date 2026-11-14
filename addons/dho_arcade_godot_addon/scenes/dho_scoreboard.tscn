@@ -25,18 +25,21 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -1025.0
-offset_bottom = -506.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme = ExtResource("1_u1cd5")
 script = ExtResource("2_u1cd5")
 dho_context = ExtResource("3_o61tr")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=173133550]
 layout_mode = 1
-offset_right = 1152.0
-offset_bottom = 648.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="CenterContainer2" type="CenterContainer" parent="PanelContainer" unique_id=710052514]
 layout_mode = 2
@@ -47,7 +50,7 @@ layout_mode = 2
 
 [node name="GameTitle" type="Label" parent="PanelContainer/CenterContainer2/MarginContainer" unique_id=1612738683]
 layout_mode = 2
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 100
 text = "GAME TITLE"
 script = ExtResource("4_1vti6")
 localized_text_res = SubResource("Resource_efcoe")
@@ -72,7 +75,6 @@ layout_mode = 2
 [node name="PressAToStartLabel" type="Label" parent="PanelContainer/CenterContainer/MarginContainer" unique_id=2114385245]
 layout_mode = 2
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 25
 text = "Press A to start"
 script = ExtResource("7_noms1")
 localized_text_res = SubResource("Resource_te1d3")

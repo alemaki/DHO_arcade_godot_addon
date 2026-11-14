@@ -64,14 +64,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CenterContainer3" type="CenterContainer" parent="PanelContainer" unique_id=2082393629]
+[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer" unique_id=530816116]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/CenterContainer3" unique_id=530816116]
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/MarginContainer2" unique_id=377661301]
 layout_mode = 2
 
-[node name="YourScoreLabel" type="Label" parent="PanelContainer/CenterContainer3/MarginContainer" unique_id=960971313]
+[node name="YourScoreLabel" type="Label" parent="PanelContainer/MarginContainer2/CenterContainer" unique_id=960971313]
 layout_mode = 2
 text = "Your score: 001000"
 script = ExtResource("7_r3w5j")
@@ -101,33 +101,39 @@ theme = SubResource("Theme_8q4b8")
 theme_override_constants/separation = 10
 script = ExtResource("1_7xf3h")
 dho_scene = NodePath("../../../../../..")
-bad_name_label = NodePath("../../../../../CenterContainer2/MarginContainer/VBoxContainer/BadNameLabel")
+bad_name_label = NodePath("../../../../../MarginContainer/VBoxContainer/CenterContainer/BadNameLabel")
 
-[node name="CenterContainer2" type="CenterContainer" parent="PanelContainer" unique_id=1090364554]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=967384459]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/CenterContainer2" unique_id=967384459]
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=1015699162]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/CenterContainer2/MarginContainer" unique_id=1015699162]
+[node name="CenterContainer" type="CenterContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=519773078]
 layout_mode = 2
 
-[node name="BadNameLabel" type="Label" parent="PanelContainer/CenterContainer2/MarginContainer/VBoxContainer" unique_id=373060520]
+[node name="BadNameLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/CenterContainer" unique_id=373060520]
 layout_mode = 2
 text = "Name not allowed!"
 script = ExtResource("8_tgki7")
 localized_text_res = SubResource("Resource_efcoe")
 metadata/_custom_type_script = "uid://1m3f1rp22asu"
 
-[node name="MoveLabel" type="Label" parent="PanelContainer/CenterContainer2/MarginContainer/VBoxContainer" unique_id=964971335]
+[node name="CenterContainer2" type="CenterContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=919910062]
+layout_mode = 2
+
+[node name="MoveLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/CenterContainer2" unique_id=964971335]
 layout_mode = 2
 text = "Move: change letter / position"
 script = ExtResource("4_mar51")
 localized_text_res = SubResource("Resource_dytl1")
 metadata/_custom_type_script = "uid://4aubjdyqkpw1"
 
-[node name="DHOBlinkingLabel" type="Label" parent="PanelContainer/CenterContainer2/MarginContainer/VBoxContainer" unique_id=776659118]
+[node name="CenterContainer3" type="CenterContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=222492937]
+layout_mode = 2
+
+[node name="DHOBlinkingLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/CenterContainer3" unique_id=776659118]
 layout_mode = 2
 text = "A: OK   B: BACK"
 script = ExtResource("4_mar51")

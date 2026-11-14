@@ -19,12 +19,13 @@ corner_radius_bottom_left = 4
 
 [sub_resource type="Theme" id="Theme_m5iau"]
 default_font = ExtResource("2_qkwjj")
-Label/font_sizes/font_size = 12
+default_font_size = 40
+Label/font_sizes/font_size = 20
 Label/fonts/font = ExtResource("2_qkwjj")
-MarginContainer/constants/margin_bottom = 10
-MarginContainer/constants/margin_left = 10
-MarginContainer/constants/margin_right = 10
-MarginContainer/constants/margin_top = 10
+MarginContainer/constants/margin_bottom = 20
+MarginContainer/constants/margin_left = 20
+MarginContainer/constants/margin_right = 20
+MarginContainer/constants/margin_top = 20
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_1nfdl")
 
 [sub_resource type="Resource" id="Resource_f3pki"]
@@ -51,8 +52,8 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -234.0
-offset_bottom = 93.0
+offset_left = -412.0
+offset_bottom = 119.0
 grow_horizontal = 0
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer" unique_id=1940373516]
@@ -68,7 +69,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="MarginContainer/PanelContainer/MarginContainer" unique_id=27426949]
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
-text = "Press \"exit\" again to quit"
+text = "Press CHANGE GAME again to quit"
 autowrap_mode = 3
 script = ExtResource("3_wegon")
 localized_text_res = SubResource("Resource_f3pki")

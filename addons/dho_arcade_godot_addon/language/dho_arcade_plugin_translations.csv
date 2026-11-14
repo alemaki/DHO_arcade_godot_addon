@@ -1,6 +1,6 @@
 keys,en,bg,__context
 DHO_STRING_GAME_TITLE,GAME TITLE,ЗАГЛАВИЕ НА ИГРА,"general, title scene"
-DHO_STRING_PRESS_EXIT_AGAIN,"Press ""exit"" again to quit","Натисни ""изход"" отново, за да излезеш",exit scene
+DHO_STRING_PRESS_EXIT_AGAIN,"Press CHANGE GAME again to exit","Натисни СМЕНИ ИГРА отново, за да излезеш",exit scene
 DHO_TEST_SCENE_TITLE,Godot test scene for DevHubOne joypad,Godot тестова сцена за DevHubOne джойпад,test scene
 DHO_TEST_SCENE_MOVEMENT,Movement,Движение,test scene
 DHO_TEST_SCENE_HAT,Hat,Hat,"test scene, what is hat?"
