@@ -263,15 +263,20 @@ const AXIS_INFORMATION: Array[DHOJoystickAxisInformation] = [
 	preload("res://addons/dho_arcade_godot_addon/resources/axes/Y_down.tres"),
 ]
 
+var _last_movement_device_change: int = -1
+
 # This function defaults to device 0 in device = -1, because not sure how I am supposed to handle
 # multiple device inputs for axes.
 ## NOTE: The function below does not return normalised input.
 ## I am using only raw input here so the devhubone_test_scene will work regardless of input actions.
-## If device = -1 it will default to 0.
+## If device = -1 will default to device that last changed movement.
 func get_input_vector(device: int = -1) -> Vector2:
 	assert(self.is_device_valid(device))
 	if device == -1:
-		device = 0
+		if _last_movement_device_change == -1:
+			device = 0
+		else:
+			device = _last_movement_device_change
 	return Vector2(
 			self._device_contexts[device].left_joystick_X_axis, 
 			self._device_contexts[device].left_joystick_Y_axis
@@ -283,12 +288,14 @@ func get_normalized_input_vector(device: int = -1) -> Vector2:
 
 func _axis_x_changed(axis_value: float, device: int) -> void:
 	self._device_contexts[device].left_joystick_X_axis = axis_value
+	self._last_movement_device_change = device
 	self.dho_joystick_changed.emit(self.get_normalized_input_vector(device), device)
+
 
 func _axis_y_changed(axis_value: float, device: int) -> void:
 	self._device_contexts[device].left_joystick_Y_axis = axis_value
+	self._last_movement_device_change = device
 	self.dho_joystick_changed.emit(self.get_normalized_input_vector(device), device)
-
 """ -------------------------------------------------------------------------------------------- """
 """ SECTION: NODE FUNCTIONS """
 """ -------------------------------------------------------------------------------------------- """
