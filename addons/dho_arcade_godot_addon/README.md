@@ -12,8 +12,9 @@ This is a Godot plugin that gives access to predefined input actions for [DevHub
 - [Getting started](#getting-started)
 - [Input capture](#input-capture)
 - [Joypad API (advanced)](#joypad-api-advanced)
+- [Plugin settings](#plugin-settings)
 - [Scenes](#scenes)
-- [Passing information between scenes](#passing-information-between-scenes)
+- [Switching between scenes](#switching-between-scenes)
 - [Localization](#localization)
 - [Credits](#credits)
 
@@ -85,6 +86,7 @@ If you want to create a game with single player, by all means use the general ac
 
 Just in case you plan on making a game with more than 2 joypads connected :
 - Increase `MAX_DEVICES_HANDLED` in `DHOJoypad`as you like and reload the plugin. It will create new actions for you and map the joypads.
+
 ## Joypad API (advanced)
 Skip this section if you are planning on using only the predefined input actions stated above!
 
@@ -111,48 +113,39 @@ var input_vec: Vector2 = DhoJoypad.get_input_vector()
 var n_input_vec: Vector2 = DhoJoypad.get_normalized_input_vector()
 ```
 
+## Plugin settings
+The plugin adds new settings in `Project -> Project Settings -> General -> DHO -> Arcade`. If you do not see it, turn on  `Advanced Settings`:
+- `Game Start Scene` - your game's starting scene. The scenes in the plugin will look at it to switch to. You must set this setting if you are going to use the plugin's provided scenes.
+- `Is Zero Score Saved` - Set this to false if you do not wish to count 0-scores as new highscores in your game.
+
 ## Scenes
-The scenes are made for 1920 x 1200 resolution a.k.a. WUXGA (Widescreen Ultra Extended Graphics Array). DevHubOne's arcade works with this resolution. Use these scenes in your games:
-- `dho_scoreboard.tscn` - Set this as your main scene. It requires you to set a scene for your game to switch to in the `start_scene` var in the root node. It will change the scene when action "ui_accept" is pressed (joypad A button).
-- `dho_save_score.tscn` - Switch to this scene when the game is using [TODO]. It will handle setting the player's name, saving their score and switching to win/lose scene afterwards. If the new score is not a top 10 highscore, it will switch directly to win/lose scene without saving anything.
-- `dho_win_lose.tscn` - If you do not want to have scores in your game, switch directly to this scene using [TODO]. Otherwise, switch to `dho_save_score.tscn`. This scene will have a `play_again_scene` var. This should be set to the same path as the start scene in `dho_scoreboard.tscn`.
+The scenes are made for 1920 x 1200 resolution a.k.a. WUXGA (Widescreen Ultra Extended Graphics Array). DevHubOne's arcade works with this resolution. You should set your game's resolution to WUXGA.
+
+Provided scenes:
+- `dho_main.tscn` - Set this as your main scene in `Project -> Project Settings -> General -> Application -> Run -> Main Scene`. It displays your game's title and a scoreboard with the best scores (or nothing if no scores recorded). It will change to the `Game Start Scene` when action "ui_accept" is pressed (joypad A button).
+- `dho_save_score.tscn` - It will handle setting the player's name, saving their score and switching to win/lose scene afterwards. If the new score is not a top 10 highscore, it will switch directly to win/lose scene without saving anything.
+- `dho_win_lose.tscn` - This scene shows a text for win and lose. Then it will switch to either the main scene or the `Game Start Scene`, depending on the button press.
 - `dho_exit_trigger.tscn` - Autoloaded by the plugin. It's an UI Node that stays hidden until the "ui_exit" action is pressed. If it is pressed twice in quick succession, this scene will trigger an exit of the game. `dho_exit_trigger.tscn` is required for DevHubOne's arcade.
 - `dho_joypad_test.tscn` - This scene is only meant for you to test the joypad on your own device. It is not meant to be included in your game.
 
-## Passing information between scenes (advanced)
+## Switching between scenes
 
-This section is not required 
-
-### `DHOSceneContext` Resource
-A resource for managing information between scenes. You pair this with `DHOScene` node to pass game information between scenes, however it's not required. You will have to pass `DHOSceneContext` to the plugin's scenes so they will work properly.
-
-The data fields below are required for those scenes. You can edit the fields in your own game to keep track of information then pass it to other DHO scenes from the plugin. They will take care of the information for you after that.
-
-| Field | Description |
-|-------|-------------|
-| `score` | How much the player scored. Keep value between 0 and 999999. |
-| `is_win` | Before changing the scene set this to `true` if player won. Otherwise, set to `false`. |
-
-Add other information for your scenes as you see fit. Or even better: extend this class.
-
-### How to switch to score_saving scene or win/lose scene
-#### 1. You can use `DHOSceneManager` directly
-This is a static class that contains a method for changing scenes for DevHubOne's arcade.
-
-The function you will mostly need:
-```
-change_scene(current_node, to_path, context) # For scenes that are DHOScene nodes
-change_scene_to_path(current_node, to_path) # For any scene
+Switch to the `dho_save_score.tscn` scene when the game is over with:
+```GDScript
+DHOSceneManager.switch_to_save_score_scene(<scene_tree>, <score>, <is_win>)
 ```
 
-You can read what this function does in the file `scripts/dho_scene_manager.gd`.
+Switch to the `dho_win_lose.tscn` scene when the game is over and you do not want to save scores with:
+```GDScript
+# score is just for display. Won't show if 0 and `is_zero_score_saved` is set to false.
+DHOSceneManager.switch_to_win_lose_scene(<scene_tree>, <score>, <is_win>)
+```
 
-#### 2. You can use `DHOWinLoseEvent`
-You can use this node to switch to a different `DHOScene`. Normally when the game ends you should switch to the save_score.tscn. You can do whatever you want, though. Set `is_win` before switching to save_score or win_lose scene to know if the player won or lost.
-
-NOTE: This node requires a current `DHOScene`. If not set, it will search for it.
-
-Call `execute()` when ready to change scene.
+Example:
+```GDScript
+# In some node, when player wins...:
+DHOSceneManager.switch_to_save_score_scene(self.get_tree(), player.score, true)
+```
 
 ## Localization
 The classes below are a part of the plugin's scenes. You can make use of them, however I would recommend against it in a game jam setting, because you won't need localization.
