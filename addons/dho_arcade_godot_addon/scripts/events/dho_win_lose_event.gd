@@ -8,9 +8,11 @@
 ## NOTE: This node requires a current [DHOScene]. If not set it will search for it.
 ## Call execute() when ready to change scene.
 extends DHOEvent
-class_name DHOWinLoseEvent
+class_name DHOChangeSceneEvent
 
-@export_file("*.tscn") var win_lose_scene: String = "res://addons/dho_arcade_godot_addon/scenes/dho_save_score.tscn"
+@export_file("*.tscn")
+var scene_path: String = "res://addons/dho_arcade_godot_addon/scenes/dho_save_score.tscn"
+
 @export var dho_scene: DHOScene = null
 @export var is_win: bool = false
 
@@ -19,4 +21,4 @@ func execute() -> void:
 		self.dho_scene = DHOScene._walk_parents_to_find_dho_scene(self)
 	assert(self.dho_scene != null)
 	dho_scene.dho_context.is_win = self.is_win
-	DHOSceneManager.change_scene(self, win_lose_scene, dho_scene.dho_context)
+	DHOSceneManager.change_to_dho_scene(self, scene_path, dho_scene.dho_context)

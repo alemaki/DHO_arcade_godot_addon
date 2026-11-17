@@ -8,6 +8,10 @@
 
 @tool
 extends EditorPlugin
+class_name DHOEditorPlugin
+
+const GAME_START_SCENE_SETTING: String = DHOSceneManager.GAME_START_SCENE_SETTING
+const DEFAULT_GAME_START_SCENE: String = DHOSceneManager.DEFAULT_GAME_START_SCENE
 
 const TRANSLATIONS_SETTING: String = "internationalization/locale/translations"
 const TRANSLATION_PATH_EN: String = "res://addons/dho_arcade_godot_addon/language/dho_arcade_plugin_translations.en.translation"
@@ -20,8 +24,8 @@ const TRANSLATION_PATHS: PackedStringArray = [
 const DEVICE_NAME_SUFFIX: String = "_device_"
 const DHO_AUTOLOAD_NAME: String = "DhoJoypad"
 const DHO_AUTOLOAD_PATH: String = "res://addons/dho_arcade_godot_addon/scripts/dho_joypad.gd"
-const QUIT_AUTOLOAD_NAME: String = "QuitScene"
-const QUIT_AUTOLOAD_PATH: String = "res://addons/dho_arcade_godot_addon/scenes/dho_exit_trigger.tscn"
+const EXIT_TRIGGER_AUTOLOAD_NAME: String = "ExitTrigger"
+const EXIT_TRIGGER_AUTOLOAD_PATH: String = "res://addons/dho_arcade_godot_addon/scenes/dho_exit_trigger.tscn"
 
 # -1 means all devices. Other joypad devices are registered from 0 to 8.
 func create_joypad_button_event(button: JoyButton, device: int = -1) -> InputEventJoypadButton:
@@ -77,18 +81,18 @@ func change_settings_for_buttons_on_device(device: int) -> void:
 	for button: DHOJoypad.BUTTON in DHOJoypad.BUTTON_INFORMATION:
 		var info: DHOButtonInformation = DHOJoypad.BUTTON_INFORMATION[button]
 		var setting_path := self.get_action_setting_path(info.input_action, device)
-		var action := get_action_setting(setting_path)
-		var event := create_joypad_button_event(info.joy_button, device)
-		if not has_joypad_button_event(action.events, event):
+		var action := self.get_action_setting(setting_path)
+		var event := self.create_joypad_button_event(info.joy_button, device)
+		if not self.has_joypad_button_event(action.events, event):
 			action.events.append(event)
 		ProjectSettings.set_setting(setting_path, action)
 
 func change_settings_for_axes_on_device(device: int) -> void:
 	for axis: DHOJoystickAxisInformation in DHOJoypad.AXIS_INFORMATION:
 		var setting_path := self.get_action_setting_path(axis.input_action, device)
-		var action := get_action_setting(setting_path)
-		var event := create_joypad_axis_event(axis.joy_axis, axis.axis_value, device)
-		if not has_joypad_axis_event(action.events, event):
+		var action := self.get_action_setting(setting_path)
+		var event := self.create_joypad_axis_event(axis.joy_axis, axis.axis_value, device)
+		if not self.has_joypad_axis_event(action.events, event):
 			action.events.append(event)
 		ProjectSettings.set_setting(setting_path, action)
 
@@ -114,21 +118,35 @@ func unregister_translations() -> void:
 			updated.append(path)
 	ProjectSettings.set_setting(TRANSLATIONS_SETTING, updated)
 
+func register_start_game_setting() -> void:
+	if not ProjectSettings.has_setting(GAME_START_SCENE_SETTING):
+		ProjectSettings.set_setting(GAME_START_SCENE_SETTING, DEFAULT_GAME_START_SCENE)
+	ProjectSettings.add_property_info({
+		"name": GAME_START_SCENE_SETTING,
+		"type": TYPE_STRING,
+		"hint": PROPERTY_HINT_FILE,
+		"hint_string": "*.tscn",
+	})
+	ProjectSettings.set_initial_value(GAME_START_SCENE_SETTING, DEFAULT_GAME_START_SCENE)
+
 func _enable_plugin() -> void:
 	self.add_autoload_singleton(DHO_AUTOLOAD_NAME, DHO_AUTOLOAD_PATH)
-	self.add_autoload_singleton(QUIT_AUTOLOAD_NAME, QUIT_AUTOLOAD_PATH)
+	self.add_autoload_singleton(EXIT_TRIGGER_AUTOLOAD_NAME, EXIT_TRIGGER_AUTOLOAD_PATH)
 	register_translations()
 	register_input_actions()
+	register_start_game_setting()
 	ProjectSettings.save()
 
 func _disable_plugin() -> void:
 	self.remove_autoload_singleton(DHO_AUTOLOAD_NAME)
-	self.remove_autoload_singleton(QUIT_AUTOLOAD_NAME)
+	self.remove_autoload_singleton(EXIT_TRIGGER_AUTOLOAD_NAME)
 	unregister_translations()
+	# No unregister for other settings so they can be saved for reloading.
 	ProjectSettings.save()
 
 func _enter_tree() -> void:
-	return
+	# TODO: if the default value wasn't changed is the setting saved or not in project.godot?
+	register_start_game_setting()
 
 func _exit_tree() -> void:
 	return

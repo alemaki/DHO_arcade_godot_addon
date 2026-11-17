@@ -291,10 +291,10 @@ localized_text_res = SubResource("Resource_ro22j")
 anchors_preset = 0
 script = ExtResource("11_gkipy")
 button_capture = 1
-trigger_event = NodePath("DHOWinLose")
+trigger_event = NodePath("DHOChangeScene")
 metadata/_custom_type_script = "uid://qkevjtyxu8q1"
 
-[node name="DHOWinLose" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/BButtonHoldLabel/DHOHoldTrigger" unique_id=1217351933 node_paths=PackedStringArray("dho_scene")]
+[node name="DHOChangeScene" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/BButtonHoldLabel/DHOHoldTrigger" unique_id=1217351933 node_paths=PackedStringArray("dho_scene")]
 script = ExtResource("12_04svh")
 dho_scene = NodePath("../../../../../..")
 is_win = true
@@ -312,10 +312,10 @@ localized_text_res = SubResource("Resource_ro22j")
 anchors_preset = 0
 script = ExtResource("11_gkipy")
 button_capture = 2
-trigger_event = NodePath("DHOWinLose")
+trigger_event = NodePath("DHOChangeScene")
 metadata/_custom_type_script = "uid://qkevjtyxu8q1"
 
-[node name="DHOWinLose" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/CButtonHoldLabel/DHOHoldTrigger" unique_id=1400051763 node_paths=PackedStringArray("dho_scene")]
+[node name="DHOChangeScene" type="Node" parent="Tree/LongPressButtonContainer/VBoxContainer/CButtonHoldLabel/DHOHoldTrigger" unique_id=1400051763 node_paths=PackedStringArray("dho_scene")]
 script = ExtResource("12_04svh")
 dho_scene = NodePath("../../../../../..")
 metadata/_custom_type_script = "uid://bgdlvsyh2nvxl"

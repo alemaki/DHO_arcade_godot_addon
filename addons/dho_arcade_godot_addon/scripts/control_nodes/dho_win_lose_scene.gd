@@ -11,10 +11,6 @@ class_name DHOWinLoseScene
 
 @export var play_again_action = "ui_accept"
 @export var menu_action = "ui_back"
-## Set this to your game's start scene. It can be a [DHOScene] type, but not required.
-@export_file("*.tscn") var play_again_scene = "res://addons/dho_arcade_godot_addon/scenes/dho_joypad_test.tscn"
-## Leave this as the default.
-@export_file("*.tscn") var menu_scene = "res://addons/dho_arcade_godot_addon/scenes/dho_scoreboard.tscn"
 
 @export var score_saved_label: Label = null
 
@@ -41,6 +37,13 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed(self.play_again_action):
-		await DHOSceneManager.change_scene_to_path(self, self.play_again_scene)
+		await DHOSceneManager.change_scene_to_path(
+				self,
+				DHOSceneManager.get_game_start_scene_path(),
+			)
 	if Input.is_action_just_pressed(self.menu_action):
-		await DHOSceneManager.change_scene_new_context(self, self.menu_scene)
+		await DHOSceneManager.change_to_dho_scene(
+				self,
+				DHOSceneManager.MAIN_SCENE,
+				DHOSceneContext.new()
+			)

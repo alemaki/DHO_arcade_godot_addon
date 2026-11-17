@@ -19,15 +19,12 @@ var letter_labels: Array[Label] = []
 
 @export var bad_name_label: Label = null
 
-@export var left_action = "ui_left"
-@export var right_action = "ui_right"
-@export var up_action = "ui_up"
-@export var down_action = "ui_down"
-@export var save_action = "ui_accept"
-@export var exit_action = "ui_back"
-
-@export_file("*.tscn") var accept_scene_to_change_to = "res://addons/dho_arcade_godot_addon/scenes/dho_win_lose.tscn"
-@export_file("*.tscn") var back_scene_to_change_to = "res://addons/dho_arcade_godot_addon/scenes/dho_win_lose.tscn"
+@export var left_action: String = "ui_left"
+@export var right_action: String = "ui_right"
+@export var up_action: String = "ui_up"
+@export var down_action: String = "ui_down"
+@export var save_action: String = "ui_accept"
+@export var exit_action: String = "ui_back"
 
 func _ready() -> void:
 	if self.dho_scene == null:
@@ -47,7 +44,7 @@ func _ready() -> void:
 	if not DHOPlayerDataHolder.is_new_highscore(dho_scene.dho_context.score):
 		self.set_process(false)
 		# Call deferred since scene is still loading in _ready
-		self.call_deferred("go_next_scene", accept_scene_to_change_to)
+		self.call_deferred("go_next_scene", DHOSceneManager.WIN_LOSE_SCENE)
 
 func update_labels() -> void:
 	for i in LETTER_COUNT:
@@ -78,7 +75,7 @@ func create_and_save_player_data() -> void:
 	self.dho_scene.dho_context.is_score_saved = self.try_save_player_data(player_data)
 
 func go_next_scene(scene_path: String) -> Error:
-	var result := await DHOSceneManager.change_scene(
+	var result := await DHOSceneManager.change_to_dho_scene(
 			self,
 			scene_path,
 			self.dho_scene.dho_context
@@ -114,11 +111,11 @@ func handle_input_scene_change() -> void:
 			self.get_tree().create_timer(2).timeout.connect(self.hide_bad_name_label)
 		else:
 			self.create_and_save_player_data()
-			if await go_next_scene(self.accept_scene_to_change_to) != OK:
+			if await go_next_scene(DHOSceneManager.WIN_LOSE_SCENE) != OK:
 				push_warning("ScoreSaver: Something went horribly wrong.")
 				self.get_tree().quit() # not okay if player can save scores multiple times.
 	if Input.is_action_just_pressed(self.exit_action):
-		if await go_next_scene(self.back_scene_to_change_to) != OK:
+		if await go_next_scene(DHOSceneManager.WIN_LOSE_SCENE) != OK:
 			push_warning("ScoreSaver: Something went horribly wrong.")
 
 func _process(_delta: float) -> void:
