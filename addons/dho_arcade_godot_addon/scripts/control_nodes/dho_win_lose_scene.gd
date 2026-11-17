@@ -38,12 +38,12 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed(self.play_again_action):
 		await DHOSceneManager.change_scene_to_path(
-				self,
+				self.get_tree(),
 				DHOSceneManager.get_game_start_scene_path(),
 			)
 	if Input.is_action_just_pressed(self.menu_action):
 		await DHOSceneManager.change_to_dho_scene(
-				self,
+				self.get_tree(),
 				DHOSceneManager.MAIN_SCENE,
 				DHOSceneContext.new()
 			)

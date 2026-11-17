@@ -21,5 +21,5 @@ func _ready() -> void:
 		self.localized_text_res.get_text(),
 		dho_scene.dho_context.score
 		])
-	if (not DHOPlayerDataHolder.IS_ZERO_SCORE_COUNTED) and dho_scene.dho_context.score == 0:
+	if (not DHOPlayerDataHolder.is_zero_score_saved()) and dho_scene.dho_context.score == 0:
 		self.set_visible(false)

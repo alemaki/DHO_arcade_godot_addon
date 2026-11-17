@@ -76,7 +76,7 @@ func create_and_save_player_data() -> void:
 
 func go_next_scene(scene_path: String) -> Error:
 	var result := await DHOSceneManager.change_to_dho_scene(
-			self,
+			self.get_tree(),
 			scene_path,
 			self.dho_scene.dho_context
 	)

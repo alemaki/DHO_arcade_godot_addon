@@ -10,8 +10,10 @@
 extends EditorPlugin
 class_name DHOEditorPlugin
 
-const GAME_START_SCENE_SETTING: String = DHOSceneManager.GAME_START_SCENE_SETTING
-const DEFAULT_GAME_START_SCENE: String = DHOSceneManager.DEFAULT_GAME_START_SCENE
+const GAME_START_SCENE_SETTING := DHOSceneManager.GAME_START_SCENE_SETTING
+const DEFAULT_GAME_START_SCENE := DHOSceneManager.DEFAULT_GAME_START_SCENE
+const IS_ZERO_SCORE_SAVED_SETTING_PATH := DHOPlayerDataHolder.IS_ZERO_SCORE_SAVED_SETTING_PATH
+const IS_ZERO_SCORE_SAVED_DEFAULT_VALUE := DHOPlayerDataHolder.IS_ZERO_SCORE_SAVED_DEFAULT_VALUE
 
 const TRANSLATIONS_SETTING: String = "internationalization/locale/translations"
 const TRANSLATION_PATH_EN: String = "res://addons/dho_arcade_godot_addon/language/dho_arcade_plugin_translations.en.translation"
@@ -118,7 +120,7 @@ func unregister_translations() -> void:
 			updated.append(path)
 	ProjectSettings.set_setting(TRANSLATIONS_SETTING, updated)
 
-func register_start_game_setting() -> void:
+func register_game_settings() -> void:
 	if not ProjectSettings.has_setting(GAME_START_SCENE_SETTING):
 		ProjectSettings.set_setting(GAME_START_SCENE_SETTING, DEFAULT_GAME_START_SCENE)
 	ProjectSettings.add_property_info({
@@ -128,13 +130,26 @@ func register_start_game_setting() -> void:
 		"hint_string": "*.tscn",
 	})
 	ProjectSettings.set_initial_value(GAME_START_SCENE_SETTING, DEFAULT_GAME_START_SCENE)
+	if not ProjectSettings.has_setting(IS_ZERO_SCORE_SAVED_SETTING_PATH):
+		ProjectSettings.set_setting(
+				IS_ZERO_SCORE_SAVED_SETTING_PATH,
+				IS_ZERO_SCORE_SAVED_DEFAULT_VALUE
+			)
+	ProjectSettings.add_property_info({
+		"name": IS_ZERO_SCORE_SAVED_SETTING_PATH,
+		"type": TYPE_BOOL,
+	})
+	ProjectSettings.set_initial_value(
+			IS_ZERO_SCORE_SAVED_SETTING_PATH,
+			IS_ZERO_SCORE_SAVED_DEFAULT_VALUE
+		)
 
 func _enable_plugin() -> void:
 	self.add_autoload_singleton(DHO_AUTOLOAD_NAME, DHO_AUTOLOAD_PATH)
 	self.add_autoload_singleton(EXIT_TRIGGER_AUTOLOAD_NAME, EXIT_TRIGGER_AUTOLOAD_PATH)
 	register_translations()
 	register_input_actions()
-	register_start_game_setting()
+	register_game_settings()
 	ProjectSettings.save()
 
 func _disable_plugin() -> void:
@@ -146,7 +161,7 @@ func _disable_plugin() -> void:
 
 func _enter_tree() -> void:
 	# TODO: if the default value wasn't changed is the setting saved or not in project.godot?
-	register_start_game_setting()
+	register_game_settings()
 
 func _exit_tree() -> void:
 	return

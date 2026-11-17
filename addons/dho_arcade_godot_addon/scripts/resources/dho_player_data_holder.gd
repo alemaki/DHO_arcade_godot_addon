@@ -8,13 +8,18 @@ extends Resource
 class_name DHOPlayerDataHolder
 
 const MAX_SCORE_HOLD := 10 # Can hold more than 10 but currently shows just 10, so why bother.
-## If 0 score is not counted, the score_saver will skip it. Also the score won't be shown in the 
-## win_lose scene of the game.
-const IS_ZERO_SCORE_COUNTED := true
+const IS_ZERO_SCORE_SAVED_SETTING_PATH := "DHO/arcade/is_zero_score_saved"
+const IS_ZERO_SCORE_SAVED_DEFAULT_VALUE := true
 @export var player_data_arr: Array[DHOPlayerData]
 
 const PLAYER_DATA_LOCATION: String = "user://score_data.json"
 const PLAYER_TMP_DATA_LOCATION: String = "user://score_data_temp.json"
+
+static func is_zero_score_saved() -> bool:
+	return ProjectSettings.get_setting(
+			IS_ZERO_SCORE_SAVED_SETTING_PATH,
+			IS_ZERO_SCORE_SAVED_DEFAULT_VALUE
+		)
 
 func sort_player_data() -> void:
 	self.player_data_arr.sort_custom(DHOPlayerData._bigger_score)
@@ -22,7 +27,7 @@ func sort_player_data() -> void:
 ## Adds score and sorts it in. If overflowing - deletes worst score.
 ## Returns true if new score is added, false if it was too low.
 func add_player_data(player_data_to_add: DHOPlayerData) -> bool:
-	if (not IS_ZERO_SCORE_COUNTED) and player_data_to_add.score == 0:
+	if (not is_zero_score_saved()) and player_data_to_add.score == 0:
 		return false
 	var score_added: bool = true
 	self.player_data_arr.push_back(player_data_to_add)
@@ -99,7 +104,7 @@ func save_player_data() -> bool:
 
 static func is_new_highscore(score: int) -> bool:
 	var player_data_holder: DHOPlayerDataHolder = load_player_data()
-	if not IS_ZERO_SCORE_COUNTED and score == 0:
+	if not is_zero_score_saved() and score == 0:
 		return false
 	return player_data_holder.player_data_arr.size() < MAX_SCORE_HOLD\
 		or player_data_holder.player_data_arr.back().score < score

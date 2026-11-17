@@ -11,6 +11,6 @@ extends DHOScene
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed(self.start_action):
 		await DHOSceneManager.change_scene_to_path(
-				self,
+				self.get_tree(),
 				DHOSceneManager.get_game_start_scene_path(),
 			)

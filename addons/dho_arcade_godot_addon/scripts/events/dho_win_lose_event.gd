@@ -21,4 +21,4 @@ func execute() -> void:
 		self.dho_scene = DHOScene._walk_parents_to_find_dho_scene(self)
 	assert(self.dho_scene != null)
 	dho_scene.dho_context.is_win = self.is_win
-	DHOSceneManager.change_to_dho_scene(self, scene_path, dho_scene.dho_context)
+	DHOSceneManager.change_to_dho_scene(self.get_tree(), scene_path, dho_scene.dho_context)
