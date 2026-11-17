@@ -3,25 +3,21 @@
 
 @tool
 extends Node
+
 # You know... As in DevHubOne
+## An autoloaded 
 class_name DHOJoypad
-# NOTE: The documentation below is for any godot version from 4.x <= 4.8.
-# It might be compatible for future versions or might not be. ¯\_(ツ)_/¯
-#
-# To learn how best to use the DevHubOne joypad, please read the designated documentation.
+# To learn how best to use the DevHubOne joypad, please read the README located at the root of the addon.
 # The code part of this class might be or might not be relevant for you. Depends on how deep of an
 # implementation you want to create with the joypad.
 #
 # WARNING: This node is autoloaded by the plugin. Disabling the autoload of this node (or disabling
 # the plugin) will BREAK the joypad test scene provided by this plugin.
 # You can see the autoloads in Project settings -> Globals.
-#
-# NOTE: The important sections are: BUTTONS and JOYSTICK
 
 """ -------------------------------------------------------------------------------------------- """
 """ SECTION: DEVICE CONTEXTS """
 """ -------------------------------------------------------------------------------------------- """
-# NOTE: Documentation for this section ends here.
 
 ## Increase value as you like. NOTE: If you are using other joypads in addition to the devhubone's you
 ## might need to increase this value on demand.
@@ -47,74 +43,17 @@ func is_device_valid(device: int) -> bool:
 	return true
 
 """ -------------------------------------------------------------------------------------------- """
-""" SECTION: INPUT ACTIONS (INPUT MAP) """
-""" -------------------------------------------------------------------------------------------- """
-# NOTE: Any mention of any input actions below will be a descripton for all devices actions. 
-# The plugin itself creates those actions for you to use.
-# Each input action will have it's mirror for a single device with the same name with appended
-# "_device_[num]" (devices are 0-counted) string at the end. For example: "ui_accept" will be the
-# the action that all devices activate when pressing the A button. "ui_accept_device_0" is the input
-# action for device 0 (the first deivce) and device 1 (the second device) will have an action 
-# "ui_accept_device_1" mapped to it, "ui_left" for all devices "ui_left_device_0" for device 0 and 
-# "ui_left_device_1" for device 1, etc.
-#
-# When the plugin is loaded, restart the editor and look at the defined actions in:
-# Prject Settings -> Input Map. Search for "ui_accept" and you will see multiple actions defined
-# for all devices and for each device one by one. If you want to create a game with single player,
-# by all means use the general actions. However, If you wish to create a game that uses multiple
-# DevHubOne's joypads you might have to use the more targeted actions.
-#
-# WARNING: Deleting those actions will require you to reload the plugin to have them again.
-# Otherwise you can create your own input actions and map them yourself. You are not required to
-# use the ones provided in the plugin. The test scene for the joypad works with the raw input from
-# this node and won't break if the defaults ahve been removed. However the asset scenes provided in
-# this plugin work with input actions, so yo will have to edit them and include your own actions.
-#
-# If you wish to create a game that works both with keyboard and the DHO's joypad you can map your
-# keyboard variants to those actions.
-#
-# NOTE: Documentation for this section ends here.
-
-""" -------------------------------------------------------------------------------------------- """
 """ SECTION: BUTTONS """
 """ -------------------------------------------------------------------------------------------- """
-# The buttons are as straight forward as it goes. The plugin will create input action maps for you 
-# to capture in your game:
-# "ui_accept"	: the A button
-# "ui_back"		: the B button		# TODO: create interaction between "ui_back" and control nodes? # "ui_cancel" is mapped to esc. not proper for this purpose
-# "ui_c"		: the C button
-# "ui_d"		: the D button
-# "ui_e"		: the E button
-# "ui_f"		: the F button
-# "ui_play"		: the Play (Left) button
-# "ui_exit"		: the Exit (Right) button
-#
-# You can also create your own actions with mappngs for DHO's buttons like this:
-# A		: Joypad Button 3 (Top Action, Sony Triangle, Xbox Y, Nintendo X)
-# B		: Joypad Button 1 (Right Action, Sony Circle, Xbox B, Nintendo A)
-# C		: Joypad Button 0 (Bottom Action, Sony Cross, Xbox A, Nintendo B)
-# D		: Joypad Button 2 (Left Action, Sony Square, Xbox X, Nintendo Y)
-# E		: Joypad Button 9 (Left Shoulder, Sony L1, Xbox LB)
-# F		: Joypad Button 10 (Right Shoulder, Sony R1, Xbox RB)
-# PLAY	: Joypad Button 6 (Start, Xbox Menu, Nintendo +)
-# EXIT	: Joypad Button 4 (Back, Sony Select, Xbox Back, Nintendo -)
-#
-# NOTE: I recommend using the defaults since they are better integrated in the engine and even
-# have interactions with the UI.
-#
-# Optionaly you can capture input from this node like:
-# DhoJoypad.dho_button_pressed.connect(<your function>)
-# DhoJoypad.dho_button_released.connect(<your function>)
-# There is also a small API which can also by accessed like :
-# DhoJoypad.is_button_pressed(<button>, <device number>)
-# DhoJoypad.get_button_hold_duration_sec(<button>, <device number>)
-# See the implementations below. Keep in mind, they only work for joypads.
-#
-# NOTE: Documentation for this section ends here.
+# TODO: create interaction between "ui_back" and control nodes?
+# "ui_cancel" is mapped to esc. not proper for this purpose
 
+## Attach to this to listen for button input events.
 signal dho_button_pressed(button: DHOJoypad.BUTTON, device: int)
+## Attach to this to listen for button input events.
 signal dho_button_released(button: DHOJoypad.BUTTON, device: int)
 
+## All current DHOJoypad buttons
 enum BUTTON {
 	A,
 	B,
@@ -126,6 +65,7 @@ enum BUTTON {
 	EXIT
 }
 
+## All relevant information for the button enums above
 const BUTTON_INFORMATION: Dictionary[BUTTON, DHOButtonInformation] = {
 	DHOJoypad.BUTTON.A: preload("res://addons/dho_arcade_godot_addon/resources/buttons/dho_button_a.tres"),
 	DHOJoypad.BUTTON.B: preload("res://addons/dho_arcade_godot_addon/resources/buttons/dho_button_b.tres"),
@@ -214,43 +154,6 @@ func _button_released(button: BUTTON, device: int) -> void:
 """ -------------------------------------------------------------------------------------------- """
 """ SECTION: JOYSTICK """
 """ -------------------------------------------------------------------------------------------- """
-# NOTE: The devhubone joystick is captured by the default godot action input mappings:
-# ui_left, ui_right, ui_up, ui_down. I am sure those are descriptive enough.
-# They will be dewly registered by the plugin if not already registered.
-#
-# New projects in Godot have them ON by default. You can see the godot built-in actions
-# by going into: Project -> Project Settings -> Input Map -> Show Built-In-Actions.
-# Feel free to define yours if you want to. The instructions are below.
-#
-# You can capture the joystick events by defining your own action names 
-# (for example 'process_[direction]') and setting the input capture to:
-# left	: Joypad Axis 0 - (Left stick Left, Joystick 0 Left)
-# right	: Joypad Axis 0 + (Left stick Right, Joystick 0 Right)
-# up	: Joypad Axis 1 - (Left stick Up, Joystick 0 Up)
-# down	: Joypad Axis 1 + (Left stick Down, Joystick 0 Down)
-#
-# NOTE: I recommend using the defaults since they are better integrated in the engine and even
-# have interactions with the UI.
-# 
-# To get input information just capture the action mappings:
-# var axis_X: float = Input.get_axis("ui_left", "ui_right")
-# var axis_Y: float = Input.get_axis("ui_up", "ui_down")
-#
-# Feel free to get the direct input with:
-# var input_left: float = Input.get_action_strength("ui_left") # for example
-#
-# You can also use this class' API which, keep in mind, only works for joypads:
-# DhoJoypad.get_input_vector()
-# DhoJoypad.get_normalized_input_vector()
-# See the implementations below.
-#
-# WARNING: DO NOT USE Input.get_vector like this:
-# var input_direction := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-# As of currently (06.11.2026), joypad inputs will result with some error along the axis
-# that is not pressed when calling the Input.get_vector with combination of keyboard input.
-# Issue to resolve: https://github.com/godotengine/godot/issues/90515#issuecomment-2616602880
-#
-# NOTE: Documentation for this section ends here.
 
 ## Emits normalized input
 signal dho_joystick_changed(vector: Vector2, device: int)
@@ -296,6 +199,7 @@ func _axis_y_changed(axis_value: float, device: int) -> void:
 	self._device_contexts[device].left_joystick_Y_axis = axis_value
 	self._last_movement_device_change = device
 	self.dho_joystick_changed.emit(self.get_normalized_input_vector(device), device)
+
 """ -------------------------------------------------------------------------------------------- """
 """ SECTION: NODE FUNCTIONS """
 """ -------------------------------------------------------------------------------------------- """
@@ -309,10 +213,6 @@ func _init() -> void:
 """ -------------------------------------------------------------------------------------------- """
 """ SECTION: INPUT HANDLING """
 """ -------------------------------------------------------------------------------------------- """
-# The devhubone joystick can also be captured by using the general joypad input events.
-# Take a look at _input() to see how the input events can be handled.
-#
-# NOTE: Documentation for this section ends here.
 
 @export_range(0.0, 1, 0.001)
 var axis_deadzone: float = 0.5 # default in godot
