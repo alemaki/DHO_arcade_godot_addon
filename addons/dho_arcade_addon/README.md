@@ -3,7 +3,7 @@
 ## Description
 This is a Godot plugin that gives access to predefined input actions for [DevHubOne](https://www.devhubone.com/en)'s joypad, scenes used in DevHubOne's arcade and API classes for anyone who needs a deeper integration with the joypad in the game they are developing.
 
-![DHO joypad test scene](https://raw.githubusercontent.com/alemaki/DHO_arcade_addon/master/images/dho_test_scene_screenshot.png)
+![DHO joypad test scene](https://raw.githubusercontent.com/alemaki/DHO_arcade_godot_addon/master/images/dho_test_scene_screenshot.png)
 *The joypad test scene*
 
 ---
