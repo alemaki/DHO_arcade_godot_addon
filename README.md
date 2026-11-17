@@ -3,7 +3,7 @@
 ## Description
 This is a Godot plugin that gives access to predefined input actions for [DevHubOne](https://www.devhubone.com/en)'s joypad, scenes used in DevHubOne's arcade and API classes for anyone who needs a deeper integration with the joypad in the game they are developing.
 
-![DHO joypad test scene](https://raw.githubusercontent.com/alemaki/DHO_arcade_godot_addon/master/images/dho_test_scene_screenshot.png)
+![DHO joypad test scene](https://raw.githubusercontent.com/alemaki/DHO_arcade_addon/master/images/dho_test_scene_screenshot.png)
 *The joypad test scene*
 
 ---
@@ -20,7 +20,7 @@ This is a Godot plugin that gives access to predefined input actions for [DevHub
 
 
 ## Installation
-Go to the [Godot asset library](https://godotengine.org/asset-library/asset/5605) and download there or download this plugin manually from the [git repo](https://github.com/alemaki/DHO_arcade_godot_addon) and copy the whole `addons/dho_arcade_godot_addon` folder into the `addons` folder of your project. After that go to <code> Project -> Project Settings -> Plugins </code> and enable this plugin. Restart the editor so any changes to the project can load properly.
+Go to the [Godot asset library](https://godotengine.org/asset-library/asset/5605) and download there or download this plugin manually from the [git repo](https://github.com/alemaki/DHO_arcade_addon) and copy the whole `addons/dho_arcade_addon` folder into the `addons` folder of your project. After that go to <code> Project -> Project Settings -> Plugins </code> and enable this plugin. Restart the editor so any changes to the project can load properly.
 
 ## Getting started
 After downloading the plugin and enabling it you can take a look at the newly defined input actions in your project in <code>Project -> Project Settings -> Input Map</code>. There are also a few autoloads that will work in the background.
