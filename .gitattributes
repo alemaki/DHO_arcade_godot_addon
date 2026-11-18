@@ -5,6 +5,5 @@
 /**               export-ignore
 
 # except the addon folder
-/addons           !export-ignore
-/addons/dho_arcade_godot_addon        !export-ignore
-/addons/dho_arcade_godot_addon/**     !export-ignore
+/addons !export-ignore
+/addons/** !export-ignore
