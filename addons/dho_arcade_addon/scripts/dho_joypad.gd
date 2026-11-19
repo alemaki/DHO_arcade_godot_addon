@@ -19,9 +19,8 @@ class_name DHOJoypad
 """ SECTION: DEVICE CONTEXTS """
 """ -------------------------------------------------------------------------------------------- """
 
-## Increase value as you like. NOTE: If you are using other joypads in addition to the devhubone's you
-## might need to increase this value on demand.
-const MAX_DEVICES_HANDLED: int = 2
+const MAX_DEVICES_HANDLED_SETTING_PATH := "DHO/arcade/max_devices_handled"
+const MAX_DEVICES_HANDLED_DEFAULT_VALUE := 2
 
 ## Context for the joypad measurements.
 class _DHOJoypadContext extends RefCounted:
@@ -37,8 +36,14 @@ class _DHOJoypadContext extends RefCounted:
 
 var _device_contexts: Dictionary[int, _DHOJoypadContext] = {}
 
+static func get_max_devices_handled() -> int:
+	return ProjectSettings.get_setting(
+			MAX_DEVICES_HANDLED_SETTING_PATH,
+			MAX_DEVICES_HANDLED_DEFAULT_VALUE,
+		)
+
 func is_device_valid(device: int) -> bool:
-	if device >= self.MAX_DEVICES_HANDLED:
+	if device >= get_max_devices_handled():
 		return false
 	return true
 
@@ -205,7 +210,7 @@ func _axis_y_changed(axis_value: float, device: int) -> void:
 """ -------------------------------------------------------------------------------------------- """
 
 func _init() -> void:
-	for device in self.MAX_DEVICES_HANDLED:
+	for device in get_max_devices_handled():
 		var device_context := _DHOJoypadContext.new()
 		device_context.device = device
 		self._device_contexts[device] = device_context

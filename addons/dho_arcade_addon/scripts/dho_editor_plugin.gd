@@ -10,8 +10,10 @@
 extends EditorPlugin
 class_name DHOEditorPlugin
 
-const GAME_START_SCENE_SETTING := DHOSceneManager.GAME_START_SCENE_SETTING
-const DEFAULT_GAME_START_SCENE := DHOSceneManager.DEFAULT_GAME_START_SCENE
+const MAX_DEVICES_HANDLED_SETTING_PATH := DHOJoypad.MAX_DEVICES_HANDLED_SETTING_PATH
+const MAX_DEVICES_HANDLED_DEFAULT_VALUE := DHOJoypad.MAX_DEVICES_HANDLED_DEFAULT_VALUE
+const GAME_START_SCENE_SETTING_PATH := DHOSceneManager.GAME_START_SCENE_SETTING_PATH
+const GAME_START_SCENE_DEFAULT_VALUE := DHOSceneManager.GAME_START_SCENE_DEFAULT_VALUE
 const IS_ZERO_SCORE_SAVED_SETTING_PATH := DHOPlayerDataHolder.IS_ZERO_SCORE_SAVED_SETTING_PATH
 const IS_ZERO_SCORE_SAVED_DEFAULT_VALUE := DHOPlayerDataHolder.IS_ZERO_SCORE_SAVED_DEFAULT_VALUE
 
@@ -28,6 +30,8 @@ const DHO_AUTOLOAD_NAME: String = "DhoJoypad"
 const DHO_AUTOLOAD_PATH: String = "res://addons/dho_arcade_addon/scripts/dho_joypad.gd"
 const EXIT_TRIGGER_AUTOLOAD_NAME: String = "ExitTrigger"
 const EXIT_TRIGGER_AUTOLOAD_PATH: String = "res://addons/dho_arcade_addon/scenes/dho_exit_trigger.tscn"
+
+var _last_max_device_handled: int = DHOJoypad.get_max_devices_handled()
 
 # -1 means all devices. Other joypad devices are registered from 0 to 8.
 func create_joypad_button_event(button: JoyButton, device: int = -1) -> InputEventJoypadButton:
@@ -99,10 +103,9 @@ func change_settings_for_axes_on_device(device: int) -> void:
 		ProjectSettings.set_setting(setting_path, action)
 
 func register_input_actions() -> void:
-	for device in range(-1, DHOJoypad.MAX_DEVICES_HANDLED):
+	for device in range(-1, DHOJoypad.get_max_devices_handled()):
 		change_settings_for_buttons_on_device(device)
 		change_settings_for_axes_on_device(device)
-	ProjectSettings.save()
 
 func register_translations() -> void:
 	var current: PackedStringArray = ProjectSettings.get_setting(TRANSLATIONS_SETTING, PackedStringArray())
@@ -120,16 +123,18 @@ func unregister_translations() -> void:
 			updated.append(path)
 	ProjectSettings.set_setting(TRANSLATIONS_SETTING, updated)
 
-func register_game_settings() -> void:
-	if not ProjectSettings.has_setting(GAME_START_SCENE_SETTING):
-		ProjectSettings.set_setting(GAME_START_SCENE_SETTING, DEFAULT_GAME_START_SCENE)
+func register_plugin_settings() -> void:
+	# Game start scene setting
+	if not ProjectSettings.has_setting(GAME_START_SCENE_SETTING_PATH):
+		ProjectSettings.set_setting(GAME_START_SCENE_SETTING_PATH, GAME_START_SCENE_DEFAULT_VALUE)
 	ProjectSettings.add_property_info({
-		"name": GAME_START_SCENE_SETTING,
+		"name": GAME_START_SCENE_SETTING_PATH,
 		"type": TYPE_STRING,
 		"hint": PROPERTY_HINT_FILE,
 		"hint_string": "*.tscn",
 	})
-	ProjectSettings.set_initial_value(GAME_START_SCENE_SETTING, DEFAULT_GAME_START_SCENE)
+	ProjectSettings.set_initial_value(GAME_START_SCENE_SETTING_PATH, GAME_START_SCENE_DEFAULT_VALUE)
+	# Is zero setting
 	if not ProjectSettings.has_setting(IS_ZERO_SCORE_SAVED_SETTING_PATH):
 		ProjectSettings.set_setting(
 				IS_ZERO_SCORE_SAVED_SETTING_PATH,
@@ -143,25 +148,51 @@ func register_game_settings() -> void:
 			IS_ZERO_SCORE_SAVED_SETTING_PATH,
 			IS_ZERO_SCORE_SAVED_DEFAULT_VALUE
 		)
+	# Max devices handled.
+	if not ProjectSettings.has_setting(MAX_DEVICES_HANDLED_SETTING_PATH):
+		ProjectSettings.set_setting(
+				MAX_DEVICES_HANDLED_SETTING_PATH,
+				MAX_DEVICES_HANDLED_DEFAULT_VALUE
+			)
+	ProjectSettings.add_property_info({
+		"name": MAX_DEVICES_HANDLED_SETTING_PATH,
+		"type": TYPE_INT,
+		"hint": PROPERTY_HINT_RANGE,
+		"hint_string": "1,8,1"
+	})
+	ProjectSettings.set_initial_value(
+			MAX_DEVICES_HANDLED_SETTING_PATH,
+			MAX_DEVICES_HANDLED_DEFAULT_VALUE
+		)
+
+func _on_settings_changed() -> void:
+	## NOTE: (to self) do not remove input actions if max is reduced. That would delete user
+	## defined input mappings, which might be bad.
+	if self._last_max_device_handled == DHOJoypad.get_max_devices_handled():
+		return
+	self._last_max_device_handled = DHOJoypad.get_max_devices_handled()
+	register_input_actions()
+	ProjectSettings.save()
 
 func _enable_plugin() -> void:
+	register_plugin_settings()
 	self.add_autoload_singleton(DHO_AUTOLOAD_NAME, DHO_AUTOLOAD_PATH)
 	self.add_autoload_singleton(EXIT_TRIGGER_AUTOLOAD_NAME, EXIT_TRIGGER_AUTOLOAD_PATH)
 	register_translations()
 	register_input_actions()
-	register_game_settings()
 	ProjectSettings.save()
 
 func _disable_plugin() -> void:
 	self.remove_autoload_singleton(DHO_AUTOLOAD_NAME)
 	self.remove_autoload_singleton(EXIT_TRIGGER_AUTOLOAD_NAME)
 	unregister_translations()
-	# No unregister for other settings so they can be saved for reloading.
+	# No unregister for other settings so they can be saved for possible reload.
 	ProjectSettings.save()
 
 func _enter_tree() -> void:
 	# TODO: if the default value wasn't changed is the setting saved or not in project.godot?
-	register_game_settings()
+	register_plugin_settings()
+	ProjectSettings.settings_changed.connect(self._on_settings_changed)
 
 func _exit_tree() -> void:
 	return

@@ -10,8 +10,8 @@ class_name DHOSceneManager
 const MAIN_SCENE = "res://addons/dho_arcade_addon/scenes/dho_main.tscn"
 const SAVE_SCORE_SCENE: String = "res://addons/dho_arcade_addon/scenes/dho_save_score.tscn"
 const WIN_LOSE_SCENE: String = "res://addons/dho_arcade_addon/scenes/dho_win_lose.tscn"
-const GAME_START_SCENE_SETTING: String = "DHO/arcade/game_start_scene"
-const DEFAULT_GAME_START_SCENE: String = "res://addons/dho_arcade_addon/scenes/dho_joypad_test.tscn"
+const GAME_START_SCENE_SETTING_PATH: String = "DHO/arcade/game_start_scene"
+const GAME_START_SCENE_DEFAULT_VALUE: String = "res://addons/dho_arcade_addon/scenes/dho_joypad_test.tscn"
 
 # NOTE: The switch_to* functions are better tailored for your game design.
 
@@ -45,7 +45,7 @@ static func switch_to_win_lose_scene(
 	return await change_to_dho_scene(scene_tree, WIN_LOSE_SCENE, context)
 
 static func get_game_start_scene_path() -> String:
-	return ProjectSettings.get_setting(GAME_START_SCENE_SETTING, DEFAULT_GAME_START_SCENE)
+	return ProjectSettings.get_setting(GAME_START_SCENE_SETTING_PATH, GAME_START_SCENE_DEFAULT_VALUE)
 
 ## Changes the current scene to the next and passes the context to that scene. Use this to switch if
 ## you have a current context. [br]
