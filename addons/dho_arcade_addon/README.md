@@ -84,8 +84,7 @@ Any mention of input actions above is a description for "all devices" actions. E
 
 If you want to create a game with single player, by all means use the general actions. However, if you wish to create a game that uses multiple DevHubOne's joypads you might have to use the more targeted actions, the Joypad API or define your own.
 
-Just in case you plan on making a game with more than 2 joypads connected :
-- Increase `MAX_DEVICES_HANDLED` in `DHOJoypad`as you like and reload the plugin. It will create new actions for you and map the joypads.
+If you plan on handling more than 2 devices look at [Plugin settings](#plugin-settings).
 
 ## Joypad API (advanced)
 Skip this section if you are planning on using only the predefined input actions stated above!
@@ -117,6 +116,7 @@ var n_input_vec: Vector2 = DhoJoypad.get_normalized_input_vector()
 The plugin adds new settings in `Project -> Project Settings -> General -> DHO -> Arcade`. If you do not see it, turn on  `Advanced Settings`:
 - `Game Start Scene` - your game's starting scene. The scenes in the plugin will look at it to switch to. You must set this setting if you are going to use the plugin's provided scenes.
 - `Is Zero Score Saved` - Set this to false if you do not wish to count 0-scores as new highscores in your game.
+- `Max Devices Handled` - Default is 2. When setting this to a bigger value it will create new actions for you and map the new joypads. However, you have to restart the editor to see the changes in the project's settings.
 
 ## Scenes
 The scenes are made for 1920 x 1200 resolution a.k.a. WUXGA (Widescreen Ultra Extended Graphics Array). DevHubOne's arcade works with this resolution. You should set your game's resolution to WUXGA.
