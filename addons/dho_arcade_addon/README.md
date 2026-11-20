@@ -20,7 +20,7 @@ This is a Godot plugin that gives access to predefined input actions for [DevHub
 
 
 ## Installation
-Go to the [Godot asset library](https://godotengine.org/asset-library/asset/5605) and download there or download this plugin manually from the [git repo](https://github.com/alemaki/DHO_arcade_addon) and copy the whole `addons/dho_arcade_addon` folder into the `addons` folder of your project. After that go to <code> Project -> Project Settings -> Plugins </code> and enable this plugin. Restart the editor so any changes to the project can load properly.
+Download the addon in the engine directly by accessing the [Godot asset store](https://store.godotengine.org/asset/alexander-makedonski/dho-arcade-addon/) or manually go to the [Godot asset library](https://godotengine.org/asset-library/asset/5605) and get it there, or direcrly get it from the [git repo](https://github.com/alemaki/DHO_arcade_addon) and copy the whole `addons/dho_arcade_addon` folder into the `addons` folder of your project. After that go to <code> Project -> Project Settings -> Plugins </code> and enable this plugin. Restart the editor so any changes to the project can load properly.
 
 ## Getting started
 After downloading the plugin and enabling it you can take a look at the newly defined input actions in your project in <code>Project -> Project Settings -> Input Map</code>. There are also a few autoloads that will work in the background.
